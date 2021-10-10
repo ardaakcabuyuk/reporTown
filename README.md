@@ -1,37 +1,23 @@
-## Welcome to GitHub Pages
+# Bilkent University
+## CS 491/492 - Senior Design Project
+## reporTown
 
-You can use the [editor on GitHub](https://github.com/OguzKaanImamoglu/reporTown/edit/gh-pages/README.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+#### Group Members:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Arda Akça Büyük
 
-```markdown
-Syntax highlighted code block
+Cemre Biltekin
 
-# Header 1
-## Header 2
-### Header 3
+Elif Özer
 
-- Bulleted
-- List
+Mustafa Yaşar
 
-1. Numbered
-2. List
+Oğuz Kaan İmamoğlu
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
-```
+#### Deliverables
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Project Specifations Report: [[Github]](https://github.com/OguzKaanImamoglu/Online-Course-Platform/blob/main/Group%201%20Proposal.pdf)  [[Google Drive]](https://docs.google.com/document/d/1LM5VS6MT3cDnsI_oO8nN7vY9bLUAT5O_I7LejMuM8go/edit?usp=sharing)
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/OguzKaanImamoglu/reporTown/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
