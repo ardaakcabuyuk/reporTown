@@ -1,6 +1,5 @@
-# Bilkent University
-## CS 491/492 - Senior Design Project
-## reporTown
+# CS 491/492 - Senior Design Project
+# reporTown
 
 
 
