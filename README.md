@@ -19,5 +19,5 @@ Oğuz Kaan İmamoğlu
 
 #### Deliverables
 
-Project Specifations Report: [[Github]](https://github.com/OguzKaanImamoglu/Online-Course-Platform/blob/main/Group%201%20Proposal.pdf)  [[Google Drive]](https://docs.google.com/document/d/1LM5VS6MT3cDnsI_oO8nN7vY9bLUAT5O_I7LejMuM8go/edit?usp=sharing)
+Project Specifations Report: [[Github]](https://github.com/OguzKaanImamoglu/reporTown/raw/main/Project%20Specification.pdf)  [[Google Drive]](https://drive.google.com/file/d/1gb9UJBN1W5mp5j9wrDxexu0qqcjGX7V9/view?usp=sharing)
 
