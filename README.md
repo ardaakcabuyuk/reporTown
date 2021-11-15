@@ -21,3 +21,7 @@ Oğuz Kaan İmamoğlu
 
 Project Specifations Report: [[Github]](https://github.com/OguzKaanImamoglu/reporTown/raw/main/Project%20Specification.pdf)  [[Google Drive]](https://drive.google.com/file/d/1gb9UJBN1W5mp5j9wrDxexu0qqcjGX7V9/view?usp=sharing)
 
+Project Analysis Report: [[Github]](https://github.com/OguzKaanImamoglu/reporTown/raw/main/Analysis%20Report.pdf)  [[Google Drive]](https://drive.google.com/file/d/16_6JokcS5SxrxK_HjkFH7sBmj7CnGE2X/view?usp=sharing)
+
+
+
