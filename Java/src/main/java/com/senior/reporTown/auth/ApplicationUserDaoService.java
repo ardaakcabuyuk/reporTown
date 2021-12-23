@@ -12,14 +12,14 @@ import java.util.List;
 import static com.senior.reporTown.security.UserRole.*;
 
 @Repository("fake")
-public class FakeApplicationUserDaoService implements ApplicationUserDao {
+public class ApplicationUserDaoService implements ApplicationUserDao {
 
     private final static String USER_NOT_FOUND_MSG = "user with username %s not found";
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
     @Autowired
-    public FakeApplicationUserDaoService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+    public ApplicationUserDaoService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
     }

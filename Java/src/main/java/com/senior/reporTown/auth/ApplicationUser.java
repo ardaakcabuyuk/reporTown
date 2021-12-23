@@ -1,2 +1,117 @@
-package com.senior.reporTown.auth;public class ApplicationUser {
+package com.senior.reporTown.auth;
+
+import com.senior.reporTown.security.UserRole;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
+import java.util.Set;
+
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
+@Entity
+public class ApplicationUser implements UserDetails {
+
+    @Id
+    @SequenceGenerator(
+            name = "user_sequence",
+            sequenceName = "user_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_sequence"
+    )
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String username;
+    private String password;
+    /*@ElementCollection(targetClass = GrantedAuthority.class)
+    private Set<? extends GrantedAuthority> authorities;*/
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+    private boolean isAccountNonExpired;
+    private boolean isAccountNonLocked;
+    private boolean isCredentialsNonExpired;
+    private boolean isEnabled;
+
+    public ApplicationUser(String firstName,
+                           String lastName,
+                           String email,
+                           String username,
+                           String password,
+                           UserRole role,
+                           //Set<? extends GrantedAuthority> authorities,
+                           boolean isAccountNonExpired,
+                           boolean isAccountNonLocked,
+                           boolean isCredentialsNonExpired,
+                           boolean isEnabled) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        //this.authorities = role.getGrantedAuthorities();
+        this.role = role;
+        this.password = password;
+        this.username = username;
+        this.isAccountNonExpired = isAccountNonExpired;
+        this.isAccountNonLocked = isAccountNonLocked;
+        this.isCredentialsNonExpired = isCredentialsNonExpired;
+        this.isEnabled = isEnabled;
+    }
+
+    @Override
+    public Set<? extends GrantedAuthority> getAuthorities() {
+        return role.getGrantedAuthorities();
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return isAccountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return isAccountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return isCredentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isEnabled;
+    }
 }
