@@ -66,6 +66,8 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 .secret-*
 **.sample
+package-log.json
+yarn.lock
 #amplify-do-not-edit-end
 .expo/packager-info.json
 .expo/settings.json
