@@ -1,7 +1,5 @@
 package com.senior.reporTown.service;
 
-import com.senior.reporTown.auth.ApplicationUserService;
-import com.senior.reporTown.request.RegistrationRequest;
 import com.senior.reporTown.request.ReportRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

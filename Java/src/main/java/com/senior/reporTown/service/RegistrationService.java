@@ -1,7 +1,6 @@
 package com.senior.reporTown.service;
 
-import com.senior.reporTown.auth.ApplicationUser;
-import com.senior.reporTown.auth.ApplicationUserService;
+import com.senior.reporTown.model.ApplicationUser;
 import com.senior.reporTown.request.RegistrationRequest;
 import com.senior.reporTown.security.UserRole;
 import com.senior.reporTown.util.EmailValidator;

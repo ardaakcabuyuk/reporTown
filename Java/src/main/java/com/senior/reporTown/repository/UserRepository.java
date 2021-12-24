@@ -1,6 +1,6 @@
 package com.senior.reporTown.repository;
 
-import com.senior.reporTown.auth.ApplicationUser;
+import com.senior.reporTown.model.ApplicationUser;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,4 +1,4 @@
-package com.senior.reporTown.auth;
+package com.senior.reporTown.model;
 
 import com.senior.reporTown.security.UserRole;
 import lombok.EqualsAndHashCode;

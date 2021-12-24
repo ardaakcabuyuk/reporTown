@@ -1,7 +1,6 @@
 package com.senior.reporTown.controller;
 
-import com.senior.reporTown.auth.ApplicationUser;
-import org.springframework.security.access.prepost.PreAuthorize;
+import com.senior.reporTown.model.ApplicationUser;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 

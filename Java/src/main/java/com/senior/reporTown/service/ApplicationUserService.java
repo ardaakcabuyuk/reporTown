@@ -1,8 +1,8 @@
-package com.senior.reporTown.auth;
+package com.senior.reporTown.service;
 
+import com.senior.reporTown.model.ApplicationUser;
 import com.senior.reporTown.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
