@@ -50,45 +50,6 @@ public class ApplicationUserDaoService implements ApplicationUserDao {
         return "it works!";
     }
 
-    /*private List<ApplicationUser> getApplicationUsers() {
-        List<ApplicationUser> applicationUsers  = Lists.newArrayList(
-                new ApplicationUser(
-                        "arda",
-                        passwordEncoder.encode("password"),
-                        ADMIN.getGrantedAuthorities(),
-                        true,
-                        true,
-                        true,
-                        true
-                ),
-                new ApplicationUser(
-                        "adil",
-                        passwordEncoder.encode("password"),
-                        CITIZEN.getGrantedAuthorities(),
-                        true,
-                        true,
-                        true,
-                        true
-                ),
-                new ApplicationUser(
-                        "ankaraBld",
-                        passwordEncoder.encode("password"),
-                        INSTITUTION.getGrantedAuthorities(),
-                        true,
-                        true,
-                        true,
-                        true
-                ),
-                new ApplicationUser(
-                        "mansur",
-                        passwordEncoder.encode("password"),
-                        OFFICIAL.getGrantedAuthorities(),
-                        true,
-                        true,
-                        true,
-                        true
-                )
-        );
-        return applicationUsers;
-    }*/
+    //public String
+
 }
