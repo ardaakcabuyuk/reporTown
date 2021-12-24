@@ -1,6 +1,6 @@
 package com.senior.reporTown.service;
 
-import com.senior.reporTown.auth.ApplicationUserDaoService;
+import com.senior.reporTown.auth.ApplicationUserService;
 import com.senior.reporTown.request.RegistrationRequest;
 import com.senior.reporTown.request.ReportRequest;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class ReportService {
 
-    private final ApplicationUserDaoService applicationUserDaoService;
+    private final ApplicationUserService applicationUserService;
 
     public String postReport(ReportRequest request) {
 
