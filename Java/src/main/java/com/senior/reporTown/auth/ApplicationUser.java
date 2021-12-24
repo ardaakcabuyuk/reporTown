@@ -5,31 +5,24 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
 import java.util.Set;
 
 @Getter
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-@Entity
+@Document(collection = "users")
 public class ApplicationUser implements UserDetails {
 
     @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
-    private Long id;
+    private ObjectId _id;
     private String firstName;
     private String lastName;
     private String email;
@@ -37,7 +30,7 @@ public class ApplicationUser implements UserDetails {
     private String password;
     /*@ElementCollection(targetClass = GrantedAuthority.class)
     private Set<? extends GrantedAuthority> authorities;*/
-    @Enumerated(EnumType.STRING)
+    //@Enumerated
     private UserRole role;
     private boolean isAccountNonExpired;
     private boolean isAccountNonLocked;
@@ -71,6 +64,14 @@ public class ApplicationUser implements UserDetails {
     @Override
     public Set<? extends GrantedAuthority> getAuthorities() {
         return role.getGrantedAuthorities();
+    }
+
+    public ObjectId getId() {
+        return _id;
+    }
+
+    public UserRole getRole() {
+        return role;
     }
 
     public String getFirstName() {
