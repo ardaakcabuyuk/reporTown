@@ -1,6 +1,8 @@
 package com.senior.reporTown.controller;
 
+import com.senior.reporTown.auth.ApplicationUser;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,8 +14,8 @@ public class HelloController {
     }
 
     @GetMapping("/hello")
-    public String hello() {
-        return "Hello from reporTown!";
+    public String hello(@AuthenticationPrincipal ApplicationUser authenticatedUser) {
+        return "Hello from reporTown " + authenticatedUser.getUsername() + "!";
     }
 
     @GetMapping("/banCitizen/{id}")
