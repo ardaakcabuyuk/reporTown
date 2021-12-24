@@ -23,5 +23,6 @@ Project Specifations Report: [[Github]](https://github.com/OguzKaanImamoglu/repo
 
 Analysis Report: [[Github]](https://github.com/OguzKaanImamoglu/reporTown/raw/main/Analysis%20Report.pdf)  [[Google Drive]](https://drive.google.com/file/d/16_6JokcS5SxrxK_HjkFH7sBmj7CnGE2X/view?usp=sharing)
 
+High-Level Design Report: [[Github]](https://github.com/OguzKaanImamoglu/reporTown/raw/main/Reports/High_Level_Design_Report_reportown.pdf)  [[Google Drive]](https://drive.google.com/file/d/16DX3wNt-pqgtAA4sPdDUwumO0GErcOBY/view?usp=sharing)
 
 
