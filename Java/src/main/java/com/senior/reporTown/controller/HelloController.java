@@ -21,12 +21,6 @@ public class HelloController {
         return "Citizen " + id + " is banned.";
     }
 
-    @PostMapping("/postReport")
-    @PreAuthorize("hasAuthority('report:write')")
-    public String postReport(@RequestBody String text) {
-        return "Post: " + text;
-    }
-
     @PostMapping("/registerOfficial")
     public String registerOfficial(@RequestBody String username) {
         return "Official: " + username;
