@@ -1,7 +1,6 @@
 package com.senior.reporTown.service;
 
-import com.senior.reporTown.auth.ApplicationUser;
-import com.senior.reporTown.auth.ApplicationUserDaoService;
+import com.senior.reporTown.model.ApplicationUser;
 import com.senior.reporTown.request.RegistrationRequest;
 import com.senior.reporTown.security.UserRole;
 import com.senior.reporTown.util.EmailValidator;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class RegistrationService {
 
-    private final ApplicationUserDaoService applicationUserDaoService;
+    private final ApplicationUserService applicationUserService;
     private EmailValidator emailValidator;
 
     public String register(RegistrationRequest request) {
@@ -39,7 +38,7 @@ public class RegistrationService {
             throw new IllegalStateException("role not valid");
         }
 
-        return applicationUserDaoService.signUpUser(
+        return applicationUserService.signUpUser(
                 new ApplicationUser(
                         request.getFirstName(),
                         request.getLastName(),

@@ -1,6 +1,7 @@
 package com.senior.reporTown.controller;
 
-import org.springframework.security.access.prepost.PreAuthorize;
+import com.senior.reporTown.model.ApplicationUser;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,19 +13,13 @@ public class HelloController {
     }
 
     @GetMapping("/hello")
-    public String hello() {
-        return "Hello from reporTown!";
+    public String hello(@AuthenticationPrincipal ApplicationUser authenticatedUser) {
+        return "Hello from reporTown " + authenticatedUser.getUsername() + "!";
     }
 
     @GetMapping("/banCitizen/{id}")
     public String banUser(@PathVariable Long id) {
         return "Citizen " + id + " is banned.";
-    }
-
-    @PostMapping("/postReport")
-    @PreAuthorize("hasAuthority('report:write')")
-    public String postReport(@RequestBody String text) {
-        return "Post: " + text;
     }
 
     @PostMapping("/registerOfficial")
