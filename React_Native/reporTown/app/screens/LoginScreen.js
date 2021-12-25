@@ -302,26 +302,7 @@ class LoginScreen extends Component {
               </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              onPress={() =>
-                this.props.navigation.navigate("WelcomeScreen")
-              }
-              style={{
-                width: "30%",
-                alignItems: "center",
-                height: "50%",
-                justifyContent: "center",
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: Dimensions.get("window").width / 25,
-                  textDecorationLine: "underline",
-                }}
-              >
-                Şifremi Unuttum
-              </Text>
-            </TouchableOpacity>
+            
           </View>
           
         </SafeAreaView>

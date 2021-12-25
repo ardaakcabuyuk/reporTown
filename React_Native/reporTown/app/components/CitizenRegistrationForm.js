@@ -9,13 +9,24 @@ import {
   SafeAreaView,
   StatusBar,
   Keyboard,
+  Linking,
   Platform,
   KeyboardAvoidingView,
   ScrollView,
   TouchableWithoutFeedback,
 } from "react-native";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
+
 
 export default class CitizenRegistrationForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      checked1: false,
+    };
+    
+    this._isMounted = false;
+  }
   render() {
     return (
       <KeyboardAvoidingView>
@@ -64,6 +75,8 @@ export default class CitizenRegistrationForm extends React.Component {
                   placeholderTextColor={"gray"}
                 />
 
+                
+
                 <TextInput
                   style={styles.textinput}
                   placeholder="Password"
@@ -79,6 +92,38 @@ export default class CitizenRegistrationForm extends React.Component {
                   underlineColorAndroid={"transparent"}
                   placeholderTextColor={"gray"}
                 />
+
+            <View
+                style={{ width: "90%", alignItems: "center", paddingTop: "5%" }}
+              >
+                <View
+                  style={{
+                    width: "100%",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <BouncyCheckbox
+                    fillColor="#cb7b23"
+                    isChecked={this.state.checked1}
+                    disableBuiltInState
+                    onPress={() => {
+                        this.setState({ checked1: !this.state.checked1 });
+                    }}
+                    style={{ width: "8.5%", aspectRatio: 1 }}
+                  />
+              
+                    <Text
+                      style={{ color: "#cb7b23", fontWeight: "bold" }}
+                      onPress={() =>
+                        Linking.openURL("https://passmiracle.com/kvvk.pdf")
+                      }
+                    >
+                      I understand and accept terms of usage.
+                    </Text>
+                </View>
+              </View>
 
                 <TouchableOpacity style={styles.button}>
                   <Text style={styles.buttontext}>Register</Text>
