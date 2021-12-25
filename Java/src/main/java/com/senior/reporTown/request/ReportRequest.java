@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.ToString;
 import org.bson.json.JsonObject;
 import org.bson.types.ObjectId;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class ReportRequest {
     private ArrayList<ObjectId> comments;
     private ArrayList<ObjectId> upvotes;
     private JsonObject location;
-    private File[] images;
+    private String report_image_link;
+    private MultipartFile file;
 
 }
