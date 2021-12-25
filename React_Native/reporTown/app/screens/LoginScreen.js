@@ -7,6 +7,7 @@ import {
   Image,
   StatusBar,
   Button,
+  Alert,
   SafeAreaView,
   Platform,
   Dimensions,
@@ -17,17 +18,39 @@ class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
+      username: "",
       password: "",
-      phone_number: "",
-      phone_verification: "",
       errorText: "",
     };
 
+    this._isMounted = false;
   }
 
-  signInClicked = async () => {
-    const { email, password } = this.state;
+  async componentDidMount() {
+    this._isMounted = true;
+  }
+
+
+  signInClicked = () => {
+    const { username, password } = this.state;
+    console.log("Yarraaaa");
+    console.log(username);
+    console.log(this.state.password);
+
+    if(this.state.username == "Mustafa" && this.state.password == 123){
+        console.log("Beniiii");
+        this.props.navigation.reset({
+            index: 0,
+            routes: [
+              {
+                name: "WelcomeScreen",
+                params: {
+                  username: this.state.username,
+                },
+              },
+            ],
+          });
+    }
   };
 
 
@@ -118,7 +141,7 @@ class LoginScreen extends Component {
                 textContentType="emailAddress"
                 keyboardType="email-address"
                 onChangeText={(value) =>
-                  this._isMounted && this.setState({ email: value })
+                  this._isMounted && this.setState({username: value })
                 }
               />
               <TextInput
@@ -260,7 +283,7 @@ class LoginScreen extends Component {
               </Text>
             </View>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate("WelcomeScreen")}
+              onPress={() => this.props.navigation.navigate("RegisterChooseScreen")}
               style={{
                 width: "30%",
                 alignItems: "center",
