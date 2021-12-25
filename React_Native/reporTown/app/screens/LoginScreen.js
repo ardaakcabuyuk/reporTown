@@ -147,7 +147,7 @@ class LoginScreen extends Component {
               />
             </View>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate("RegisterScreen")}
+              onPress={() => this.props.navigation.navigate("WelcomeScreen")}
               style={{
                 width: "30%",
                 alignItems: "center",
@@ -260,7 +260,7 @@ class LoginScreen extends Component {
               </Text>
             </View>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate("RegisterScreen")}
+              onPress={() => this.props.navigation.navigate("WelcomeScreen")}
               style={{
                 width: "30%",
                 alignItems: "center",
@@ -281,7 +281,7 @@ class LoginScreen extends Component {
 
             <TouchableOpacity
               onPress={() =>
-                this.props.navigation.navigate("ForgotPasswordScreen")
+                this.props.navigation.navigate("WelcomeScreen")
               }
               style={{
                 width: "30%",

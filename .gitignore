@@ -32,7 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 
-node_modules/
+node_modules
 .expo/
 npm-debug.*
 *.jks
