@@ -41,7 +41,7 @@ public class ReportService {
                 request.getFile(),
                 authenticatedUser.get_id())
         );
-        return "report posted";
+        return "report posted to db";
     }
 
 
