@@ -4,8 +4,12 @@ import com.senior.reporTown.model.ApplicationUser;
 import com.senior.reporTown.model.Report;
 import com.senior.reporTown.repository.ReportRepository;
 import com.senior.reporTown.request.ReportRequest;
+import org.bson.types.ObjectId;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReportService {
@@ -20,12 +24,14 @@ public class ReportService {
         reportRepository.save(new Report(
                 request.getDescription(),
                 request.getCategory(),
-                request.getComments(),
-                request.getUpvotes(),
                 request.getLocation(),
                 request.getImages(),
-                authenticatedUser.get_id() )
+                authenticatedUser.getId())
         );
         return "report posted";
+    }
+
+    public List<Report> getReportsByUser(ObjectId user_id) {
+        return reportRepository.findByUserId(user_id);
     }
 }

@@ -1,5 +1,7 @@
 package com.senior.reporTown.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,11 +21,13 @@ import java.util.ArrayList;
 @Document(collection = "reports")
 public class Report {
 
-
     @Id
-    private ObjectId _id;
-    private ObjectId _user_id;
-    private ObjectId _solution_id;
+    @JsonSerialize(using= ToStringSerializer.class)
+    private ObjectId id;
+    @JsonSerialize(using= ToStringSerializer.class)
+    private ObjectId userId;
+    @JsonSerialize(using= ToStringSerializer.class)
+    private ObjectId solutionId;
 
     private String description;
     private String category;
@@ -32,42 +36,19 @@ public class Report {
     private JsonObject location;
     private File[] images;
 
-
-
-    public Report(String description, String category, ArrayList<ObjectId> comments, ArrayList<ObjectId> upvotes, JsonObject location, File[] images,ObjectId _user_id) {
+    public Report(String description,
+                  String category,
+                  JsonObject location,
+                  File[] images,
+                  ObjectId userId) {
         this.description = description;
         this.category = category;
-        this.comments = comments;
-        this.upvotes = upvotes;
+        comments = null;
+        upvotes = null;
         this.location = location;
         this.images = images;
-        this._user_id = _user_id;
+        this.userId = userId;
+        solutionId = null;
     }
-
-    public ArrayList<ObjectId> getComments() {
-        return comments;
-    }
-
-    public ArrayList<ObjectId> getUpvotes() {
-        return upvotes;
-    }
-
-    public JsonObject getLocation() {
-        return location;
-    }
-
-    public File[] getImages() {
-        return images;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-
 }
 

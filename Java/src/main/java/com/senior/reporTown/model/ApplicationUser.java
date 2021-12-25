@@ -1,5 +1,7 @@
 package com.senior.reporTown.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.senior.reporTown.security.UserRole;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,7 +24,8 @@ import java.util.Set;
 public class ApplicationUser implements UserDetails {
 
     @Id
-    private ObjectId _id;
+    @JsonSerialize(using= ToStringSerializer.class)
+    private ObjectId id;
     private String email;
     private String username;
     private String password;
@@ -61,7 +64,7 @@ public class ApplicationUser implements UserDetails {
     }
 
     public ObjectId getId() {
-        return _id;
+        return id;
     }
 
     public UserRole getRole() {
