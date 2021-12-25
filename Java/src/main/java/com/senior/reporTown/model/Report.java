@@ -23,11 +23,11 @@ import java.util.ArrayList;
 public class Report {
 
     @Id
-    @JsonSerialize(using= ToStringSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
-    @JsonSerialize(using= ToStringSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId userId;
-    @JsonSerialize(using= ToStringSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId solutionId;
 
     private String description;
@@ -41,7 +41,8 @@ public class Report {
     public Report(String description,
                   String category,
                   JsonObject location,
-                  File[] images,
+                  String report_image_link,
+                  MultipartFile file,
                   ObjectId userId) {
         this.description = description;
         this.category = category;
@@ -53,4 +54,5 @@ public class Report {
         this.report_image_link = report_image_link;
         this.file = file;
     }
+}
 

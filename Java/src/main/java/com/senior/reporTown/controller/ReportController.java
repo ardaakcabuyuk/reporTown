@@ -23,6 +23,7 @@ public class ReportController {
         return reportService.postReport(authenticatedUser,request);
     }
 
+    /*
     //parameter allow us to assign profile image to ("profileId")
     @PostMapping(
             path = "/upload",
@@ -34,6 +35,6 @@ public class ReportController {
 
         reportService.uploadReportImage(authenticatedUser,file);
 
-    }
+    }*/
 
 }
