@@ -1,18 +1,31 @@
 package com.senior.reporTown.service;
 
+import com.senior.reporTown.model.ApplicationUser;
+import com.senior.reporTown.model.Report;
+import com.senior.reporTown.repository.ReportRepository;
 import com.senior.reporTown.request.ReportRequest;
-import lombok.AllArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 public class ReportService {
 
-    private final UserService userService;
+    private final ReportRepository reportRepository;
 
-    public String postReport(ReportRequest request) {
+    public ReportService(ReportRepository reportRepository) {
+        this.reportRepository = reportRepository;
+    }
 
-        //return ApplicationUserDaoService
-        return null;
+    public String postReport(@AuthenticationPrincipal ApplicationUser authenticatedUser, ReportRequest request) {
+        reportRepository.save(new Report(
+                request.getDescription(),
+                request.getCategory(),
+                request.getComments(),
+                request.getUpvotes(),
+                request.getLocation(),
+                request.getImages(),
+                authenticatedUser.get_id() )
+        );
+        return "report posted";
     }
 }

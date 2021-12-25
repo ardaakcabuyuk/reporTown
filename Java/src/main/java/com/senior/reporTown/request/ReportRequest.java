@@ -5,6 +5,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import org.bson.json.JsonObject;
+import org.bson.types.ObjectId;
+
+import java.io.File;
+import java.util.ArrayList;
 
 @Getter
 @AllArgsConstructor
@@ -12,9 +16,11 @@ import org.bson.json.JsonObject;
 @ToString
 public class ReportRequest {
 
-    private final String description;
-    private final String category;
-    private final String file; //url for now
-    private final JsonObject location;
+    private String description;
+    private String category;
+    private ArrayList<ObjectId> comments;
+    private ArrayList<ObjectId> upvotes;
+    private JsonObject location;
+    private File[] images;
 
 }
