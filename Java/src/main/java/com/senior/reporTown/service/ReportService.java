@@ -1,18 +1,21 @@
 package com.senior.reporTown.service;
 
-import com.senior.reporTown.request.ReportRequest;
-import lombok.AllArgsConstructor;
+import com.senior.reporTown.model.ApplicationUser;
+import com.senior.reporTown.model.Report;
+import com.senior.reporTown.repository.ReportRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 public class ReportService {
 
-    private final ApplicationUserService applicationUserService;
+    private final ReportRepository reportRepository;
 
-    public String postReport(ReportRequest request) {
+    public ReportService(ReportRepository reportRepository) {
+        this.reportRepository = reportRepository;
+    }
 
-        //return ApplicationUserDaoService
-        return null;
+    public String postReport(Report report) {
+        reportRepository.save(report);
+        return "report saved to database";
     }
 }
