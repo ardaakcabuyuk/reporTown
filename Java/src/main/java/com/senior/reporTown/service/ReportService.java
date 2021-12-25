@@ -7,6 +7,7 @@ import com.senior.reporTown.model.ApplicationUser;
 import com.senior.reporTown.model.Report;
 import com.senior.reporTown.repository.ReportRepository;
 import com.senior.reporTown.request.ReportRequest;
+import org.bson.types.ObjectId;
 import org.apache.http.entity.ContentType;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +18,19 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ReportService {
 
     private final ReportRepository reportRepository;
-    private final FileStore fileStore;
+    //private final FileStore fileStore;
 
     @Autowired
-    public ReportService(ReportRepository reportRepository,FileStore fileStore) {
+    public ReportService(ReportRepository reportRepository) { //,FileStore fileStore) {
         this.reportRepository = reportRepository;
-        this.fileStore = fileStore;
+        //this.fileStore = fileStore;
     }
 
     public String postReport(@AuthenticationPrincipal ApplicationUser authenticatedUser, ReportRequest request) {
@@ -34,18 +38,19 @@ public class ReportService {
         reportRepository.save(new Report(
                 request.getDescription(),
                 request.getCategory(),
-                request.getComments(),
-                request.getUpvotes(),
                 request.getLocation(),
                 request.getReport_image_link(),
                 request.getFile(),
-                authenticatedUser.get_id())
+                authenticatedUser.getId())
         );
         return "report posted to db";
     }
 
+    public List<Report> getReportsByUser(ObjectId userId) {
+        return reportRepository.findByUserId(userId);
+    }
 
-    public String uploadReportImage(@AuthenticationPrincipal ApplicationUser authenticatedUser, MultipartFile file) {
+    /*public String uploadReportImage(@AuthenticationPrincipal ApplicationUser authenticatedUser, MultipartFile file) {
 
         //1. Check if image is not empty
         //2. If file is an image
@@ -66,7 +71,7 @@ public class ReportService {
                     ContentType.IMAGE_PNG.getMimeType()).contains(file.getContentType())){
                 //store image in s3 and update db userProfileımageLink with s3 link
                 String path = String.format("%s/%s", BucketName.REPORT_IMAGE.getBucketName(),
-                        authenticatedUser.get_id());
+                        authenticatedUser.getId());
                 String fileName = String.format("%s-%s", file.getOriginalFilename()  , UUID.randomUUID() );
                 try{
                     fileStore.save(path, fileName, Optional.of(metaData), file.getInputStream());
@@ -88,5 +93,5 @@ public class ReportService {
             throw new IllegalStateException("File is not uploaded" );
         }
 
-    }
+    }*/
 }

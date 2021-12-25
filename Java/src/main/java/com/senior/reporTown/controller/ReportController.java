@@ -1,6 +1,7 @@
 package com.senior.reporTown.controller;
 
 import com.senior.reporTown.model.ApplicationUser;
+import com.senior.reporTown.model.Report;
 import com.senior.reporTown.request.ReportRequest;
 import com.senior.reporTown.service.ReportService;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ public class ReportController {
         return reportService.postReport(authenticatedUser,request);
     }
 
+    /*
     //parameter allow us to assign profile image to ("profileId")
     @PostMapping(
             path = "/upload",
@@ -33,6 +35,6 @@ public class ReportController {
 
         reportService.uploadReportImage(authenticatedUser,file);
 
-    }
+    }*/
 
 }
