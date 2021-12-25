@@ -7,6 +7,7 @@ import com.senior.reporTown.service.ReportService;
 import lombok.AllArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +21,7 @@ public class ReportController {
 
     private ReportService reportService;
     @PostMapping("/postReport")
+    @PreAuthorize()
     public Report postReport(@AuthenticationPrincipal ApplicationUser authenticatedUser, @RequestBody ReportRequest request) {
         return reportService.postReport(authenticatedUser,request);
     }

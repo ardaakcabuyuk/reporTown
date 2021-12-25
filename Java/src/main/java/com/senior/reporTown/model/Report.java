@@ -28,6 +28,8 @@ public class Report {
     @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId userId;
     @JsonSerialize(using = ToStringSerializer.class)
+    private ObjectId institutionId;
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId solutionId;
 
     private String description;
@@ -43,13 +45,15 @@ public class Report {
                   JsonObject location,
                   String report_image_link,
                   MultipartFile file,
-                  ObjectId userId) {
+                  ObjectId userId,
+                  ObjectId institutionId) {
         this.description = description;
         this.category = category;
         comments = null;
         upvotes = null;
         this.location = location;
         this.userId = userId;
+        this.institutionId = institutionId;
         solutionId = null;
         this.report_image_link = report_image_link;
         this.file = file;
