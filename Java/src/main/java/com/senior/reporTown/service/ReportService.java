@@ -10,6 +10,8 @@ import com.senior.reporTown.request.ReportRequest;
 import org.bson.types.ObjectId;
 import org.apache.http.entity.ContentType;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,7 @@ public class ReportService {
 
     private final ReportRepository reportRepository;
     //private final FileStore fileStore;
+    private final Logger logger = LoggerFactory.getLogger(ReportService.class);
 
     @Autowired
     public ReportService(ReportRepository reportRepository) { //,FileStore fileStore) {
@@ -33,17 +36,19 @@ public class ReportService {
         //this.fileStore = fileStore;
     }
 
-    public String postReport(@AuthenticationPrincipal ApplicationUser authenticatedUser, ReportRequest request) {
+    public Report postReport(@AuthenticationPrincipal ApplicationUser authenticatedUser, ReportRequest request) {
         //String link = uploadReportImage(authenticatedUser, request.getFile());
-        reportRepository.save(new Report(
+        Report newReport = new Report(
                 request.getDescription(),
                 request.getCategory(),
                 request.getLocation(),
                 request.getReport_image_link(),
                 request.getFile(),
-                authenticatedUser.getId())
+                authenticatedUser.getId()
         );
-        return "report posted to db";
+        reportRepository.save(newReport);
+        logger.info(String.format("A report has been posted by user %s", authenticatedUser.getUsername()));
+        return newReport;
     }
 
     public List<Report> getReportsByUser(ObjectId userId) {

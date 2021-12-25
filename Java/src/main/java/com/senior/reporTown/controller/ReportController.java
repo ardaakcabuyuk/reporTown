@@ -19,7 +19,7 @@ public class ReportController {
 
     private ReportService reportService;
     @PostMapping("/postReport")
-    public String postReport(@AuthenticationPrincipal ApplicationUser authenticatedUser, @RequestBody ReportRequest request) {
+    public Report postReport(@AuthenticationPrincipal ApplicationUser authenticatedUser, @RequestBody ReportRequest request) {
         return reportService.postReport(authenticatedUser,request);
     }
 
