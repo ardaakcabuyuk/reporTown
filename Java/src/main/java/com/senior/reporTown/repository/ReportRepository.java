@@ -15,4 +15,6 @@ import java.util.Optional;
 public interface ReportRepository extends MongoRepository<Report, String>{
     Report findById(ObjectId id);
     List<Report> findByUserId(ObjectId userId);
+
+
 }
