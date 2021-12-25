@@ -16,6 +16,9 @@ public class Institution extends ApplicationUser {
     private String institutionName;
     private String approvalDocument;
     private List<String> positions;
+    private String profilePicture;
+    private String bio;
+    private float score;
 
     public Institution(String institutionName,
                        String email,
@@ -32,5 +35,8 @@ public class Institution extends ApplicationUser {
         this.institutionName = institutionName;
         this.approvalDocument = approvalDocument;
         this.positions = positions;
+        profilePicture = "";
+        bio = "";
+        score = (float) 0.0;
     }
 }

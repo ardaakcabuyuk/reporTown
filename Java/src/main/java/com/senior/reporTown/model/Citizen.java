@@ -13,6 +13,9 @@ import lombok.Setter;
 public class Citizen extends ApplicationUser {
     private String firstName;
     private String lastName;
+    private String profilePicture;
+    private String bio;
+    private float score;
 
     public Citizen(String firstName,
                    String lastName,
@@ -27,5 +30,8 @@ public class Citizen extends ApplicationUser {
         super(email, username, password, role, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled);
         this.firstName = firstName;
         this.lastName = lastName;
+        profilePicture = "";
+        bio = "";
+        score = (float) 0.0;
     }
 }
