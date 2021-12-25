@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class ReportService {
 
-    private final ApplicationUserService applicationUserService;
+    private final UserService userService;
 
     public String postReport(ReportRequest request) {
 

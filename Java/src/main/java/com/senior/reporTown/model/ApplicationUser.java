@@ -23,8 +23,6 @@ public class ApplicationUser implements UserDetails {
 
     @Id
     private ObjectId _id;
-    private String firstName;
-    private String lastName;
     private String email;
     private String username;
     private String password;
@@ -37,9 +35,7 @@ public class ApplicationUser implements UserDetails {
     private boolean isCredentialsNonExpired;
     private boolean isEnabled;
 
-    public ApplicationUser(String firstName,
-                           String lastName,
-                           String email,
+    public ApplicationUser(String email,
                            String username,
                            String password,
                            UserRole role,
@@ -48,8 +44,6 @@ public class ApplicationUser implements UserDetails {
                            boolean isAccountNonLocked,
                            boolean isCredentialsNonExpired,
                            boolean isEnabled) {
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.email = email;
         //this.authorities = role.getGrantedAuthorities();
         this.role = role;
@@ -72,14 +66,6 @@ public class ApplicationUser implements UserDetails {
 
     public UserRole getRole() {
         return role;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
     }
 
     public String getEmail() {
