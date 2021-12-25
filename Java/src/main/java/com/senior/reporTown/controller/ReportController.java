@@ -11,6 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -21,6 +22,12 @@ public class ReportController {
     @PostMapping("/postReport")
     public Report postReport(@AuthenticationPrincipal ApplicationUser authenticatedUser, @RequestBody ReportRequest request) {
         return reportService.postReport(authenticatedUser,request);
+    }
+
+    @GetMapping("/feed")
+    public List<Report> getAllReports(){
+
+        return reportService.getAllReports();
     }
 
     /*

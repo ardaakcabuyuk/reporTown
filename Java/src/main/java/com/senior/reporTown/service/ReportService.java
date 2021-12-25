@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.*;
 
 import java.util.List;
+import java.util.Collections;
 import java.util.Optional;
 
 @Service
@@ -53,6 +54,14 @@ public class ReportService {
 
     public List<Report> getReportsByUser(ObjectId userId) {
         return reportRepository.findByUserId(userId);
+    }
+
+    public List<Report> getAllReports(){
+
+        List<Report> reports = reportRepository.findAll();
+        Collections.reverse(reports);
+        return reports;
+
     }
 
     /*public String uploadReportImage(@AuthenticationPrincipal ApplicationUser authenticatedUser, MultipartFile file) {
