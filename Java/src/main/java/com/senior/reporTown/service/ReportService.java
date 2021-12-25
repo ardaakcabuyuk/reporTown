@@ -44,7 +44,8 @@ public class ReportService {
                 request.getLocation(),
                 request.getReport_image_link(),
                 request.getFile(),
-                authenticatedUser.getId()
+                authenticatedUser.getId(),
+                request.getInstitutionId()
         );
         reportRepository.save(newReport);
         logger.info(String.format("A report has been posted by user %s", authenticatedUser.getUsername()));
@@ -54,6 +55,8 @@ public class ReportService {
     public List<Report> getReportsByUser(ObjectId userId) {
         return reportRepository.findByUserId(userId);
     }
+
+    public List<Report> getReportsByInstitution(ObjectId userId) { return reportRepository.findByInstitutionId(userId); }
 
     /*public String uploadReportImage(@AuthenticationPrincipal ApplicationUser authenticatedUser, MultipartFile file) {
 

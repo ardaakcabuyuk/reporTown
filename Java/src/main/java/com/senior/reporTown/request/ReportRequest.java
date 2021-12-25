@@ -17,6 +17,7 @@ import java.util.ArrayList;
 @ToString
 public class ReportRequest {
 
+    private ObjectId institutionId;
     private String description;
     private String category;
     private ArrayList<ObjectId> comments;
