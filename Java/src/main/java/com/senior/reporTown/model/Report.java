@@ -10,6 +10,7 @@ import org.bson.json.JsonObject;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,7 +35,8 @@ public class Report {
     private ArrayList<ObjectId> comments;
     private ArrayList<ObjectId> upvotes;
     private JsonObject location;
-    private File[] images;
+    private String report_image_link;
+    private MultipartFile file;
 
     public Report(String description,
                   String category,
@@ -46,9 +48,9 @@ public class Report {
         comments = null;
         upvotes = null;
         this.location = location;
-        this.images = images;
         this.userId = userId;
         solutionId = null;
+        this.report_image_link = report_image_link;
+        this.file = file;
     }
-}
 
