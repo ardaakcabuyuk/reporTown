@@ -1,18 +1,20 @@
-import React from 'react';
-import {ImageBackground, StyleSheet} from "react-native"
+import React from "react";
+import { ImageBackground, StyleSheet, View } from "react-native";
+import CitizenRegistrationForm from "../components/CitizenRegistrationForm";
 
 function CitizenRegisterScreen(props) {
-    return (
-      <ImageBackground
-      style = {styles.background}
-      source={require("../assets/background.jpg")}
-      ></ImageBackground>
-    );
+  return (
+    <View style={styles.container}>
+      <CitizenRegistrationForm />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    background:{
-        flex:1
-    }
-})
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#36485f",
+  },
+});
 export default CitizenRegisterScreen;
