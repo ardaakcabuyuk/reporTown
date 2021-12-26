@@ -75,3 +75,6 @@ yarn.lock
 React_Native/reporTown/yarn.lock
 React_Native/reporTown/.expo/packager-info.json
 React_Native/reporTown/.expo/settings.json
+**.yarn.lock
+**.packager-info.json
+**.settings.json

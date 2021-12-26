@@ -3,8 +3,8 @@
   "expoServerPort": 19000,
   "packagerPort": 19000,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://qp-pnw.anonymous.reportown.exp.direct",
+  "packagerNgrokUrl": "https://packager.qp-pnw.anonymous.reportown.exp.direct",
+  "ngrokPid": 16100,
   "webpackServerPort": null
 }
