@@ -43,7 +43,7 @@ class LoginScreen extends Component {
             index: 0,
             routes: [
               {
-                name: "WelcomeScreen",
+                name: "UserScreens",
                 params: {
                   username: this.state.username,
                 },
