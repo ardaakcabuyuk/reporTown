@@ -77,7 +77,7 @@ function PostScreen({navigation}) {
               }}
             >
                  <Image
-                source={require("../gui_components/camera.png")}
+                source={require("../assets/cam.png")}
                 style={{
                   width: "100%",
                   height: undefined,
