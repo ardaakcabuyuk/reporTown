@@ -51,6 +51,21 @@ class LoginScreen extends Component {
             ],
           });
     }
+
+    if(this.state.username == "Ankara" && this.state.password == 321){
+      console.log("Beniiii");
+      this.props.navigation.reset({
+          index: 0,
+          routes: [
+            {
+              name: "InstScreens",
+              params: {
+                username: this.state.username,
+              },
+            },
+          ],
+        });
+  }
   };
 
 

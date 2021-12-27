@@ -16,6 +16,11 @@ import ProfileScreen from './app/screens/ProfileScreen';
 import FeedScreen from './app/screens/FeedScreen';
 import { MaterialIcons } from "@expo/vector-icons";
 import CameraScreen from './app/screens/CameraScreen';
+import InstFeedScreen from './app/screens/InstScreens/InstFeedScreen';
+import InstMapScreen from './app/screens/InstScreens/InstMapScreen';
+import InstProfileScreen from './app/screens/InstScreens/InstProfileScreen';
+import InstSearchScreen from './app/screens/InstScreens/InstSearchScreen';
+import EmployeeScreen from './app/screens/InstScreens/EmployeeScreen';
 
 const Stack = createStackNavigator();
 const Tabs = createMaterialBottomTabNavigator();
@@ -55,6 +60,41 @@ const UserScreens = () => {
 };
 
 
+const InstScreens = () => {
+  return (
+    <Tabs.Navigator
+      initialRouteName="Feed"
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color }) => {
+          let iconName;
+
+          if (route.name === "Feed") {
+            iconName = "dynamic-feed";
+          } else if (route.name === "Map") {
+            iconName = "map";
+          } else if (route.name === "Employees") {
+            iconName = "people";
+          } else if (route.name === "Search") {
+            iconName = "search";
+          } else if (route.name === "Profile") {
+            iconName = "person";
+          }
+
+          return <MaterialIcons name={iconName} size={24} color={color} />;
+        },
+      })}
+      barStyle={{ backgroundColor: "#cb7b23" }}
+    >
+      <Tabs.Screen name="Search" component={InstSearchScreen} />
+      <Tabs.Screen name="Map" component={InstMapScreen} />
+      <Tabs.Screen name="Employees" component={EmployeeScreen} />
+      <Tabs.Screen name="Feed" component={InstFeedScreen} />
+      <Tabs.Screen name="Profile" component={InstProfileScreen} />
+    </Tabs.Navigator>
+  );
+};
+
+
 
 export default function App() {
 
@@ -63,12 +103,18 @@ export default function App() {
       <Stack.Navigator headerMode="false" initialRouteName="LoginScreen">
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="SearchScreen" component={SearchScreen} />
+        <Stack.Screen name="InstSearchScreen" component={InstSearchScreen} />
         <Stack.Screen name="CameraScreen" component={CameraScreen} />
         <Stack.Screen name="UserScreens" component={UserScreens} />
+        <Stack.Screen name="InstScreens" component={InstScreens} />
         <Stack.Screen name="MapScreen" component={MapScreen} />
+        <Stack.Screen name="InstMapScreen" component={InstMapScreen} />
+        <Stack.Screen name="EmployeeScreen" component={EmployeeScreen} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+        <Stack.Screen name="InstProfileScreen" component={InstProfileScreen} />
         <Stack.Screen name="PostScreen" component={PostScreen} />
         <Stack.Screen name="FeedScreen" component={FeedScreen} />
+        <Stack.Screen name="InstFeedScreen" component={InstFeedScreen} />
         <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
         <Stack.Screen name="RegisterChooseScreen" component={RegisterChooseScreen} />
         <Stack.Screen name="CitizenRegisterScreen" component={CitizenRegisterScreen} />
