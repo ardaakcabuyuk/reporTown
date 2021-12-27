@@ -30,44 +30,37 @@ class LoginScreen extends Component {
     this._isMounted = true;
   }
 
-
   signInClicked = () => {
     const { username, password } = this.state;
-    console.log("Yarraaaa");
-    console.log(username);
-    console.log(this.state.password);
 
-    if(this.state.username == "Mustafa" && this.state.password == 123){
-        console.log("Beniiii");
-        this.props.navigation.reset({
-            index: 0,
-            routes: [
-              {
-                name: "UserScreens",
-                params: {
-                  username: this.state.username,
-                },
-              },
-            ],
-          });
+    if (this.state.username == "Mustafa" && this.state.password == 123) {
+      this.props.navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: "UserScreens",
+            params: {
+              username: this.state.username,
+            },
+          },
+        ],
+      });
     }
 
-    if(this.state.username == "Ankara" && this.state.password == 321){
-      console.log("Beniiii");
+    if (this.state.username == "" && this.state.password == "") {
       this.props.navigation.reset({
-          index: 0,
-          routes: [
-            {
-              name: "InstScreens",
-              params: {
-                username: this.state.username,
-              },
+        index: 0,
+        routes: [
+          {
+            name: "InstScreens",
+            params: {
+              username: this.state.username,
             },
-          ],
-        });
-  }
+          },
+        ],
+      });
+    }
   };
-
 
   render() {
     return (
@@ -89,7 +82,6 @@ class LoginScreen extends Component {
             height: "100%",
             paddingTop:
               Platform.OS === "android" ? StatusBar.currentHeight * 1.5 : 0,
-            
           }}
         >
           <View style={{ height: "20%", alignItems: "center" }}>
@@ -118,7 +110,6 @@ class LoginScreen extends Component {
             </Text>
           </View>
 
-          
           <View
             style={{
               height: "40%",
@@ -140,7 +131,7 @@ class LoginScreen extends Component {
                   borderBottomWidth: 1,
                   width: "100%",
                   color: "white",
-                  
+
                   height:
                     Platform.OS === "ios"
                       ? Dimensions.get("window").height / 20
@@ -151,12 +142,12 @@ class LoginScreen extends Component {
                       : undefined,
                 }}
                 placeholder="Username"
-                placeholderTextColor = "white"
+                placeholderTextColor="white"
                 autoCapitalize="none"
                 textContentType="emailAddress"
                 keyboardType="email-address"
                 onChangeText={(value) =>
-                  this._isMounted && this.setState({username: value })
+                  this._isMounted && this.setState({ username: value })
                 }
               />
               <TextInput
@@ -177,7 +168,7 @@ class LoginScreen extends Component {
                       : undefined,
                 }}
                 placeholder="Password"
-                placeholderTextColor = "white"
+                placeholderTextColor="white"
                 textContentType="password"
                 onChangeText={(value) =>
                   this._isMounted && this.setState({ password: value })
@@ -198,24 +189,24 @@ class LoginScreen extends Component {
                 style={{
                   fontSize: Dimensions.get("window").width / 30,
                   textDecorationLine: "underline",
-                  color: "#cb7b23"
+                  color: "#cb7b23",
                 }}
               >
                 Forgot Password?
               </Text>
             </TouchableOpacity>
-            <View         
-            style={{
-                  marginBottom:"30%",
-                  width:"30%",
-                }}>
-            
-            <Button
-            onPress={this.signInClicked}
-            title="Login"
-            color="#cb7b23"
-            accessibilityLabel="Learn more about this purple button"
-            />
+            <View
+              style={{
+                marginBottom: "30%",
+                width: "30%",
+              }}
+            >
+              <Button
+                onPress={this.signInClicked}
+                title="Login"
+                color="#cb7b23"
+                accessibilityLabel="Learn more about this purple button"
+              />
             </View>
           </View>
           {/* <View
@@ -298,7 +289,9 @@ class LoginScreen extends Component {
               </Text>
             </View>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate("RegisterChooseScreen")}
+              onPress={() =>
+                this.props.navigation.navigate("RegisterChooseScreen")
+              }
               style={{
                 width: "30%",
                 alignItems: "center",
@@ -310,16 +303,13 @@ class LoginScreen extends Component {
                 style={{
                   fontSize: Dimensions.get("window").width / 20,
                   textDecorationLine: "underline",
-                  color: "#cb7b23"
+                  color: "#cb7b23",
                 }}
               >
                 Register
               </Text>
             </TouchableOpacity>
-
-            
           </View>
-          
         </SafeAreaView>
       </TouchableOpacity>
     );
