@@ -1,19 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import { StyleSheet, Text, View } from 'react-native';
-import LoginScreen from './app/screens/LoginScreen';
-import WelcomeScreen from './app/screens/WelcomeScreen';
-import RegisterChooseScreen from './app/screens/RegisterChooseScreen';
-import CitizenRegisterScreen from './app/screens/CitizenRegisterScreen';
-import InstitutionRegisterScreen from './app/screens/InstitutionRegisterScreen';
-import SearchScreen from './app/screens/SearchScreen';
-import MapScreen from './app/screens/MapScreen';
-import PostScreen from './app/screens/PostScreen';
-import ProfileScreen from './app/screens/ProfileScreen';
-import FeedScreen from './app/screens/FeedScreen';
+import { StyleSheet, Text, View } from "react-native";
+import LoginScreen from "./app/screens/LoginScreen";
+import WelcomeScreen from "./app/screens/WelcomeScreen";
+import RegisterChooseScreen from "./app/screens/RegisterChooseScreen";
+import CitizenRegisterScreen from "./app/screens/CitizenRegisterScreen";
+import InstitutionRegisterScreen from "./app/screens/InstitutionRegisterScreen";
+import SearchScreen from "./app/screens/SearchScreen";
+import MapScreen from "./app/screens/MapScreen";
+import PostScreen from "./app/screens/PostScreen";
+import ProfileScreen from "./app/screens/ProfileScreen";
+import FeedScreen from "./app/screens/FeedScreen";
 import { MaterialIcons } from "@expo/vector-icons";
 import CameraScreen from './app/screens/CameraScreen';
 import InstFeedScreen from './app/screens/InstScreens/InstFeedScreen';
@@ -64,11 +64,10 @@ const UserScreens = () => {
   );
 };
 
-
 const InstScreens = () => {
   return (
     <Tabs.Navigator
-      initialRouteName="Feed"
+      initialRouteName="Profile"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color }) => {
           let iconName;
@@ -94,15 +93,12 @@ const InstScreens = () => {
       <Tabs.Screen name="Map" component={InstMapScreen} />
       <Tabs.Screen name="Employees" component={EmployeeScreen} />
       <Tabs.Screen name="Feed" component={InstFeedScreen} />
-      <Tabs.Screen name="Profile" component={InstProfileScreen} />
+      <Tabs.Screen name="Profile" component={ProfileScreen} />
     </Tabs.Navigator>
   );
 };
 
-
-
 export default function App() {
-
   return (
     <NavigationContainer>
       <Stack.Navigator headerMode="false" initialRouteName="LoginScreen">
@@ -121,9 +117,18 @@ export default function App() {
         <Stack.Screen name="FeedScreen" component={FeedScreen}/>
         <Stack.Screen name="InstFeedScreen" component={InstFeedScreen} />
         <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-        <Stack.Screen name="RegisterChooseScreen" component={RegisterChooseScreen} />
-        <Stack.Screen name="CitizenRegisterScreen" component={CitizenRegisterScreen} />
-        <Stack.Screen name="InstitutionRegisterScreen" component={InstitutionRegisterScreen} />
+        <Stack.Screen
+          name="RegisterChooseScreen"
+          component={RegisterChooseScreen}
+        />
+        <Stack.Screen
+          name="CitizenRegisterScreen"
+          component={CitizenRegisterScreen}
+        />
+        <Stack.Screen
+          name="InstitutionRegisterScreen"
+          component={InstitutionRegisterScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
