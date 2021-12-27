@@ -15,6 +15,7 @@ function SearchStackScreen() {
     <SearchStack.Navigator>
       <SearchStack.Screen name="Search" component={SearchScreen} options={{
             headerTitle:"Search",
+            headerTitleAlign: "center",
             headerStyle: {
               backgroundColor: "#080f26",
               height: 50

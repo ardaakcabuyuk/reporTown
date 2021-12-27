@@ -4,18 +4,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import FeedScreen from '../FeedScreen';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import  Constants from 'expo-constants';
-import MapScreen from '../MapScreen';
-import SearchScreen from '../SearchScreen';
-import PostScreen from '../PostScreen';
+import InstFeedScreen from '../InstScreens/InstFeedScreen';
 
-const PostStack = createStackNavigator();
+const InstFeedStack = createStackNavigator();
 
-function PostStackScreen() {
+function InstFeedStackScreen() {
   return (
     <View style ={{paddingTop: Constants.statusBarHeight, backgroundColor: "#080f26", height: Dimensions.get('window').height}}>
-    <PostStack.Navigator>
-      <PostStack.Screen name="Post" component={PostScreen} options={{
-            headerTitle:"Post Report",
+    <InstFeedStack.Navigator>
+      <InstFeedStack.Screen name="InstFeed" component={InstFeedScreen} options={{
+            headerTitle:"Feed",
             headerTitleAlign: "center",
             headerStyle: {
               backgroundColor: "#080f26",
@@ -30,9 +28,9 @@ function PostStackScreen() {
                 <MaterialCommunityIcons name="bell-alert" size={28} color="#cb7b23" style={{marginRight: 24 }}/>
               </TouchableOpacity>
             ),}}/>
-    </PostStack.Navigator>
+    </InstFeedStack.Navigator>
     </View>
   );
 }
 
-export default PostStackScreen;
+export default InstFeedStackScreen;

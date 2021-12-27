@@ -47,7 +47,7 @@ class LoginScreen extends Component {
       });
     }
 
-    if (this.state.username == "" && this.state.password == "") {
+    if (this.state.username == "Ankara" && this.state.password == "123") {
       this.props.navigation.reset({
         index: 0,
         routes: [

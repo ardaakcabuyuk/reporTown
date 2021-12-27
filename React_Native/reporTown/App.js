@@ -26,6 +26,11 @@ import MapStackScreen from "./app/screens/StackScreens/MapStackScreen";
 import SearchStackScreen from "./app/screens/StackScreens/SearchStackScreen";
 import ProfileStackScreen from "./app/screens/StackScreens/ProfileStackScreen";
 import PostStackScreen from "./app/screens/StackScreens/PostStackScreen";
+import InstProfileStackScreen from "./app/screens/StackScreens/InstProfileStackScreen";
+import EmployeeStackScreen from "./app/screens/StackScreens/EmployeeStackScreen";
+import InstMapStackScreen from "./app/screens/StackScreens/InstMapStackScreen";
+import InstSearchStackScreen from "./app/screens/StackScreens/InstSearchStackScreen";
+import InstFeedStackScreen from "./app/screens/StackScreens/InstFeedStackScreen";
 
 const Stack = createStackNavigator();
 const Tabs = createMaterialBottomTabNavigator();
@@ -89,11 +94,11 @@ const InstScreens = () => {
       })}
       barStyle={{ backgroundColor: "#cb7b23" }}
     >
-      <Tabs.Screen name="Search" component={InstSearchScreen} />
-      <Tabs.Screen name="Map" component={InstMapScreen} />
-      <Tabs.Screen name="Employees" component={EmployeeScreen} />
-      <Tabs.Screen name="Feed" component={InstFeedScreen} />
-      <Tabs.Screen name="Profile" component={InstProfileScreen} />
+      <Tabs.Screen name="Search" component={InstSearchStackScreen} />
+      <Tabs.Screen name="Map" component={InstMapStackScreen} />
+      <Tabs.Screen name="Employees" component={EmployeeStackScreen} />
+      <Tabs.Screen name="Feed" component={InstFeedStackScreen} />
+      <Tabs.Screen name="Profile" component={InstProfileStackScreen} />
     </Tabs.Navigator>
   );
 };

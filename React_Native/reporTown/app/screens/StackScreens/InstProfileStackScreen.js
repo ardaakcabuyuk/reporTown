@@ -2,20 +2,18 @@ import * as React from 'react';
 import { TouchableOpacity, View, Dimensions } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import FeedScreen from '../FeedScreen';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Ionicons  } from '@expo/vector-icons';
 import  Constants from 'expo-constants';
-import MapScreen from '../MapScreen';
-import SearchScreen from '../SearchScreen';
-import PostScreen from '../PostScreen';
+import InstProfileScreen from '../InstScreens/InstProfileScreen'
 
-const PostStack = createStackNavigator();
+const InstProfileStack = createStackNavigator();
 
-function PostStackScreen() {
+function InstProfileStackScreen() {
   return (
     <View style ={{paddingTop: Constants.statusBarHeight, backgroundColor: "#080f26", height: Dimensions.get('window').height}}>
-    <PostStack.Navigator>
-      <PostStack.Screen name="Post" component={PostScreen} options={{
-            headerTitle:"Post Report",
+    <InstProfileStack.Navigator>
+      <InstProfileStack.Screen name="InstProfile" component={InstProfileScreen} options={{
+            headerTitle:"Profile",
             headerTitleAlign: "center",
             headerStyle: {
               backgroundColor: "#080f26",
@@ -29,10 +27,15 @@ function PostStackScreen() {
               <TouchableOpacity onPress={() => alert('This is a button!')}>
                 <MaterialCommunityIcons name="bell-alert" size={28} color="#cb7b23" style={{marginRight: 24 }}/>
               </TouchableOpacity>
-            ),}}/>
-    </PostStack.Navigator>
+            ),
+            headerLeft: () => (
+                <TouchableOpacity onPress={() => alert('This is a button!')}>
+                  <Ionicons name="settings" size={28} color="#808080" style={{marginLeft: 24 }}/>
+                </TouchableOpacity>
+              ),}}/>
+    </InstProfileStack.Navigator>
     </View>
   );
 }
 
-export default PostStackScreen;
+export default InstProfileStackScreen;

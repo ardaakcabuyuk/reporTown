@@ -13,8 +13,9 @@ function ProfileStackScreen() {
   return (
     <View style ={{paddingTop: Constants.statusBarHeight, backgroundColor: "#080f26", height: Dimensions.get('window').height}}>
     <ProfileStack.Navigator>
-      <ProfileStack.Screen name="Map" component={ProfileScreen} options={{
+      <ProfileStack.Screen name="Profile" component={ProfileScreen} options={{
             headerTitle:"Profile",
+            headerTitleAlign: "center",
             headerStyle: {
               backgroundColor: "#080f26",
               height: 50
