@@ -21,6 +21,11 @@ import InstMapScreen from './app/screens/InstScreens/InstMapScreen';
 import InstProfileScreen from './app/screens/InstScreens/InstProfileScreen';
 import InstSearchScreen from './app/screens/InstScreens/InstSearchScreen';
 import EmployeeScreen from './app/screens/InstScreens/EmployeeScreen';
+import FeedStackScreen from './app/screens/StackScreens/FeedStackScreen';
+import MapStackScreen from './app/screens/StackScreens/MapStackScreen';
+import SearchStackScreen from './app/screens/StackScreens/SearchStackScreen';
+import ProfileStackScreen from './app/screens/StackScreens/ProfileStackScreen';
+import PostStackScreen from './app/screens/StackScreens/PostStackScreen';
 
 const Stack = createStackNavigator();
 const Tabs = createMaterialBottomTabNavigator();
@@ -50,11 +55,11 @@ const UserScreens = () => {
       })}
       barStyle={{ backgroundColor: "#cb7b23" }}
     >
-      <Tabs.Screen name="Search" component={SearchScreen} />
-      <Tabs.Screen name="Map" component={MapScreen} />
-      <Tabs.Screen name="Post" component={PostScreen} />
-      <Tabs.Screen name="Feed" component={FeedScreen} />
-      <Tabs.Screen name="Profile" component={ProfileScreen} />
+      <Tabs.Screen name="Search" component={SearchStackScreen} />
+      <Tabs.Screen name="Map" component={MapStackScreen} />
+      <Tabs.Screen name="Post" component={PostStackScreen} />
+      <Tabs.Screen name="Feed" component={FeedStackScreen}/>
+      <Tabs.Screen name="Profile" component={ProfileStackScreen} />
     </Tabs.Navigator>
   );
 };
@@ -113,7 +118,7 @@ export default function App() {
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         <Stack.Screen name="InstProfileScreen" component={InstProfileScreen} />
         <Stack.Screen name="PostScreen" component={PostScreen} />
-        <Stack.Screen name="FeedScreen" component={FeedScreen} />
+        <Stack.Screen name="FeedScreen" component={FeedScreen}/>
         <Stack.Screen name="InstFeedScreen" component={InstFeedScreen} />
         <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
         <Stack.Screen name="RegisterChooseScreen" component={RegisterChooseScreen} />

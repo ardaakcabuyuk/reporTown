@@ -2,9 +2,9 @@
   "expoServerPort": 19000,
   "packagerPort": 19000,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://vd-tmu.anonymous.reportown.exp.direct",
+  "packagerNgrokUrl": "https://packager.vd-tmu.anonymous.reportown.exp.direct",
+  "ngrokPid": 15848,
   "webpackServerPort": null,
   "devToolsPort": 19002
 }

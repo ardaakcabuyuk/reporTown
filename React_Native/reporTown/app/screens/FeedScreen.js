@@ -1,12 +1,18 @@
 import React from 'react';
-import {ImageBackground, StyleSheet} from "react-native"
+import {ImageBackground, StyleSheet, Text, View} from "react-native"
 
 function FeedScreen(props) {
     return (
-      <ImageBackground
-      style = {styles.background}
-      source={require("../assets/feed.png")}
-      ></ImageBackground>
+        <View style={{
+            flex: 1, 
+            alignItems: 'center',
+            justifyContent: 'center', 
+            backgroundColor: 'blue'
+        }}>
+            <Text style={{backgroundColor: 'red'}}>
+                This is feed
+            </Text>
+        </View>
     );
 }
 
