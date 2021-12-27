@@ -13,6 +13,7 @@ function FeedStackScreen() {
     <FeedStack.Navigator>
       <FeedStack.Screen name="Feed" component={FeedScreen} options={{
             headerTitle:"Feed",
+            headerTitleAlign: "center",
             headerStyle: {
               backgroundColor: "#080f26",
               height: 50

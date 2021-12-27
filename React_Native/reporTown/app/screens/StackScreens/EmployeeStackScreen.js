@@ -4,18 +4,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import FeedScreen from '../FeedScreen';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import  Constants from 'expo-constants';
-import MapScreen from '../MapScreen';
-import SearchScreen from '../SearchScreen';
-import PostScreen from '../PostScreen';
+import EmployeeScreen from '../InstScreens/EmployeeScreen';
 
-const PostStack = createStackNavigator();
+const EmployeeStack = createStackNavigator();
 
-function PostStackScreen() {
+function EmployeeStackScreen() {
   return (
     <View style ={{paddingTop: Constants.statusBarHeight, backgroundColor: "#080f26", height: Dimensions.get('window').height}}>
-    <PostStack.Navigator>
-      <PostStack.Screen name="Post" component={PostScreen} options={{
-            headerTitle:"Post Report",
+    <EmployeeStack.Navigator>
+      <EmployeeStack.Screen name="Employee" component={EmployeeScreen} options={{
+            headerTitle:"My Employees",
             headerTitleAlign: "center",
             headerStyle: {
               backgroundColor: "#080f26",
@@ -30,9 +28,9 @@ function PostStackScreen() {
                 <MaterialCommunityIcons name="bell-alert" size={28} color="#cb7b23" style={{marginRight: 24 }}/>
               </TouchableOpacity>
             ),}}/>
-    </PostStack.Navigator>
+    </EmployeeStack.Navigator>
     </View>
   );
 }
 
-export default PostStackScreen;
+export default EmployeeStackScreen;

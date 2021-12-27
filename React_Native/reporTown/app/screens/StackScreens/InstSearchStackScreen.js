@@ -4,18 +4,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import FeedScreen from '../FeedScreen';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import  Constants from 'expo-constants';
-import MapScreen from '../MapScreen';
-import SearchScreen from '../SearchScreen';
-import PostScreen from '../PostScreen';
+import InstSearchScreen from '../InstScreens/InstSearchScreen';
 
-const PostStack = createStackNavigator();
+const InstSearchStack = createStackNavigator();
 
-function PostStackScreen() {
+function InstSearchStackScreen() {
   return (
     <View style ={{paddingTop: Constants.statusBarHeight, backgroundColor: "#080f26", height: Dimensions.get('window').height}}>
-    <PostStack.Navigator>
-      <PostStack.Screen name="Post" component={PostScreen} options={{
-            headerTitle:"Post Report",
+    <InstSearchStack.Navigator>
+      <InstSearchStack.Screen name="Search" component={InstSearchScreen} options={{
+            headerTitle:"Search",
             headerTitleAlign: "center",
             headerStyle: {
               backgroundColor: "#080f26",
@@ -30,9 +28,9 @@ function PostStackScreen() {
                 <MaterialCommunityIcons name="bell-alert" size={28} color="#cb7b23" style={{marginRight: 24 }}/>
               </TouchableOpacity>
             ),}}/>
-    </PostStack.Navigator>
+    </InstSearchStack.Navigator>
     </View>
   );
 }
 
-export default PostStackScreen;
+export default InstSearchStackScreen;

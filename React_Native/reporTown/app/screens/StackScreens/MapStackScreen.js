@@ -14,6 +14,7 @@ function MapStackScreen() {
     <MapStack.Navigator>
       <MapStack.Screen name="Map" component={MapScreen} options={{
             headerTitle:"Map",
+            headerTitleAlign: "center",
             headerStyle: {
               backgroundColor: "#080f26",
               height: 50
