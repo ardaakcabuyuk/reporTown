@@ -15,17 +15,17 @@ import PostScreen from "./app/screens/PostScreen";
 import ProfileScreen from "./app/screens/ProfileScreen";
 import FeedScreen from "./app/screens/FeedScreen";
 import { MaterialIcons } from "@expo/vector-icons";
-import CameraScreen from './app/screens/CameraScreen';
-import InstFeedScreen from './app/screens/InstScreens/InstFeedScreen';
-import InstMapScreen from './app/screens/InstScreens/InstMapScreen';
-import InstProfileScreen from './app/screens/InstScreens/InstProfileScreen';
-import InstSearchScreen from './app/screens/InstScreens/InstSearchScreen';
-import EmployeeScreen from './app/screens/InstScreens/EmployeeScreen';
-import FeedStackScreen from './app/screens/StackScreens/FeedStackScreen';
-import MapStackScreen from './app/screens/StackScreens/MapStackScreen';
-import SearchStackScreen from './app/screens/StackScreens/SearchStackScreen';
-import ProfileStackScreen from './app/screens/StackScreens/ProfileStackScreen';
-import PostStackScreen from './app/screens/StackScreens/PostStackScreen';
+import CameraScreen from "./app/screens/CameraScreen";
+import InstFeedScreen from "./app/screens/InstScreens/InstFeedScreen";
+import InstMapScreen from "./app/screens/InstScreens/InstMapScreen";
+import InstProfileScreen from "./app/screens/InstScreens/InstProfileScreen";
+import InstSearchScreen from "./app/screens/InstScreens/InstSearchScreen";
+import EmployeeScreen from "./app/screens/InstScreens/EmployeeScreen";
+import FeedStackScreen from "./app/screens/StackScreens/FeedStackScreen";
+import MapStackScreen from "./app/screens/StackScreens/MapStackScreen";
+import SearchStackScreen from "./app/screens/StackScreens/SearchStackScreen";
+import ProfileStackScreen from "./app/screens/StackScreens/ProfileStackScreen";
+import PostStackScreen from "./app/screens/StackScreens/PostStackScreen";
 
 const Stack = createStackNavigator();
 const Tabs = createMaterialBottomTabNavigator();
@@ -58,7 +58,7 @@ const UserScreens = () => {
       <Tabs.Screen name="Search" component={SearchStackScreen} />
       <Tabs.Screen name="Map" component={MapStackScreen} />
       <Tabs.Screen name="Post" component={PostStackScreen} />
-      <Tabs.Screen name="Feed" component={FeedStackScreen}/>
+      <Tabs.Screen name="Feed" component={FeedStackScreen} />
       <Tabs.Screen name="Profile" component={ProfileStackScreen} />
     </Tabs.Navigator>
   );
@@ -93,7 +93,7 @@ const InstScreens = () => {
       <Tabs.Screen name="Map" component={InstMapScreen} />
       <Tabs.Screen name="Employees" component={EmployeeScreen} />
       <Tabs.Screen name="Feed" component={InstFeedScreen} />
-      <Tabs.Screen name="Profile" component={ProfileScreen} />
+      <Tabs.Screen name="Profile" component={InstProfileScreen} />
     </Tabs.Navigator>
   );
 };
@@ -114,7 +114,7 @@ export default function App() {
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         <Stack.Screen name="InstProfileScreen" component={InstProfileScreen} />
         <Stack.Screen name="PostScreen" component={PostScreen} />
-        <Stack.Screen name="FeedScreen" component={FeedScreen}/>
+        <Stack.Screen name="FeedScreen" component={FeedScreen} />
         <Stack.Screen name="InstFeedScreen" component={InstFeedScreen} />
         <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
         <Stack.Screen

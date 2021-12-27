@@ -35,6 +35,8 @@ const Report = (props) => {
         },
         {
           maxHeight: 400,
+          borderBottomColor: "white",
+          borderBottomWidth: 2,
         },
       ]}
     >

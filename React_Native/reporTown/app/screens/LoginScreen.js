@@ -33,7 +33,7 @@ class LoginScreen extends Component {
   signInClicked = () => {
     const { username, password } = this.state;
 
-    if (this.state.username == "Mustafa" && this.state.password == 123) {
+    if (this.state.username == "a" && this.state.password == "a") {
       this.props.navigation.reset({
         index: 0,
         routes: [
