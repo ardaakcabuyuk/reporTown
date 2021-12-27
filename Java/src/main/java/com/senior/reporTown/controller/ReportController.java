@@ -21,7 +21,6 @@ public class ReportController {
 
     private ReportService reportService;
     @PostMapping("/postReport")
-    @PreAuthorize()
     public Report postReport(@AuthenticationPrincipal ApplicationUser authenticatedUser, @RequestBody ReportRequest request) {
         return reportService.postReport(authenticatedUser,request);
     }

@@ -10,10 +10,16 @@ import org.bson.json.JsonObject;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 
 @Getter
 @Setter
@@ -39,6 +45,8 @@ public class Report {
     private JsonObject location;
     private String report_image_link;
     private MultipartFile file;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private Date date;
 
     public Report(String description,
                   String category,
@@ -57,6 +65,7 @@ public class Report {
         solutionId = null;
         this.report_image_link = report_image_link;
         this.file = file;
+        date = new Date();
     }
 }
 
