@@ -15,6 +15,7 @@ import PostScreen from './app/screens/PostScreen';
 import ProfileScreen from './app/screens/ProfileScreen';
 import FeedScreen from './app/screens/FeedScreen';
 import { MaterialIcons } from "@expo/vector-icons";
+import CameraScreen from './app/screens/CameraScreen';
 
 const Stack = createStackNavigator();
 const Tabs = createMaterialBottomTabNavigator();
@@ -62,6 +63,7 @@ export default function App() {
       <Stack.Navigator headerMode="false" initialRouteName="LoginScreen">
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="SearchScreen" component={SearchScreen} />
+        <Stack.Screen name="CameraScreen" component={CameraScreen} />
         <Stack.Screen name="UserScreens" component={UserScreens} />
         <Stack.Screen name="MapScreen" component={MapScreen} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />

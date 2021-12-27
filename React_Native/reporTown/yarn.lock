@@ -1236,6 +1236,24 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
+"@ionic/core@6.0.1":
+  "integrity" "sha512-MrS2rxxEk44Nmas+1ccGk+VDxvhoDKbQ7g3KHQkeRtHXmWPoG47tnUHY2aCRRTeaN5wPSA14/kmCwyMMyO5A9A=="
+  "resolved" "https://registry.npmjs.org/@ionic/core/-/core-6.0.1.tgz"
+  "version" "6.0.1"
+  dependencies:
+    "@stencil/core" "~2.11.0-0"
+    "ionicons" "^6.0.0"
+    "tslib" "^2.1.0"
+
+"@ionic/react@^6.0.1":
+  "integrity" "sha512-XyoRDmtddtLg5X6A9FRO7JP7aUf2lBtgpKFD27H6NKRIMI2v5mXluiarrdOS4Oryj6xF2iU7i/PariLl5+rrdg=="
+  "resolved" "https://registry.npmjs.org/@ionic/react/-/react-6.0.1.tgz"
+  "version" "6.0.1"
+  dependencies:
+    "@ionic/core" "6.0.1"
+    "ionicons" "^6.0.0"
+    "tslib" "*"
+
 "@isaacs/string-locale-compare@*", "@isaacs/string-locale-compare@^1.1.0":
   "integrity" "sha512-SQ7Kzhh9+D+ZW9MA0zkYv3VXhIDNx+LzM6EJ+/65I3QY+enU6Itte7E5XX7EWrqLW2FN4n06GWzBnPoC3th2aQ=="
   "resolved" "https://registry.npmjs.org/@isaacs/string-locale-compare/-/string-locale-compare-1.1.0.tgz"
@@ -1258,6 +1276,13 @@
     "@types/node" "*"
     "@types/yargs" "^15.0.0"
     "chalk" "^4.0.0"
+
+"@koale/useworker@^4.0.2":
+  "integrity" "sha512-xPIPADtom8/3/4FLNj7MvNcBM/Z2FleH85Fdx2O869eoKW8+PoEgtSVvoxWjCWMA46Sm9A5/R1TyzNGc+yM0wg=="
+  "resolved" "https://registry.npmjs.org/@koale/useworker/-/useworker-4.0.2.tgz"
+  "version" "4.0.2"
+  dependencies:
+    "dequal" "^1.0.0"
 
 "@nodelib/fs.scandir@2.1.5":
   "integrity" "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="
@@ -1694,6 +1719,16 @@
   "integrity" "sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ=="
   "resolved" "https://registry.npmjs.org/@sideway/pinpoint/-/pinpoint-2.0.0.tgz"
   "version" "2.0.0"
+
+"@stencil/core@~2.10.0":
+  "integrity" "sha512-15rWMTPQ/sp0lSV82HVCXkIya3QLN+uBl7pqK4JnTrp4HiLrzLmNbWjbvgCs55gw0lULbCIGbRIEsFz+Pe/Q+A=="
+  "resolved" "https://registry.npmjs.org/@stencil/core/-/core-2.10.0.tgz"
+  "version" "2.10.0"
+
+"@stencil/core@~2.11.0-0":
+  "integrity" "sha512-/IubCWhVXCguyMUp/3zGrg3c882+RJNg/zpiKfyfJL3kRCOwe+/MD8OoAXVGdd+xAohZKIi1Ik+EHFlsptsjLg=="
+  "resolved" "https://registry.npmjs.org/@stencil/core/-/core-2.11.0.tgz"
+  "version" "2.11.0"
 
 "@tootallnate/once@1":
   "integrity" "sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw=="
@@ -3054,6 +3089,11 @@
   "resolved" "https://registry.npmjs.org/depd/-/depd-1.1.2.tgz"
   "version" "1.1.2"
 
+"dequal@^1.0.0":
+  "integrity" "sha512-Fx8jxibzkJX2aJgyfSdLhr9tlRoTnHKrRJuu2XHlAgKioN2j19/Bcbe0d4mFXYZ3+wpE2KVobUVTfDutcD17xQ=="
+  "resolved" "https://registry.npmjs.org/dequal/-/dequal-1.0.1.tgz"
+  "version" "1.0.1"
+
 "destroy@~1.0.4":
   "integrity" "sha1-l4hXRCxEdJ5CBmE+N5RiBYJqvYA="
   "resolved" "https://registry.npmjs.org/destroy/-/destroy-1.0.4.tgz"
@@ -3287,6 +3327,15 @@
     "path-browserify" "^1.0.0"
     "url-parse" "^1.4.4"
 
+"expo-camera@~12.1.0":
+  "integrity" "sha512-FWzgexrsd1v2XYmtXpeZsXMJf2G6ctX7wmU3xi2KEL7vYMdrCCZi+aX5vj7WQz5DDEu/TH1fkHnqU/hek8ZGMA=="
+  "resolved" "https://registry.npmjs.org/expo-camera/-/expo-camera-12.1.0.tgz"
+  "version" "12.1.0"
+  dependencies:
+    "@expo/config-plugins" "^4.0.2"
+    "@koale/useworker" "^4.0.2"
+    "invariant" "^2.2.4"
+
 "expo-constants@~13.0.0":
   "integrity" "sha512-DwElzs1k6KljlZln/X2O9b5K4bXlDk8nzF5nzSLgI+Ibg/xUoIL5QKM41Y9RDJfTzlDlV7nmeS/Xar+nP5KjMA=="
   "resolved" "https://registry.npmjs.org/expo-constants/-/expo-constants-13.0.0.tgz"
@@ -3338,6 +3387,11 @@
   dependencies:
     "compare-versions" "^3.4.0"
     "invariant" "^2.2.4"
+
+"expo-permissions@^13.1.0":
+  "integrity" "sha512-f3ngERaoeAw8236xyvw4gS89Fxd4fU2soKXQn0JPXwiDGmIXO+lIJNH3psNvAebj4DfmyQtGW4AS1itG83GHaQ=="
+  "resolved" "https://registry.npmjs.org/expo-permissions/-/expo-permissions-13.1.0.tgz"
+  "version" "13.1.0"
 
 "expo-status-bar@~1.2.0":
   "integrity" "sha512-pVZZ/kDCXFK79E4dCtRecs3XLC8aiwlciutSd/fFmUPJSQZ1Txia6hlKajPt0GAYft8/YnT0V3URXzWZOBniYQ=="
@@ -3993,6 +4047,13 @@
   "version" "2.2.4"
   dependencies:
     "loose-envify" "^1.0.0"
+
+"ionicons@^6.0.0":
+  "integrity" "sha512-p83W1T8jZUlllHAjuIWaDQbI36OYqdrwcf8MhYbKW7+9rjGlCMP9+5OaR0W7tl0QfM004uAiy/zkc7HTpDNKgA=="
+  "resolved" "https://registry.npmjs.org/ionicons/-/ionicons-6.0.0.tgz"
+  "version" "6.0.0"
+  dependencies:
+    "@stencil/core" "~2.10.0"
 
 "ip-regex@^4.1.0":
   "integrity" "sha512-B9ZWJxHHOHUhUjCPrMpLD4xEq35bUTClHM1S6CBU5ixQnkZmwipwgc96vAd7AAGM9TGHvJR+Uss+/Ak6UphK+Q=="
@@ -5943,7 +6004,7 @@
   dependencies:
     "read" "1"
 
-"prop-types@^15.6.0", "prop-types@^15.7.2":
+"prop-types@^15.6.0", "prop-types@^15.6.2", "prop-types@^15.7.2":
   "integrity" "sha512-fDGekdaHh65eI3lMi5OnErU6a8Ighg2KjcjQxO7m8VHyWjcPyj5kiOgV1LQDOOOgVy3+5FgjXvdSSX7B8/5/4g=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.0.tgz"
   "version" "15.8.0"
@@ -6010,7 +6071,7 @@
     "shell-quote" "^1.6.1"
     "ws" "^7"
 
-"react-dom@>=16.8", "react-dom@>=17.0.1", "react-dom@17.0.1":
+"react-dom@>=16.8", "react-dom@>=16.8.6", "react-dom@>=17.0.1", "react-dom@17.0.1":
   "integrity" "sha512-6eV150oJZ9U2t9svnsspTMrWNyHc6chX0KzDeAOXftRa8bNeOKTTfCJ7KorIwenkHd2xqVTBTCZd79yk/lx/Ug=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.1.tgz"
   "version" "17.0.1"
@@ -6168,13 +6229,22 @@
   "resolved" "https://registry.npmjs.org/react-refresh/-/react-refresh-0.4.3.tgz"
   "version" "0.4.3"
 
-"react@*", "react@^16.8.0 || ^17.0.0", "react@^17.0.0", "react@>= 16.x.x", "react@>=16.3.0", "react@>=16.8", "react@>=17.0.1", "react@17.0.1":
+"react@*", "react@^16.8.0 || ^17.0.0", "react@^17.0.0", "react@>= 16.x.x", "react@>=16.3.0", "react@>=16.8", "react@>=16.8.6", "react@>=17.0.1", "react@17.0.1":
   "integrity" "sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.1.tgz"
   "version" "17.0.1"
   dependencies:
     "loose-envify" "^1.1.0"
     "object-assign" "^4.1.1"
+
+"react@^16.8.0":
+  "integrity" "sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g=="
+  "resolved" "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
+  "version" "16.14.0"
+  dependencies:
+    "loose-envify" "^1.1.0"
+    "object-assign" "^4.1.1"
+    "prop-types" "^15.6.2"
 
 "read-cmd-shim@^2.0.0":
   "integrity" "sha512-HJpV9bQpkl6KwjxlJcBoqu9Ba0PQg8TqSNIOrulGt54a0uup0HtevreFHzYzkm0lpnleRdNBzXznKrgxglEHQw=="
@@ -7135,7 +7205,7 @@
   "resolved" "https://registry.npmjs.org/ts-interface-checker/-/ts-interface-checker-0.1.13.tgz"
   "version" "0.1.13"
 
-"tslib@^2.0.1":
+"tslib@*", "tslib@^2.0.1", "tslib@^2.1.0":
   "integrity" "sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw=="
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-2.3.1.tgz"
   "version" "2.3.1"

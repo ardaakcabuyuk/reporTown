@@ -1,12 +1,20 @@
 import React from 'react';
-import {ImageBackground, StyleSheet} from "react-native"
+import {ImageBackground, StyleSheet, View, Button, TouchableOpacity, Image,Text} from "react-native"
 
-function PostScreen(props) {
+function PostScreen({navigation}) {
     return (
-      <ImageBackground
-      style = {styles.background}
-      source={require("../assets/post.jpg")}
-      ></ImageBackground>
+    
+        <TouchableOpacity
+            style={{
+              marginTop:"35%",
+              flex: 0.5,
+              alignSelf: 'center',
+              alignItems: 'center',
+            }}
+            onPress={() => navigation.navigate('CameraScreen')}>
+             <Text>Take Photo</Text>
+          </TouchableOpacity>
+    
     );
 }
 
