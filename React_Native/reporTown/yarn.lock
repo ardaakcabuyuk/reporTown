@@ -1580,6 +1580,11 @@
     "sudo-prompt" "^9.0.0"
     "wcwidth" "^1.0.1"
 
+"@react-native-community/geolocation@^2.0.2":
+  "integrity" "sha512-tTNXRCgnhJBu79mulQwzabXRpDqfh/uaDqfHVpvF0nX4NTpolpy6mvTRiFg7eWFPGRArsnZz1EYp6rHfJWGgEA=="
+  "resolved" "https://registry.npmjs.org/@react-native-community/geolocation/-/geolocation-2.0.2.tgz"
+  "version" "2.0.2"
+
 "@react-native/assets@1.0.0":
   "integrity" "sha512-KrwSpS1tKI70wuKl68DwJZYEvXktDHdZMG0k2AXD/rJVSlB23/X2CB2cutVR0HwNMJIal9HOUOBB2rVfa6UGtQ=="
   "resolved" "https://registry.npmjs.org/@react-native/assets/-/assets-1.0.0.tgz"
@@ -1755,6 +1760,11 @@
   "integrity" "sha512-C6N5s2ZFtuZRj54k2/zyRhNDjJwwcViAM3Nbm8zjBpbqAdZ00mr0CFxvSKeO8Y/e03WVFLpQMdHYVfUd6SB+Hw=="
   "resolved" "https://registry.npmjs.org/@types/estree/-/estree-0.0.50.tgz"
   "version" "0.0.50"
+
+"@types/geojson@^7946.0.7":
+  "integrity" "sha512-1rkryxURpr6aWP7R786/UQOkJ3PcpQiWkAXBmdWc7ryFWqN6a4xfK7BtjXvFBKO9LjQ+MWQSWxYeZX1OApnArA=="
+  "resolved" "https://registry.npmjs.org/@types/geojson/-/geojson-7946.0.8.tgz"
+  "version" "7946.0.8"
 
 "@types/graceful-fs@^4.1.2":
   "integrity" "sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw=="
@@ -3368,6 +3378,14 @@
   "integrity" "sha512-kcBtoDGkm3RRe6BpKDvR7gof/ErajEia38u92pRvNRctdh+p8AFO7GQuiipyg3iMfhcCFVTCIV7h3tuA0g/yDw=="
   "resolved" "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-10.0.1.tgz"
   "version" "10.0.1"
+
+"expo-location@^14.0.1":
+  "integrity" "sha512-P3Mrty7uxezBFE9SwYhskeNwwHAapw/6lrLj2fYILgJkNiXv28ns5CwSNsTtJ+MfeHeV93t20qrkk7kJ30SQVw=="
+  "resolved" "https://registry.npmjs.org/expo-location/-/expo-location-14.0.1.tgz"
+  "version" "14.0.1"
+  dependencies:
+    "@expo/config-plugins" "^4.0.2"
+    "unimodules-task-manager-interface" "~7.1.0"
 
 "expo-modules-autolinking@0.5.2":
   "integrity" "sha512-0mh9XpU8smGaZYT/D/lkGoYRw+gwUrUZs/LiHH7Z7vlUS6jhjvM13Vi2PgfdHjMuOgHy9GjqRrIoDsjuzjfnGQ=="
@@ -6116,6 +6134,11 @@
   dependencies:
     "invariant" "^2.2.4"
 
+"react-native-geolocation-service@^5.3.0-beta.4":
+  "integrity" "sha512-8Z/FP1ls02fnvqXCII+dDS329lP3UigNR4eIHUjPQdHu/DRGMRCpJJuj05hcq37UJL/zVVsXnPFdLA9lCOWYCQ=="
+  "resolved" "https://registry.npmjs.org/react-native-geolocation-service/-/react-native-geolocation-service-5.3.0-beta.4.tgz"
+  "version" "5.3.0-beta.4"
+
 "react-native-gesture-handler@^2.1.0", "react-native-gesture-handler@>= 1.0.0":
   "integrity" "sha512-vF4yEUrV5GMBioTkvf5Le1l3N/52dSLBnNMFC+kZ4hssnRoXB0hEQ0ReUkZckRB5L3nbHBhAyjySEtFPx4nyEA=="
   "resolved" "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.1.0.tgz"
@@ -6131,6 +6154,13 @@
   "integrity" "sha512-HOf0jzRnq2/aFUcdCJ9w9JGzN3gdEg0zFE4FyYlp4jtidqU03D5X7ZegGKfT1EWteR0gPBGp9ye5T5FvSWi9Yg=="
   "resolved" "https://registry.npmjs.org/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz"
   "version" "1.3.1"
+
+"react-native-maps@0.29.4":
+  "integrity" "sha512-Td2KE8+KODcHOxfB1GBNnzFo4/89rlLiC7yTvqQZh0tGVrEzIcgSleUZRrjtq/WvSWSR4rql4AS+0VsBgDkYrw=="
+  "resolved" "https://registry.npmjs.org/react-native-maps/-/react-native-maps-0.29.4.tgz"
+  "version" "0.29.4"
+  dependencies:
+    "@types/geojson" "^7946.0.7"
 
 "react-native-paper@>= 3.0.0":
   "integrity" "sha512-mAQ74KUrOIcMEg1crrIsA7eXDaPk/fjvKFDLcN7gBBeV/zhhQiqc+/y6t+8STKsZutRA2U5/eB+0MBisybokmQ=="
@@ -6173,7 +6203,7 @@
     "prop-types" "^15.7.2"
     "yargs" "^16.1.1"
 
-"react-native-web@0.17.1":
+"react-native-web@>= 0.11", "react-native-web@0.17.1":
   "integrity" "sha512-lUnn+2O8ynQ6/gJKylSxm7DLi2vHw6AujdDV1+LSa8Epe1bYFJNUcJTEhJf0jNYUFGOujzMtuG8Mkz3HdWTkag=="
   "resolved" "https://registry.npmjs.org/react-native-web/-/react-native-web-0.17.1.tgz"
   "version" "0.17.1"
@@ -6186,7 +6216,7 @@
     "normalize-css-color" "^1.0.2"
     "prop-types" "^15.6.0"
 
-"react-native@*", "react-native@>= 0.55.x", "react-native@>=0.42.0", "react-native@>=0.64.0-rc.0 || 0.0.0-*", "react-native@0.64.3":
+"react-native@*", "react-native@>= 0.51", "react-native@>= 0.55.x", "react-native@>=0.42.0", "react-native@>=0.64.0-rc.0 || 0.0.0-*", "react-native@0.64.3":
   "integrity" "sha512-2OEU74U0Ek1/WeBzPbg6XDsCfjF/9fhrNX/5TFgEiBKd5mNc9LOZ/OlMmkb7iues/ZZ/oc51SbEfLRQdcW0fVw=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.64.3.tgz"
   "version" "0.64.3"
@@ -6229,7 +6259,7 @@
   "resolved" "https://registry.npmjs.org/react-refresh/-/react-refresh-0.4.3.tgz"
   "version" "0.4.3"
 
-"react@*", "react@^16.8.0 || ^17.0.0", "react@^17.0.0", "react@>= 16.x.x", "react@>=16.3.0", "react@>=16.8", "react@>=16.8.6", "react@>=17.0.1", "react@17.0.1":
+"react@*", "react@^16.8.0 || ^17.0.0", "react@^17.0.0", "react@>= 16.0 || < 18.0", "react@>= 16.x.x", "react@>=16.3.0", "react@>=16.8", "react@>=16.8.6", "react@>=17.0.1", "react@17.0.1":
   "integrity" "sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.1.tgz"
   "version" "17.0.1"
@@ -7262,6 +7292,11 @@
   "integrity" "sha512-5Zfuy9q/DFr4tfO7ZPeVXb1aPoeQSdeFMLpYuFebehDAhbuevLs5yxSZmIFN1tP5F9Wl4IpJrYojg85/zgyZHQ=="
   "resolved" "https://registry.npmjs.org/unicode-property-aliases-ecmascript/-/unicode-property-aliases-ecmascript-2.0.0.tgz"
   "version" "2.0.0"
+
+"unimodules-task-manager-interface@~7.1.0":
+  "integrity" "sha512-Iu6naIWWNWB69zFO6njRYj1GcfqAFnaK0hBub2zU6vvUu5A+YibZfXm5MTMq3zKfDeHrvEgVzUQszSbkjurinA=="
+  "resolved" "https://registry.npmjs.org/unimodules-task-manager-interface/-/unimodules-task-manager-interface-7.1.0.tgz"
+  "version" "7.1.0"
 
 "union-value@^1.0.0":
   "integrity" "sha512-tJfXmxMeWYnczCVs7XAEvIV7ieppALdyepWMkHkwciRpZraG/xwT+s2JN8+pr1+8jCRf80FFzvr+MpQeeoF4Xg=="
