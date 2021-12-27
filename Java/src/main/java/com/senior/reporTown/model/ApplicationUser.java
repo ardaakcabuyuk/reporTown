@@ -1,5 +1,7 @@
 package com.senior.reporTown.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.senior.reporTown.security.UserRole;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,9 +24,8 @@ import java.util.Set;
 public class ApplicationUser implements UserDetails {
 
     @Id
-    private ObjectId _id;
-    private String firstName;
-    private String lastName;
+    @JsonSerialize(using= ToStringSerializer.class)
+    private ObjectId id;
     private String email;
     private String username;
     private String password;
@@ -37,9 +38,7 @@ public class ApplicationUser implements UserDetails {
     private boolean isCredentialsNonExpired;
     private boolean isEnabled;
 
-    public ApplicationUser(String firstName,
-                           String lastName,
-                           String email,
+    public ApplicationUser(String email,
                            String username,
                            String password,
                            UserRole role,
@@ -48,8 +47,6 @@ public class ApplicationUser implements UserDetails {
                            boolean isAccountNonLocked,
                            boolean isCredentialsNonExpired,
                            boolean isEnabled) {
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.email = email;
         //this.authorities = role.getGrantedAuthorities();
         this.role = role;
@@ -67,19 +64,11 @@ public class ApplicationUser implements UserDetails {
     }
 
     public ObjectId getId() {
-        return _id;
+        return id;
     }
 
     public UserRole getRole() {
         return role;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
     }
 
     public String getEmail() {
