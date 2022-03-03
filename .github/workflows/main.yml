@@ -1,0 +1,27 @@
+name: Deploy master
+on:
+  push:
+    branches:
+    - backend-dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout source code
+      uses: actions/checkout@v2
+
+    - name: Generate deployment package
+      run: zip -r deploy.zip . -x '*.git*'
+
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v20
+      with:
+        aws_access_key: AKIASYTFE6Z2ICJCREJX
+        aws_secret_key: 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
+        application_name: reporTown
+        environment_name: Reportown-env
+        version_label: reportown-dev
+        region: us-east-1
+        deployment_package: deploy.zip
