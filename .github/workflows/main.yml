@@ -1,8 +1,8 @@
-name: Deploy master
+name: Deploy to EB
 on:
   push:
     branches:
-    - backend-dev
+    - backend_dev
     
   workflow_dispatch:
 
