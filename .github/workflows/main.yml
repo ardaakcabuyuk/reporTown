@@ -24,6 +24,6 @@ jobs:
         aws_secret_key: XBVqqgo6lc7A/8XiSJdapWUZhwM82DSETsB0M7WJ
         application_name: reporTown
         environment_name: Reportown-env
-        version_label: reportown-dev
+        version_label: reportown-source-1
         region: us-east-1
         deployment_package: deploy.zip
