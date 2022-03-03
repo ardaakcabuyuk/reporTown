@@ -20,10 +20,10 @@ jobs:
     - name: Deploy to EB
       uses: einaregilsson/beanstalk-deploy@v20
       with:
-        aws_access_key: AKIASYTFE6Z2ICJCREJX
-        aws_secret_key: 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
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         application_name: reporTown
         environment_name: Reportown-env
-        use_existing_version_if_available: true
+        version_label: reportown-source-1
         region: us-east-1
         deployment_package: deploy.zip
