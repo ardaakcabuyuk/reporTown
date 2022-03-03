@@ -32,7 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 
-node_modules/
+node_modules
 .expo/
 npm-debug.*
 *.jks
@@ -46,24 +46,12 @@ web-build/
 # macOS
 .DS_Store
 
-#amplify-do-not-edit-begin
-amplify/\#current-cloud-backend
-amplify/.config/local-*
-amplify/logs
-amplify/mock-data
-amplify/backend/amplify-meta.json
-amplify/backend/awscloudformation
-amplify/backend/.temp
 build/
 dist/
 node_modules/
-aws-exports.js
-awsconfiguration.json
-amplifyconfiguration.json
-amplifyconfiguration.dart
-amplify-build-config.json
-amplify-gradle-config.json
-amplifytools.xcconfig
+node_modules
+**/node_modules/
+**/node_modules
 .secret-*
 **.sample
 package-log.json
@@ -72,3 +60,9 @@ yarn.lock
 .expo/packager-info.json
 .expo/settings.json
 .expo/packager-info.json
+React_Native/reporTown/yarn.lock
+React_Native/reporTown/.expo/packager-info.json
+React_Native/reporTown/.expo/settings.json
+**.yarn.lock
+**.packager-info.json
+**.settings.json
