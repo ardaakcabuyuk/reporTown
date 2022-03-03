@@ -3,6 +3,8 @@ on:
   push:
     branches:
     - backend-dev
+    
+  workflow_dispatch:
 
 jobs:
   build:
