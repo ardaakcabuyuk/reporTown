@@ -1,8 +1,8 @@
-name: Deploy master
+name: Deploy to EB
 on:
   push:
     branches:
-    - backend-dev
+    - backend_dev
     
   workflow_dispatch:
 
@@ -14,16 +14,12 @@ jobs:
     - name: Checkout source code
       uses: actions/checkout@v2
 
-    - name: Generate deployment package
-      run: zip -r deploy.zip . -x '*.git*'
-
     - name: Deploy to EB
       uses: einaregilsson/beanstalk-deploy@v20
       with:
-        aws_access_key: AKIASYTFE6Z2ICJCREJX
-        aws_secret_key: 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
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         application_name: reporTown
         environment_name: Reportown-env
-        version_label: reportown-dev
+        version_label: reportown-source-1
         region: us-east-1
-        deployment_package: deploy.zip

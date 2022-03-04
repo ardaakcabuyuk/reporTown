@@ -8,13 +8,8 @@ import org.springframework.web.bind.annotation.*;
 public class HelloController {
 
     @GetMapping("/")
-    public String index() {
-        return "REPORTOWN";
-    }
-
-    @GetMapping("/hello")
-    public String hello(@AuthenticationPrincipal ApplicationUser authenticatedUser) {
-        return "Hello from reporTown " + authenticatedUser.getUsername() + "!";
+    public String hello() {
+        return "Hello from reporTown!";
     }
 
     @GetMapping("/banCitizen/{id}")
