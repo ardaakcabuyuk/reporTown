@@ -20,6 +20,6 @@ jobs:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         application_name: reporTown
-        environment_name: Reportown-env
+        environment_name: Reportown-env-1
         version_label: reportown-dev
         region: us-east-1
