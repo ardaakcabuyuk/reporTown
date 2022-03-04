@@ -7,13 +7,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  deploy_to_EB:
     runs-on: ubuntu-latest
     steps:
 
     - name: Checkout source code
       uses: actions/checkout@v2
-
+      
     - name: Deploy to EB
       uses: einaregilsson/beanstalk-deploy@v20
       with:
@@ -21,5 +21,5 @@ jobs:
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         application_name: reporTown
         environment_name: Reportown-env
-        version_label: reportown-source-1
+        version_label: reportown-dev
         region: us-east-1
