@@ -48,9 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
-            .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+        http
             .authorizeRequests()
             .antMatchers("/register", "/login", "/").permitAll()
             .antMatchers("/banCitizen/**").hasRole(ADMIN.name())
@@ -59,6 +57,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .anyRequest()
             .authenticated()
             .and()
+            .cors()
+            .and()
+            .exceptionHandling()
+            .authenticationEntryPoint(unauthorizedHandler)
+            .and()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .csrf()
+            .disable()
             //.formLogin()
             //.defaultSuccessUrl("/feed", true)
             //.and()
