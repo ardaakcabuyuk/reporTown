@@ -7,33 +7,45 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy_to_EB:
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
-
     - name: Checkout source code
       uses: actions/checkout@v2
       
-    - name: Create ZIP deployment package
-      run: zip -r deploy_package.zip ./
-
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
+    - name: Set up JDK
+      uses: actions/setup-java@v1
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: "us-east-1"
+        java-version: '11'
+    
+    - name: Build with Maven
+      run: mvn -B package -DskipTests --file pom.xml
+      
+    - name: Upload JAR
+      uses: actions/upload-artifact@v2
+      with:
+        name: artifact
+        path: target/reporTown-0.0.1-SNAPSHOT.jar 
+    
+  deploy:
+    needs: build
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download JAR
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact
 
-    - name: Upload package to S3 bucket
-      run: aws s3 cp deploy_package.zip s3://reportown-s3/
-
-    - name: Create new ElasticBeanstalk Application Version
-      run: |
-        aws elasticbeanstalk create-application-version \
-        --application-name reporTown \
-        --source-bundle S3Bucket="reportown-s3",S3Key="deploy_package.zip" \
-        --version-label "ver-${{ github.sha }}" \
-        --description "commit-sha-${{ github.sha }}"
-
-    - name: Deploy new ElasticBeanstalk Application Version
-      run: aws elasticbeanstalk update-environment --environment-name Reportown-env-1 --version-label "ver-${{ github.sha }}"
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v13
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          use_existing_version_if_available: false
+          application_name: reporTown
+          environment_name: reportown-env-dev
+          version_label: ${{github.SHA}}
+          region: us-east-1
+          deployment_package: reporTown-0.0.1-SNAPSHOT.jar
