@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 @Getter
@@ -40,7 +41,8 @@ public class Report {
 
     private String description;
     private String category;
-    private ArrayList<ObjectId> comments;
+    private ArrayList<Comment> comments;
+    @JsonSerialize(contentUsing = ToStringSerializer.class)
     private ArrayList<ObjectId> upvotes;
     private JsonObject location;
     private String report_image_link;
@@ -57,8 +59,8 @@ public class Report {
                   ObjectId institutionId) {
         this.description = description;
         this.category = category;
-        comments = null;
-        upvotes = null;
+        comments = new ArrayList<>();
+        upvotes = new ArrayList<>();
         this.location = location;
         this.userId = userId;
         this.institutionId = institutionId;

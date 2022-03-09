@@ -4,6 +4,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.senior.reporTown.FileStore;
 import com.senior.reporTown.buckets.BucketName;
 import com.senior.reporTown.model.ApplicationUser;
+import com.senior.reporTown.model.Comment;
 import com.senior.reporTown.model.Report;
 import com.senior.reporTown.repository.ReportRepository;
 import com.senior.reporTown.request.ReportRequest;
@@ -13,6 +14,7 @@ import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -53,18 +55,63 @@ public class ReportService {
         return newReport;
     }
 
-    public List<Report> getReportsByUser(ObjectId userId) {
-        return reportRepository.findByUserId(userId);
+    public int upvoteReport(ObjectId userId, ObjectId reportId) {
+        Report report = reportRepository.findById(reportId);
+        if (report != null) {
+            // if the user already upvoted the post, remove upvote
+            if (report.getUpvotes().contains(userId)) {
+                report.getUpvotes().remove(userId);
+            }
+
+            // if the user has not upvoted the post, upvote
+            else {
+                report.getUpvotes().add(userId);
+            }
+            reportRepository.save(report);
+            return report.getUpvotes().size();
+        }
+        else {
+            return -1;
+        }
+    }
+
+    public Comment commentToReport(ObjectId userId, ObjectId reportId, String text) {
+        Report report = reportRepository.findById(reportId);
+        if (report != null) {
+            Comment comment = new Comment(userId, text);
+            report.getComments().add(comment);
+            reportRepository.save(report);
+            return comment;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public Report deleteComment(ObjectId reportId, ObjectId commentId) {
+        Report report = reportRepository.findById(reportId);
+        if (report != null) {
+            report.getComments().removeIf(comment -> comment.getId().toString().equals(commentId.toString()));
+            reportRepository.save(report);
+            return report;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public Report getReport(ObjectId reportId) {
+        Report report = reportRepository.findById(reportId);
+        return report;
     }
 
     public List<Report> getAllReports(){
-
         List<Report> reports = reportRepository.findAll();
         Collections.reverse(reports);
         return reports;
-
     }
 
+    public List<Report> getReportsByUser(ObjectId userId) { return reportRepository.findByUserId(userId); }
     public List<Report> getReportsByInstitution(ObjectId userId) { return reportRepository.findByInstitutionId(userId); }
 
     /*public String uploadReportImage(@AuthenticationPrincipal ApplicationUser authenticatedUser, MultipartFile file) {
