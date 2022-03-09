@@ -1,12 +1,17 @@
 package com.senior.reporTown.response;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 
 import java.util.List;
 
 public class JwtResponse {
     private String token;
     private String type = "Bearer";
+    @Id
+    @JsonSerialize(using= ToStringSerializer.class)
     private ObjectId id;
     private String username;
     private String email;
