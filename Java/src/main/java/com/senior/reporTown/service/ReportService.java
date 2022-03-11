@@ -75,10 +75,10 @@ public class ReportService {
         }
     }
 
-    public Comment commentToReport(ObjectId userId, ObjectId reportId, String text) {
+    public Comment commentToReport(ObjectId userId, ObjectId reportId, String text, String firstName, String lastName,String username) {
         Report report = reportRepository.findById(reportId);
         if (report != null) {
-            Comment comment = new Comment(userId, text);
+            Comment comment = new Comment(userId, text, firstName, lastName, username);
             report.getComments().add(comment);
             reportRepository.save(report);
             return comment;

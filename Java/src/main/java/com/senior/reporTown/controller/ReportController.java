@@ -1,6 +1,7 @@
 package com.senior.reporTown.controller;
 
 import com.senior.reporTown.model.ApplicationUser;
+import com.senior.reporTown.model.Citizen;
 import com.senior.reporTown.model.Comment;
 import com.senior.reporTown.model.Report;
 import com.senior.reporTown.request.CommentRequest;
@@ -73,7 +74,8 @@ public class ReportController {
     public ResponseEntity<Object> commentToReport(@AuthenticationPrincipal ApplicationUser authenticatedUser,
                                                   @RequestBody CommentRequest request,
                                                   @PathVariable ObjectId reportId) {
-        Comment comment = reportService.commentToReport(authenticatedUser.getId(), reportId, request.getText());
+        Citizen user = (Citizen) authenticatedUser;
+        Comment comment = reportService.commentToReport(authenticatedUser.getId(), reportId, request.getText(),user.getFirstName(), user.getLastName(), authenticatedUser.getUsername());
         Map<String, Object> response = new HashMap<>();
         HttpStatus status;
         if (comment == null) {

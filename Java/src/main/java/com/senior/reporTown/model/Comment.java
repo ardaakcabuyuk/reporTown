@@ -25,10 +25,17 @@ public class Comment {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date date;
 
-    public Comment(ObjectId userId, String text) {
+    private String firstName;
+    private String lastName;
+    private String username;
+
+    public Comment(ObjectId userId, String text, String firstName, String lastName, String username) {
         id = new ObjectId();
         this.userId = userId;
         this.text = text;
         this.date = new Date();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
     }
 }
