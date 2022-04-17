@@ -21,3 +21,5 @@ jobs:
 
     - name: Deploy
       uses: 'google-github-actions/deploy-appengine@v0'
+      with:
+        deliverables: Java/main/src/main/appengine/app.yaml
