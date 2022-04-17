@@ -27,5 +27,4 @@ jobs:
     - name: Deploy with Maven
       run: |
         cd Java
-        ls
-        mvn -Dskiptests package appengine:deploy
+        mvn -Dskiptests package appengine:deploy -Dspring.profiles.active=dev
