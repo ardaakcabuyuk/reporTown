@@ -1,5 +1,5 @@
 runtime: java11
-entrypoint: java -Xmx64m -jar /Java/target/appengine-staging/repoTown-0.0.1-SNAPSHOT.jar
+entrypoint: java -Xmx64m -jar /Java/target/repoTown-0.0.1-SNAPSHOT.jar
 instance_class: F2
 
 handlers:
