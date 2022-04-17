@@ -24,10 +24,8 @@ jobs:
       with:
         credentials_json: '${{ secrets.APPENGINE_SA_KEY }}'
     
-    - name: Change Directory
+    - name: Deploy with Maven
       run: |
         cd Java
         ls
-    
-    - name: Deploy with Maven
-      run: mvn -f pom.xml -Dskiptests package appengine:deploy
+        mvn -Dskiptests package appengine:deploy
