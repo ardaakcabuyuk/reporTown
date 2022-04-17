@@ -23,6 +23,9 @@ jobs:
       uses: 'google-github-actions/auth@v0'
       with:
         credentials_json: '${{ secrets.APPENGINE_SA_KEY }}'
-
+    
+    - name: Change Directory
+      run: cd Java
+    
     - name: Deploy with Maven
       run: mvn -Dskiptests package appengine:deploy
