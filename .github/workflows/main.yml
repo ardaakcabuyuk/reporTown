@@ -30,4 +30,4 @@ jobs:
         ls
     
     - name: Deploy with Maven
-      run: mvn -Dskiptests package appengine:deploy
+      run: mvn -f pom.xml -Dskiptests package appengine:deploy
