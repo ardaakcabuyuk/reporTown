@@ -27,4 +27,6 @@ public class RegistrationRequest {
     private String institutionName;
     private String approvalDocument;
     private String positions;
+    private String country;
+    private String city;
 }

@@ -106,6 +106,13 @@ public class ReportController {
         return reportService.getAllReports();
     }
 
+    @PostMapping("/report/{reportId}/solve")
+    public ResponseEntity<Object> solveReport(@AuthenticationPrincipal ApplicationUser authenticatedUser,
+                                              @PathVariable ObjectId reportId){
+
+        return null;
+    }
+
     /*
     //parameter allow us to assign profile image to ("profileId")
     @PostMapping(

@@ -64,7 +64,9 @@ public class RegistrationService {
                         true,
                         true,
                         true,
-                        true
+                        true,
+                        request.getCountry(),
+                        request.getCity()
                 );
             } else if (role.equals("OFFICIAL")) {
                 registeredUser = new Official(

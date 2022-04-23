@@ -19,6 +19,8 @@ public class Institution extends ApplicationUser {
     private String profilePicture;
     private String bio;
     private float score;
+    private String country;
+    private String city;
 
     public Institution(String institutionName,
                        String email,
@@ -30,11 +32,15 @@ public class Institution extends ApplicationUser {
                        boolean isAccountNonExpired,
                        boolean isAccountNonLocked,
                        boolean isCredentialsNonExpired,
-                       boolean isEnabled) {
+                       boolean isEnabled,
+                       String country,
+                       String city) {
         super(email, username, password, role, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled);
         this.institutionName = institutionName;
         this.approvalDocument = approvalDocument;
         this.positions = positions;
+        this.country = country;
+        this.city = city;
         profilePicture = "";
         bio = "";
         score = (float) 0.0;
