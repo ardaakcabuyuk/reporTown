@@ -11,6 +11,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -55,6 +56,12 @@ public class Report {
     private String longitude;
     private String latitude;
 
+    private String username;
+    private String firstName;
+    private String lastName;
+
+    private String institutionName;
+
     public Report(String description,
                   String category,
                   JsonObject location,
@@ -64,7 +71,11 @@ public class Report {
                   ObjectId institutionId,
                   Solution solution,
                   String longitude,
-                  String latitude) {
+                  String latitude,
+                  String username,
+                  String firstName,
+                  String lastName,
+                  String institutionName) {
         this.description = description;
         this.category = category;
         comments = new ArrayList<>();
@@ -78,6 +89,10 @@ public class Report {
         this.solution = solution;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.institutionName = institutionName;
     }
 }
 

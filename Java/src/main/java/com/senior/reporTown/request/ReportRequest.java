@@ -1,5 +1,6 @@
 package com.senior.reporTown.request;
 
+import com.senior.reporTown.model.ApplicationUser;
 import com.senior.reporTown.model.Solution;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -29,5 +30,9 @@ public class ReportRequest {
     private Solution solution;
     private String longitude;
     private String latitude;
+    private String username;
+    private String firstName;
+    private String lastName;
+    private String institutionName;
 
 }

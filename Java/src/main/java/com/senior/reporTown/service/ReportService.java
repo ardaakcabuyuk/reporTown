@@ -3,11 +3,9 @@ package com.senior.reporTown.service;
 import com.amazonaws.services.s3.AmazonS3;
 import com.senior.reporTown.FileStore;
 import com.senior.reporTown.buckets.BucketName;
-import com.senior.reporTown.model.ApplicationUser;
-import com.senior.reporTown.model.Comment;
-import com.senior.reporTown.model.Report;
-import com.senior.reporTown.model.Solution;
+import com.senior.reporTown.model.*;
 import com.senior.reporTown.repository.ReportRepository;
+import com.senior.reporTown.repository.UserRepository;
 import com.senior.reporTown.request.ReportRequest;
 import org.bson.types.ObjectId;
 import org.apache.http.entity.ContentType;
@@ -31,17 +29,21 @@ import java.util.Optional;
 public class ReportService {
 
     private final ReportRepository reportRepository;
+    private final UserRepository userRepository;
     //private final FileStore fileStore;
     private final Logger logger = LoggerFactory.getLogger(ReportService.class);
 
     @Autowired
-    public ReportService(ReportRepository reportRepository) { //,FileStore fileStore) {
+    public ReportService(ReportRepository reportRepository, UserRepository userRepository) { //,FileStore fileStore) {
         this.reportRepository = reportRepository;
+        this.userRepository = userRepository;
+
         //this.fileStore = fileStore;
     }
 
     public Report postReport(@AuthenticationPrincipal ApplicationUser authenticatedUser, ReportRequest request) {
         //String link = uploadReportImage(authenticatedUser, request.getFile());
+        Institution institution = (Institution) userRepository.findById(request.getInstitutionId()).get();
         Report newReport = new Report(
                 request.getDescription(),
                 request.getCategory(),
@@ -52,7 +54,12 @@ public class ReportService {
                 request.getInstitutionId(),
                 request.getSolution(),
                 request.getLongitude(),
-                request.getLatitude()
+                request.getLatitude(),
+                authenticatedUser.getUsername(),
+                ((Citizen)authenticatedUser).getFirstName(),
+                ((Citizen)authenticatedUser).getLastName(),
+                institution.getInstitutionName()
+                //((Institution) institution).getInstitutionName()
         );
         reportRepository.save(newReport);
         logger.info(String.format("A report has been posted by user %s", authenticatedUser.getUsername()));
