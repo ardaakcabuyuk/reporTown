@@ -36,8 +36,9 @@ public class Report {
     private ObjectId userId;
     @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId institutionId;
-    @JsonSerialize(using = ToStringSerializer.class)
-    private ObjectId solutionId;
+    //@JsonSerialize(using = ToStringSerializer.class)
+    //private ObjectId solutionId;
+
 
     private String description;
     private String category;
@@ -49,6 +50,10 @@ public class Report {
     private MultipartFile file;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date date;
+    private Solution solution;
+
+    private String longitude;
+    private String latitude;
 
     public Report(String description,
                   String category,
@@ -56,7 +61,10 @@ public class Report {
                   String report_image_link,
                   MultipartFile file,
                   ObjectId userId,
-                  ObjectId institutionId) {
+                  ObjectId institutionId,
+                  Solution solution,
+                  String longitude,
+                  String latitude) {
         this.description = description;
         this.category = category;
         comments = new ArrayList<>();
@@ -64,10 +72,12 @@ public class Report {
         this.location = location;
         this.userId = userId;
         this.institutionId = institutionId;
-        solutionId = null;
         this.report_image_link = report_image_link;
         this.file = file;
         date = new Date();
+        this.solution = solution;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 }
 

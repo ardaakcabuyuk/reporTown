@@ -1,5 +1,6 @@
 package com.senior.reporTown.request;
 
+import com.senior.reporTown.model.Solution;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,5 +26,8 @@ public class ReportRequest {
     private JsonObject location;
     private String report_image_link;
     private MultipartFile file;
+    private Solution solution;
+    private String longitude;
+    private String latitude;
 
 }

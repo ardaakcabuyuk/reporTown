@@ -1,11 +1,9 @@
 package com.senior.reporTown.controller;
 
-import com.senior.reporTown.model.ApplicationUser;
-import com.senior.reporTown.model.Citizen;
-import com.senior.reporTown.model.Comment;
-import com.senior.reporTown.model.Report;
+import com.senior.reporTown.model.*;
 import com.senior.reporTown.request.CommentRequest;
 import com.senior.reporTown.request.ReportRequest;
+import com.senior.reporTown.request.SolutionRequest;
 import com.senior.reporTown.service.ReportService;
 import lombok.AllArgsConstructor;
 import org.bson.types.ObjectId;
@@ -106,11 +104,30 @@ public class ReportController {
         return reportService.getAllReports();
     }
 
+    @GetMapping("/feed/solvedReports")
+    public List<Report> getAllSolvedReports(){
+        return reportService.getAllSolvedReports();
+    }
+
+
     @PostMapping("/report/{reportId}/solve")
     public ResponseEntity<Object> solveReport(@AuthenticationPrincipal ApplicationUser authenticatedUser,
+                                              @RequestBody SolutionRequest request,
                                               @PathVariable ObjectId reportId){
+        Solution solution = reportService.solveReport(authenticatedUser.getId(),reportId, request.getDescription(), request.getFile());
+        Map<String, Object> response = new HashMap<>();
+        HttpStatus status;
 
-        return null;
+        if(solution != null ){
+            response.put("msg", "success");
+            //response.put("comment", comment);
+            status = HttpStatus.OK;
+        }
+        else{
+            response.put("msg", "This report is already solved or not exists");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(response, status);
     }
 
     /*

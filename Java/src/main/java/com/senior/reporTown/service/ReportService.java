@@ -6,6 +6,7 @@ import com.senior.reporTown.buckets.BucketName;
 import com.senior.reporTown.model.ApplicationUser;
 import com.senior.reporTown.model.Comment;
 import com.senior.reporTown.model.Report;
+import com.senior.reporTown.model.Solution;
 import com.senior.reporTown.repository.ReportRepository;
 import com.senior.reporTown.request.ReportRequest;
 import org.bson.types.ObjectId;
@@ -48,7 +49,10 @@ public class ReportService {
                 request.getReport_image_link(),
                 request.getFile(),
                 authenticatedUser.getId(),
-                request.getInstitutionId()
+                request.getInstitutionId(),
+                request.getSolution(),
+                request.getLongitude(),
+                request.getLatitude()
         );
         reportRepository.save(newReport);
         logger.info(String.format("A report has been posted by user %s", authenticatedUser.getUsername()));
@@ -111,9 +115,35 @@ public class ReportService {
         return reports;
     }
 
+    public List<Report> getAllSolvedReports(){
+        List<Report> reports = reportRepository.findAll();
+        List<Report> solvedReports = new ArrayList<>();
+        for(int i = 0; i < reports.size(); i++){
+            if(reports.get(i).getSolution() != null){
+                solvedReports.add(reports.get(i));
+            }
+        }
+        Collections.reverse(solvedReports);
+        return solvedReports;
+    }
+
     public List<Report> getReportsByUser(ObjectId userId) { return reportRepository.findByUserId(userId); }
     public List<Report> getReportsByInstitution(ObjectId userId) { return reportRepository.findByInstitutionId(userId); }
 
+    public Solution solveReport(ObjectId userId, ObjectId reportId, String description, MultipartFile solvedImage){
+
+        Report report = reportRepository.findById(reportId);
+        if(report != null){
+
+            Solution solution = new Solution(description,solvedImage);
+            report.setSolution(solution);
+            reportRepository.save(report);
+            return solution;
+        }
+        else{
+            return null;
+        }
+    }
     /*public String uploadReportImage(@AuthenticationPrincipal ApplicationUser authenticatedUser, MultipartFile file) {
 
         //1. Check if image is not empty
