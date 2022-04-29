@@ -50,7 +50,8 @@ public class RegistrationService {
                         true,
                         true,
                         true,
-                        true
+                        true,
+                        false
                 );
             } else if (role.equals("INSTITUTION")) {
                 registeredUser = new Institution(

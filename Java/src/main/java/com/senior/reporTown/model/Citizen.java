@@ -16,6 +16,7 @@ public class Citizen extends ApplicationUser {
     private String profilePicture;
     private String bio;
     private float score;
+    private boolean isVolunteer;
 
     public Citizen(String firstName,
                    String lastName,
@@ -26,12 +27,14 @@ public class Citizen extends ApplicationUser {
                    boolean isAccountNonExpired,
                    boolean isAccountNonLocked,
                    boolean isCredentialsNonExpired,
-                   boolean isEnabled) {
+                   boolean isEnabled,
+                   boolean isVolunteer) {
         super(email, username, password, role, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled);
         this.firstName = firstName;
         this.lastName = lastName;
         profilePicture = "";
         bio = "";
         score = (float) 0.0;
+        this.isVolunteer = isVolunteer;
     }
 }

@@ -1,6 +1,7 @@
 package com.senior.reporTown.service;
 
 import com.senior.reporTown.model.ApplicationUser;
+import com.senior.reporTown.model.Citizen;
 import com.senior.reporTown.repository.UserRepository;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+
     public ApplicationUser signUpUser(ApplicationUser applicationUser) {
         logger.info(String.format("Signup Request By: %s", applicationUser.getUsername()));
         boolean userExists = userRepository
@@ -45,6 +47,7 @@ public class UserService implements UserDetailsService {
         return applicationUser;
     }
 
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username)
@@ -54,5 +57,11 @@ public class UserService implements UserDetailsService {
     public UserDetails findUserById(ObjectId id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, id)));
+    }
+
+    public void beVolunteer(ObjectId userId) {
+        Citizen citizen = (Citizen) findUserById(userId);
+        citizen.setVolunteer(true);
+        userRepository.save(citizen);
     }
 }
