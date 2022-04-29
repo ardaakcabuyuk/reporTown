@@ -40,9 +40,16 @@ public class UserController {
     }
 
     @PostMapping("/profile/{userId}/volunteer")
-    public ResponseEntity<ProfileResponse> userVolunteer(@PathVariable ObjectId userId){
+    public ResponseEntity<ProfileResponse> changeVolunteer(@PathVariable ObjectId userId){
 
-        userService.beVolunteer(userId);
+        userService.changeVolunteer(userId);
+        return getProfile(userId);
+    }
+
+    @PostMapping("/profile/{userId}/updateBio")
+    public ResponseEntity<ProfileResponse> updateBio(@PathVariable ObjectId userId){
+
+        userService.updateBio(userId);
         return getProfile(userId);
     }
 }

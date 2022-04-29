@@ -59,9 +59,19 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, id)));
     }
 
-    public void beVolunteer(ObjectId userId) {
+    public void changeVolunteer(ObjectId userId) {
         Citizen citizen = (Citizen) findUserById(userId);
-        citizen.setVolunteer(true);
+        if(citizen.isVolunteer()==true){
+            citizen.setVolunteer(false);
+        }
+        else{
+            citizen.setVolunteer(true);
+        }
         userRepository.save(citizen);
+    }
+
+    public void updateBio(ObjectId userId) {
+
+
     }
 }
