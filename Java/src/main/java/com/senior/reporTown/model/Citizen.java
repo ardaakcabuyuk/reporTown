@@ -18,6 +18,7 @@ public class Citizen extends ApplicationUser {
     private float score;
     private boolean isVolunteer;
 
+
     public Citizen(String firstName,
                    String lastName,
                    String email,

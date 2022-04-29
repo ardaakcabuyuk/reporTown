@@ -2,6 +2,8 @@ package com.senior.reporTown.service;
 
 import com.senior.reporTown.model.ApplicationUser;
 import com.senior.reporTown.model.Citizen;
+import com.senior.reporTown.model.Institution;
+import com.senior.reporTown.model.Official;
 import com.senior.reporTown.repository.UserRepository;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
@@ -70,8 +72,24 @@ public class UserService implements UserDetailsService {
         userRepository.save(citizen);
     }
 
-    public void updateBio(ObjectId userId) {
+    public void updateBio(ObjectId userId, String bio) {
 
+        ApplicationUser user = (ApplicationUser) findUserById(userId);
 
+        if((user.getRole().toString()).equals("CITIZEN")){
+            Citizen citizen = (Citizen) user;
+            citizen.setBio(bio);
+            userRepository.save(citizen);
+        }
+        else if((user.getRole().toString()).equals("OFFICIAL")){
+            Official official = (Official) user;
+
+            userRepository.save(official);
+        }
+        else if((user.getRole().toString()).equals("INSTITUTION")){
+            Institution institution = (Institution) user;
+            institution.setBio(bio);
+            userRepository.save(institution);
+        }
     }
 }

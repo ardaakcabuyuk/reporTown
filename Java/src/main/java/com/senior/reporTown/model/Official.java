@@ -3,6 +3,7 @@ package com.senior.reporTown.model;
 import com.senior.reporTown.security.UserRole;
 
 public class Official extends ApplicationUser {
+
     private String firstName;
     private String lastName;
     private String position;

@@ -3,6 +3,8 @@ package com.senior.reporTown.controller;
 import com.senior.reporTown.model.ApplicationUser;
 import com.senior.reporTown.model.Citizen;
 import com.senior.reporTown.model.Report;
+import com.senior.reporTown.request.CommentRequest;
+import com.senior.reporTown.request.EditProfileRequest;
 import com.senior.reporTown.response.ProfileResponse;
 import com.senior.reporTown.response.UserInfoResponse;
 import com.senior.reporTown.security.UserRole;
@@ -14,12 +16,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -47,9 +48,9 @@ public class UserController {
     }
 
     @PostMapping("/profile/{userId}/updateBio")
-    public ResponseEntity<ProfileResponse> updateBio(@PathVariable ObjectId userId){
-
-        userService.updateBio(userId);
+    public ResponseEntity<ProfileResponse> updateBio(@AuthenticationPrincipal ApplicationUser authenticatedUser,@RequestBody EditProfileRequest request,
+                                                     @PathVariable ObjectId userId){
+        userService.updateBio(userId,request.getBio());
         return getProfile(userId);
     }
 }
