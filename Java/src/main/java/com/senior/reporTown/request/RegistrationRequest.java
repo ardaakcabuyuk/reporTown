@@ -1,9 +1,12 @@
 package com.senior.reporTown.request;
 
+import com.senior.reporTown.model.Official;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -29,4 +32,5 @@ public class RegistrationRequest {
     private String positions;
     private String country;
     private String city;
+    private List<Official> employees;
 }

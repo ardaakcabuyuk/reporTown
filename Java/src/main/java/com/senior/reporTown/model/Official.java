@@ -19,6 +19,7 @@ public class Official extends ApplicationUser {
     private String bio;
     private float score;
 
+
     public Official(String firstName,
                    String lastName,
                    String email,

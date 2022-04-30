@@ -5,6 +5,8 @@ import com.senior.reporTown.model.Citizen;
 import com.senior.reporTown.model.Institution;
 import com.senior.reporTown.model.Official;
 import com.senior.reporTown.repository.UserRepository;
+import com.senior.reporTown.request.RegistrationRequest;
+import com.senior.reporTown.security.UserRole;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,5 +93,14 @@ public class UserService implements UserDetailsService {
             institution.setBio(bio);
             userRepository.save(institution);
         }
+    }
+
+    public void addOfficial(Institution institution, RegistrationRequest request) {
+        Official official = new Official(request.getFirstName(),request.getLastName(),
+                                request.getEmail(),request.getUsername(), request.getPassword(),
+                UserRole.OFFICIAL,request.getPosition(),true,true,true,true);
+        institution.getEmployees().add(official);
+        userRepository.save(official);
+        userRepository.save(institution);
     }
 }

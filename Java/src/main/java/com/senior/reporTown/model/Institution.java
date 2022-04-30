@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -21,6 +22,7 @@ public class Institution extends ApplicationUser {
     private float score;
     private String country;
     private String city;
+    private List<Official> employees;
 
     public Institution(String institutionName,
                        String email,
@@ -34,7 +36,8 @@ public class Institution extends ApplicationUser {
                        boolean isCredentialsNonExpired,
                        boolean isEnabled,
                        String country,
-                       String city) {
+                       String city,
+                       List<Official> employees) {
         super(email, username, password, role, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled);
         this.institutionName = institutionName;
         this.approvalDocument = approvalDocument;
@@ -44,5 +47,6 @@ public class Institution extends ApplicationUser {
         profilePicture = "";
         bio = "";
         score = (float) 0.0;
+        this.employees = new ArrayList<Official>();
     }
 }

@@ -1,12 +1,9 @@
 package com.senior.reporTown.controller;
 
-import com.senior.reporTown.model.ApplicationUser;
-import com.senior.reporTown.model.Citizen;
-import com.senior.reporTown.model.Report;
-import com.senior.reporTown.request.CommentRequest;
+import com.senior.reporTown.model.*;
 import com.senior.reporTown.request.EditProfileRequest;
+import com.senior.reporTown.request.RegistrationRequest;
 import com.senior.reporTown.response.ProfileResponse;
-import com.senior.reporTown.response.UserInfoResponse;
 import com.senior.reporTown.security.UserRole;
 import com.senior.reporTown.service.ReportService;
 import com.senior.reporTown.service.UserService;
@@ -15,13 +12,9 @@ import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -53,4 +46,15 @@ public class UserController {
         userService.updateBio(userId,request.getBio());
         return getProfile(userId);
     }
+
+    @PostMapping("/institution/addOfficial")
+    public ResponseEntity<ProfileResponse> addOfficial(@AuthenticationPrincipal ApplicationUser authenticatedUser,
+                                                       @RequestBody RegistrationRequest request){
+
+        Institution institution = (Institution) authenticatedUser;
+        userService.addOfficial(institution,request);
+        return getProfile(authenticatedUser.getId());
+    }
+
+
 }
