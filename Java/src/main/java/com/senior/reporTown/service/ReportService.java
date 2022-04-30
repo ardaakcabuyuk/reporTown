@@ -58,8 +58,10 @@ public class ReportService {
                 authenticatedUser.getUsername(),
                 ((Citizen)authenticatedUser).getFirstName(),
                 ((Citizen)authenticatedUser).getLastName(),
-                institution.getInstitutionName()
-                //((Institution) institution).getInstitutionName()
+                institution.getInstitutionName(),
+                false,
+                false
+
         );
         reportRepository.save(newReport);
         logger.info(String.format("A report has been posted by user %s", authenticatedUser.getUsername()));
@@ -140,12 +142,36 @@ public class ReportService {
     public Solution solveReport(ObjectId userId, ObjectId reportId, String description, MultipartFile solvedImage){
 
         Report report = reportRepository.findById(reportId);
-        if(report != null){
-
-            Solution solution = new Solution(description,solvedImage);
-            report.setSolution(solution);
-            reportRepository.save(report);
-            return solution;
+        ApplicationUser user = (ApplicationUser) userRepository.findById(userId).get();
+        if(user.getRole().toString().equals("CITIZEN") && report != null){
+            report.setResolvedByCitizen(true);
+            if(report.isResolvedByInstitution() == true){
+                Solution solution = new Solution(description,solvedImage,true);
+                report.setSolution(solution);
+                reportRepository.save(report);
+                return solution;
+            }
+            else{
+                Solution solution = new Solution(description,solvedImage,false);
+                report.setSolution(solution);
+                reportRepository.save(report);
+                return solution;
+            }
+        }
+        else if(user.getRole().toString().equals("INSTITUTION") && report != null){
+            report.setResolvedByInstitution(true);
+            if(report.isResolvedByCitizen() == true){
+                Solution solution = new Solution(description,solvedImage,true);
+                report.setSolution(solution);
+                reportRepository.save(report);
+                return solution;
+            }
+            else{
+                Solution solution = new Solution(description,solvedImage,false);
+                report.setSolution(solution);
+                reportRepository.save(report);
+                return solution;
+            }
         }
         else{
             return null;

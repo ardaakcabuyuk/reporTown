@@ -17,10 +17,13 @@ public class Solution {
     private ObjectId id;
     private String description;
     private MultipartFile file; //image
+    private boolean resolved;
 
-    public Solution( String description, MultipartFile file) {
+    public Solution(String description, MultipartFile file, boolean resolved) {
 
         this.description = description;
         this.file = file;
+        this.resolved = resolved;
+
     }
 }

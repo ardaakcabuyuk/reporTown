@@ -1,7 +1,15 @@
 package com.senior.reporTown.model;
 
 import com.senior.reporTown.security.UserRole;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
 public class Official extends ApplicationUser {
 
     private String firstName;

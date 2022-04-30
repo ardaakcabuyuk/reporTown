@@ -61,6 +61,8 @@ public class Report {
     private String lastName;
 
     private String institutionName;
+    private boolean resolvedByCitizen;
+    private boolean resolvedByInstitution;
 
     public Report(String description,
                   String category,
@@ -75,7 +77,9 @@ public class Report {
                   String username,
                   String firstName,
                   String lastName,
-                  String institutionName) {
+                  String institutionName,
+                  boolean resolvedByCitizen,
+                  boolean resolvedByInstitution) {
         this.description = description;
         this.category = category;
         comments = new ArrayList<>();
@@ -93,6 +97,8 @@ public class Report {
         this.firstName = firstName;
         this.lastName = lastName;
         this.institutionName = institutionName;
+        this.resolvedByCitizen = resolvedByCitizen;
+        this.resolvedByInstitution = resolvedByInstitution;
     }
 }
 

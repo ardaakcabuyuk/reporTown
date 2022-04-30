@@ -83,7 +83,7 @@ public class UserService implements UserDetailsService {
         }
         else if((user.getRole().toString()).equals("OFFICIAL")){
             Official official = (Official) user;
-
+            official.setBio(bio);
             userRepository.save(official);
         }
         else if((user.getRole().toString()).equals("INSTITUTION")){
