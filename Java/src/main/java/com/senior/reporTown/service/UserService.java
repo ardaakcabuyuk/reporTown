@@ -95,12 +95,12 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public void addOfficial(Institution institution, RegistrationRequest request) {
+    public Official addOfficial(Institution institution, RegistrationRequest request) {
         Official official = new Official(request.getFirstName(),request.getLastName(),
                                 request.getEmail(),request.getUsername(), request.getPassword(),
                 UserRole.OFFICIAL,request.getPosition(),true,true,true,true);
         institution.getEmployees().add(official);
-        userRepository.save(official);
         userRepository.save(institution);
+        return official;
     }
 }

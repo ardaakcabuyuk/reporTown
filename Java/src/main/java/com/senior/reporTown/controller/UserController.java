@@ -52,7 +52,8 @@ public class UserController {
                                                        @RequestBody RegistrationRequest request){
 
         Institution institution = (Institution) authenticatedUser;
-        userService.addOfficial(institution,request);
+        Official official = userService.addOfficial(institution,request);
+        userService.signUpUser(official);
         return getProfile(authenticatedUser.getId());
     }
 
