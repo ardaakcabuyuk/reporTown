@@ -96,7 +96,7 @@ public class UserService implements UserDetailsService {
         Official official = new Official(request.getFirstName(),request.getLastName(),
                                 request.getEmail(),request.getUsername(), request.getPassword(),
                 UserRole.OFFICIAL,request.getPosition(),true,true,
-                true,true);
+                true,true,institution.getInstitutionName());
         institution.getEmployees().add(official);
         userRepository.save(institution);
         return official;

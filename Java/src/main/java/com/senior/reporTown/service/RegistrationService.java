@@ -82,7 +82,8 @@ public class RegistrationService {
                         true,
                         true,
                         true,
-                        true
+                        true,
+                        ""
                 );
             } else {
                 throw new IllegalStateException("role not valid");

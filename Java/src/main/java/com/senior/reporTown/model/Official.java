@@ -21,7 +21,7 @@ public class Official extends ApplicationUser {
     private String profilePicture;
     private String bio;
     private float score;
-
+    private String institutionName;
 
 
     public Official(String firstName,
@@ -34,7 +34,8 @@ public class Official extends ApplicationUser {
                    boolean isAccountNonExpired,
                    boolean isAccountNonLocked,
                    boolean isCredentialsNonExpired,
-                   boolean isEnabled) {
+                   boolean isEnabled,
+                    String institutionName) {
         super(email, username, password, role, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,6 +43,7 @@ public class Official extends ApplicationUser {
         profilePicture = "";
         bio = "";
         score = (float) 0.0;
+        this.institutionName = institutionName;
 
     }
 }
