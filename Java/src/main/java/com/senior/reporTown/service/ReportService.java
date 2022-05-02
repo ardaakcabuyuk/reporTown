@@ -143,7 +143,7 @@ public class ReportService {
 
         Report report = reportRepository.findById(reportId);
         ApplicationUser user = (ApplicationUser) userRepository.findById(userId).get();
-        if(user.getRole().toString().equals("CITIZEN") && report != null){
+        if(user.getRole().toString().equals("CITIZEN") && report != null && !report.isResolvedByCitizen()){
             report.setResolvedByCitizen(true);
             if(report.isResolvedByInstitution() == true){
                 Solution solution = new Solution(description,solvedImage,true);
@@ -158,7 +158,7 @@ public class ReportService {
                 return solution;
             }
         }
-        else if(user.getRole().toString().equals("INSTITUTION") && report != null){
+        else if(user.getRole().toString().equals("OFFICIAL") && report != null && !report.isResolvedByInstitution() && !report.isResolvedByCitizen()){
             report.setResolvedByInstitution(true);
             if(report.isResolvedByCitizen() == true){
                 Solution solution = new Solution(description,solvedImage,true);
