@@ -57,5 +57,4 @@ public class UserController {
         return getProfile(authenticatedUser.getId());
     }
 
-
 }
