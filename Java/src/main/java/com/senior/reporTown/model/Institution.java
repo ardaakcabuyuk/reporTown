@@ -41,7 +41,7 @@ public class Institution extends ApplicationUser {
         super(email, username, password, role, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled);
         this.institutionName = institutionName;
         this.approvalDocument = approvalDocument;
-        this.positions = positions;
+        this.positions = new ArrayList<String>();
         this.country = country;
         this.city = city;
         profilePicture = "";

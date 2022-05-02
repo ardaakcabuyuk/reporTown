@@ -120,4 +120,10 @@ public class UserService implements UserDetailsService {
 
 
     }
+
+    public Institution addPositionToOfficial(Institution institution, String position) {
+        institution.getPositions().add(position);
+        userRepository.save(institution);
+        return institution;
+    }
 }

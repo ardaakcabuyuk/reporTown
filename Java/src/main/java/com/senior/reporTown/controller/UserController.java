@@ -1,6 +1,7 @@
 package com.senior.reporTown.controller;
 
 import com.senior.reporTown.model.*;
+import com.senior.reporTown.request.AddPositionRequest;
 import com.senior.reporTown.request.EditProfileRequest;
 import com.senior.reporTown.request.RegistrationRequest;
 import com.senior.reporTown.response.ProfileResponse;
@@ -58,6 +59,15 @@ public class UserController {
         Official official = userService.addOfficial(institution,request);
         userService.signUpUser(official);
         return official;
+    }
+
+    @PostMapping("/addPositionToOfficial")
+    public Institution addPositionToOfficial(@AuthenticationPrincipal ApplicationUser authenticatedUser,
+                                             @RequestBody AddPositionRequest request){
+
+        Institution institution = (Institution) authenticatedUser;
+        institution = (Institution) userService.addPositionToOfficial(institution,request.getPosition());
+        return institution;
     }
 
     @DeleteMapping("/deleteOfficial/{userId}")
