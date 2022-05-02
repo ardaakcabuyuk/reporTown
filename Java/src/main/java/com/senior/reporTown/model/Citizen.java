@@ -15,7 +15,6 @@ public class Citizen extends ApplicationUser {
     private String lastName;
     private String profilePicture;
     private String bio;
-    private float score;
     private boolean isVolunteer;
 
 
@@ -35,7 +34,6 @@ public class Citizen extends ApplicationUser {
         this.lastName = lastName;
         profilePicture = "";
         bio = "";
-        score = (float) 0.0;
         this.isVolunteer = isVolunteer;
     }
 }

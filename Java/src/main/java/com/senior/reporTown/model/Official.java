@@ -20,7 +20,6 @@ public class Official extends ApplicationUser {
     private String position;
     private String profilePicture;
     private String bio;
-    private float score;
     private String institutionName;
 
 
@@ -42,7 +41,6 @@ public class Official extends ApplicationUser {
         this.position = position;
         profilePicture = "";
         bio = "";
-        score = (float) 0.0;
         this.institutionName = institutionName;
 
     }

@@ -22,15 +22,12 @@ public class ReportService {
 
     private final ReportRepository reportRepository;
     private final UserRepository userRepository;
-    //private final FileStore fileStore;
     private final Logger logger = LoggerFactory.getLogger(ReportService.class);
 
     @Autowired
     public ReportService(ReportRepository reportRepository, UserRepository userRepository) { //,FileStore fileStore) {
         this.reportRepository = reportRepository;
         this.userRepository = userRepository;
-
-        //this.fileStore = fileStore;
     }
 
     public Report postReport(@AuthenticationPrincipal ApplicationUser authenticatedUser, ReportRequest request) {
@@ -56,6 +53,7 @@ public class ReportService {
 
         );
         reportRepository.save(newReport);
+        rewardOwner(newReport, 10);
         logger.info(String.format("A report has been posted by user %s", authenticatedUser.getUsername()));
         return newReport;
     }
@@ -73,6 +71,7 @@ public class ReportService {
                 report.getUpvotes().add(userId);
             }
             reportRepository.save(report);
+            rewardOwner(report, 1);
             return report.getUpvotes().size();
         }
         else {
@@ -86,6 +85,7 @@ public class ReportService {
             Comment comment = new Comment(userId, text, firstName, lastName, username);
             report.getComments().add(comment);
             reportRepository.save(report);
+            rewardOwner(report, 0.5);
             return comment;
         }
         else {
@@ -137,7 +137,9 @@ public class ReportService {
         ApplicationUser user = (ApplicationUser) userRepository.findById(userId).get();
         if(user.getRole().toString().equals("CITIZEN") && report != null && !report.isResolvedByCitizen()){
             report.setResolvedByCitizen(true);
-            if(report.isResolvedByInstitution() == true){
+            rewardActionTaker(user, 10);
+            rewardActionTaker(userRepository.findById(report.getInstitutionId()).get(), 20);
+            if(report.isResolvedByInstitution()){
                 Solution solution = new Solution(description,solvedImage,true);
                 report.setSolution(solution);
                 reportRepository.save(report);
@@ -152,65 +154,25 @@ public class ReportService {
         }
         else if(user.getRole().toString().equals("OFFICIAL") && report != null && !report.isResolvedByInstitution() && !report.isResolvedByCitizen()){
             report.setResolvedByInstitution(true);
-            if(report.isResolvedByCitizen() == true){
-                Solution solution = new Solution(description,solvedImage,true);
-                report.setSolution(solution);
-                reportRepository.save(report);
-                return solution;
-            }
-            else{
-                Solution solution = new Solution(description,solvedImage,false);
-                report.setSolution(solution);
-                reportRepository.save(report);
-                return solution;
-            }
+            rewardActionTaker(user, 10);
+            Solution solution = new Solution(description,solvedImage,false);
+            report.setSolution(solution);
+            reportRepository.save(report);
+            return solution;
         }
         else{
             return null;
         }
     }
-    /*public String uploadReportImage(@AuthenticationPrincipal ApplicationUser authenticatedUser, MultipartFile file) {
 
-        //1. Check if image is not empty
-        //2. If file is an image
-        //3. Whether the user exist in our database
-        //4. ıf 3 grap some metadata from file if any
-        //5. Store the image in s3 and update database with s3 image link (userProfileImageLink attribute)
+    public void rewardActionTaker(ApplicationUser user, double val) {
+        user.setScore(user.getScore() + val);
+        userRepository.save(user);
+    }
 
-
-        //grap metadata
-        Map<String,String> metaData = new HashMap<>();
-        metaData.put("Content-Type",file.getContentType());
-        metaData.put("Content-Length", String.valueOf(file.getSize()));
-
-        //check file is not empty
-        if(!file.isEmpty()){
-            //check image
-            if(Arrays.asList(ContentType.IMAGE_JPEG.getMimeType(),
-                    ContentType.IMAGE_PNG.getMimeType()).contains(file.getContentType())){
-                //store image in s3 and update db userProfileımageLink with s3 link
-                String path = String.format("%s/%s", BucketName.REPORT_IMAGE.getBucketName(),
-                        authenticatedUser.getId());
-                String fileName = String.format("%s-%s", file.getOriginalFilename()  , UUID.randomUUID() );
-                try{
-                    fileStore.save(path, fileName, Optional.of(metaData), file.getInputStream());
-                    return fileName;
-                    //user.setUserProfileImageLink(fileName);
-                    //report.setReport_image_link(fileName);
-
-                } catch(IOException e){
-                    throw new IllegalStateException(e);
-                }
-            }
-            //not an image
-            else{
-                throw new IllegalStateException("File type should be an image[" + file.getContentType() + "]");
-            }
-        }
-        //empty file
-        else{
-            throw new IllegalStateException("File is not uploaded" );
-        }
-
-    }*/
+    public void rewardOwner(Report report, double val) {
+        ApplicationUser owner = userRepository.findById(report.getUserId()).get();
+        owner.setScore(owner.getScore() + val);
+        userRepository.save(owner);
+    }
 }

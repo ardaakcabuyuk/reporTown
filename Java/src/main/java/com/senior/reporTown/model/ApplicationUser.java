@@ -29,6 +29,7 @@ public class ApplicationUser implements UserDetails {
     private String email;
     private String username;
     private String password;
+    private double score;
     /*@ElementCollection(targetClass = GrantedAuthority.class)
     private Set<? extends GrantedAuthority> authorities;*/
     //@Enumerated
@@ -57,7 +58,7 @@ public class ApplicationUser implements UserDetails {
         this.isAccountNonLocked = isAccountNonLocked;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
         this.isEnabled = isEnabled;
-
+        this.score = 0;
     }
 
     @Override

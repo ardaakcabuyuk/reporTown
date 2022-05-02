@@ -20,7 +20,6 @@ public class Institution extends ApplicationUser {
     private List<String> positions;
     private String profilePicture;
     private String bio;
-    private float score;
     private String country;
     private String city;
     private List<Official> employees;
@@ -49,7 +48,6 @@ public class Institution extends ApplicationUser {
         this.city = city;
         profilePicture = "";
         bio = "";
-        score = (float) 0.0;
         this.employees = new ArrayList<Official>();
         this.employeeIds = new ArrayList<String>();
     }

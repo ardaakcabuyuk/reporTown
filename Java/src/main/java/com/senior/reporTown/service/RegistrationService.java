@@ -6,7 +6,6 @@ import com.senior.reporTown.model.Institution;
 import com.senior.reporTown.model.Official;
 import com.senior.reporTown.request.RegistrationRequest;
 import com.senior.reporTown.security.UserRole;
-import com.senior.reporTown.util.EmailValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +16,8 @@ import java.util.ArrayList;
 public class RegistrationService {
 
     private final UserService userService;
-    private EmailValidator emailValidator;
 
     public ApplicationUser register(RegistrationRequest request) {
-        boolean isValidEmail = emailValidator.test(request.getEmail());
-        if (!isValidEmail) {
-            throw new IllegalStateException("email not valid");
-        }
-
         ApplicationUser registeredUser = null;
         String role = request.getRole();
         try {

@@ -1,7 +1,8 @@
-package com.senior.reporTown.cloud;
+package com.senior.reporTown.controller;
 
 import com.google.api.services.storage.model.StorageObject;
 import com.google.common.io.Files;
+import com.senior.reporTown.cloud.GoogleStorageClientAdapter;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -22,7 +23,6 @@ import java.util.Map;
 public class CloudStorageController {
     @Autowired
     GoogleStorageClientAdapter googleStorageClientAdapter;
-
 
     @PostMapping(path = "report/{reportId}/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public Boolean uploadFile(@RequestPart(value = "file", required = true) MultipartFile files, @PathVariable String reportId)  {
