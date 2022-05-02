@@ -1,29 +1,21 @@
 package com.senior.reporTown.service;
 
-import com.amazonaws.services.s3.AmazonS3;
-import com.senior.reporTown.FileStore;
-import com.senior.reporTown.buckets.BucketName;
 import com.senior.reporTown.model.*;
 import com.senior.reporTown.repository.ReportRepository;
 import com.senior.reporTown.repository.UserRepository;
 import com.senior.reporTown.request.ReportRequest;
 import org.bson.types.ObjectId;
-import org.apache.http.entity.ContentType;
-import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.*;
 
 import java.util.List;
 import java.util.Collections;
-import java.util.Optional;
 
 @Service
 public class ReportService {

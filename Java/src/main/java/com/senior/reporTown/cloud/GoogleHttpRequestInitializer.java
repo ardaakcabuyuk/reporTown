@@ -6,6 +6,7 @@ import com.google.auth.http.HttpCredentialsAdapter;
 import com.google.auth.oauth2.GoogleCredentials;
 import org.springframework.beans.factory.annotation.Value;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
@@ -17,15 +18,18 @@ public class GoogleHttpRequestInitializer implements HttpRequestInitializer {
 
     @Override
     public void initialize(HttpRequest httpRequest) throws IOException {
-        credentials = GoogleCredentials
-                .fromStream(new FileInputStream("/Users/elifozer/IdeaProjects/reporTown/Java/src/main/resources/reportown-cloud-storage-key.json"))
-                .createScoped(Arrays.asList("https://www.googleapis.com/auth/cloud-platform"));
-        adapter = new HttpCredentialsAdapter(credentials);
+        try {
+            credentials = GoogleCredentials
+                    .fromStream(new FileInputStream("Java/src/main/resources/reportown-google-api-key.json"))
+                    .createScoped(Arrays.asList("https://www.googleapis.com/auth/cloud-platform"));
+            adapter = new HttpCredentialsAdapter(credentials);
 
-        adapter.initialize(httpRequest);
-        httpRequest.setConnectTimeout(60000); // 1 minute connect timeout
-        httpRequest.setReadTimeout(60000);
-
+            adapter.initialize(httpRequest);
+            httpRequest.setConnectTimeout(60000); // 1 minute connect timeout
+            httpRequest.setReadTimeout(60000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public GoogleCredentials getCredentials() {
