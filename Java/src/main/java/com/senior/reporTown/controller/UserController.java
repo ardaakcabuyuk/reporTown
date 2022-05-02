@@ -50,14 +50,14 @@ public class UserController {
     }
 
     @PostMapping("/institution/addOfficial")
-    public ResponseEntity<ProfileResponse> addOfficial(@AuthenticationPrincipal ApplicationUser authenticatedUser,
+    public Official addOfficial(@AuthenticationPrincipal ApplicationUser authenticatedUser,
                                                        @RequestBody RegistrationRequest request){
 
 
         Institution institution = (Institution) authenticatedUser;
         Official official = userService.addOfficial(institution,request);
         userService.signUpUser(official);
-        return getProfile(authenticatedUser.getId());
+        return official;
     }
 
     @DeleteMapping("/deleteOfficial/{userId}")

@@ -104,10 +104,14 @@ public class UserService implements UserDetailsService {
 
     public Institution deleteOfficial(ObjectId userId, ObjectId institutionId) {
         Official official = (Official) userRepository.findById(userId).get();
-        Institution institution = (Institution) userRepository.findById(institutionId).get();
+
         if (official != null) {
+
+            Institution institution = (Institution) userRepository.findById(institutionId).get();
+           institution.getEmployees().removeIf(o -> o.getUsername().equals(official.getUsername()));
            userRepository.deleteById(userId);
            userRepository.save(institution);
+
            return institution;
         }
         else {
