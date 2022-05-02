@@ -46,9 +46,6 @@ public class Report {
     private ArrayList<Comment> comments;
     @JsonSerialize(contentUsing = ToStringSerializer.class)
     private ArrayList<ObjectId> upvotes;
-    private JsonObject location;
-    private String report_image_link;
-    private MultipartFile file;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date date;
     private Solution solution;
@@ -66,39 +63,30 @@ public class Report {
 
     public Report(String description,
                   String category,
-                  JsonObject location,
-                  String report_image_link,
-                  MultipartFile file,
                   ObjectId userId,
                   ObjectId institutionId,
-                  Solution solution,
                   String longitude,
                   String latitude,
                   String username,
                   String firstName,
                   String lastName,
-                  String institutionName,
-                  boolean resolvedByCitizen,
-                  boolean resolvedByInstitution) {
+                  String institutionName) {
         this.description = description;
         this.category = category;
         comments = new ArrayList<>();
         upvotes = new ArrayList<>();
-        this.location = location;
         this.userId = userId;
         this.institutionId = institutionId;
-        this.report_image_link = report_image_link;
-        this.file = file;
         date = new Date();
-        this.solution = solution;
+        this.solution = null;
         this.longitude = longitude;
         this.latitude = latitude;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.institutionName = institutionName;
-        this.resolvedByCitizen = resolvedByCitizen;
-        this.resolvedByInstitution = resolvedByInstitution;
+        this.resolvedByCitizen = false;
+        this.resolvedByInstitution = false;
     }
 }
 

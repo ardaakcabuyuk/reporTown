@@ -32,6 +32,11 @@ public class ReportController {
         return reportService.postReport(authenticatedUser,request);
     }
 
+    @PostMapping("/report/{id}/edit")
+    public Report editReport(@AuthenticationPrincipal ApplicationUser authenticatedUser, @RequestBody ReportRequest request, @PathVariable ObjectId id) {
+        return reportService.editReport(id, request.getDescription(), request.getCategory());
+    }
+
     @GetMapping("/report/{id}")
     public ResponseEntity<Object> getReport(@PathVariable ObjectId id) {
         Report report = reportService.getReport(id);

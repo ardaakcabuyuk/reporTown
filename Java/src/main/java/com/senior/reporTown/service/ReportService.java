@@ -36,26 +36,27 @@ public class ReportService {
         Report newReport = new Report(
                 request.getDescription(),
                 request.getCategory(),
-                request.getLocation(),
-                request.getReport_image_link(),
-                request.getFile(),
                 authenticatedUser.getId(),
                 request.getInstitutionId(),
-                request.getSolution(),
                 request.getLongitude(),
                 request.getLatitude(),
                 authenticatedUser.getUsername(),
                 ((Citizen)authenticatedUser).getFirstName(),
                 ((Citizen)authenticatedUser).getLastName(),
-                institution.getInstitutionName(),
-                false,
-                false
-
+                institution.getInstitutionName()
         );
         reportRepository.save(newReport);
         rewardOwner(newReport, 10);
         logger.info(String.format("A report has been posted by user %s", authenticatedUser.getUsername()));
         return newReport;
+    }
+
+    public Report editReport(ObjectId id, String description, String category) {
+        Report report = reportRepository.findById(id);
+        report.setDescription(description);
+        report.setCategory(category);
+        reportRepository.save(report);
+        return report;
     }
 
     public int upvoteReport(ObjectId userId, ObjectId reportId) {

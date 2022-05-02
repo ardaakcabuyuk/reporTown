@@ -22,17 +22,7 @@ public class ReportRequest {
     private ObjectId institutionId;
     private String description;
     private String category;
-    private ArrayList<ObjectId> comments;
-    private ArrayList<ObjectId> upvotes;
-    private JsonObject location;
-    private String report_image_link;
-    private MultipartFile file;
-    private Solution solution;
     private String longitude;
     private String latitude;
-    private String username;
-    private String firstName;
-    private String lastName;
-    private String institutionName;
 
 }
