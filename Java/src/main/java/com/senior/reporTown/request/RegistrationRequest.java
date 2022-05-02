@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class RegistrationRequest {
 
     // Official
     private final String position;
+    private final ObjectId institutionId;
 
     // Institution
     private String institutionName;
@@ -33,4 +35,5 @@ public class RegistrationRequest {
     private String country;
     private String city;
     private List<Official> employees;
+
 }
