@@ -58,6 +58,7 @@ public class UserController {
         Institution institution = (Institution) authenticatedUser;
         Official official = userService.addOfficial(institution,request);
         userService.signUpUser(official);
+        userService.addOfficialHelper(institution,official);
         return official;
     }
 

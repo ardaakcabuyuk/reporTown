@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class Institution extends ApplicationUser {
     private String country;
     private String city;
     private List<Official> employees;
+    private List<String> employeeIds;
 
     public Institution(String institutionName,
                        String email,
@@ -37,7 +39,8 @@ public class Institution extends ApplicationUser {
                        boolean isEnabled,
                        String country,
                        String city,
-                       List<Official> employees) {
+                       List<Official> employees,
+                       List<ObjectId> employeeIds) {
         super(email, username, password, role, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled);
         this.institutionName = institutionName;
         this.approvalDocument = approvalDocument;
@@ -48,5 +51,6 @@ public class Institution extends ApplicationUser {
         bio = "";
         score = (float) 0.0;
         this.employees = new ArrayList<Official>();
+        this.employeeIds = new ArrayList<String>();
     }
 }

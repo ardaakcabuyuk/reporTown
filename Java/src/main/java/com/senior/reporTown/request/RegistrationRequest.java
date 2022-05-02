@@ -35,5 +35,6 @@ public class RegistrationRequest {
     private String country;
     private String city;
     private List<Official> employees;
+    private List<ObjectId> employeeIds;
 
 }

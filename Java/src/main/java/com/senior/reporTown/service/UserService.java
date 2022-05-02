@@ -92,6 +92,11 @@ public class UserService implements UserDetailsService {
         }
     }
 
+    public void addOfficialHelper(Institution institution, Official official) {//ObjectId officialId){
+        institution.getEmployeeIds().add(official.getId().toString());
+        userRepository.save(institution);
+        return;
+    }
     public Official addOfficial(Institution institution, RegistrationRequest request) {
         Official official = new Official(request.getFirstName(),request.getLastName(),
                                 request.getEmail(),request.getUsername(), request.getPassword(),
