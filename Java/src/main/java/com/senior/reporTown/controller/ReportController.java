@@ -118,7 +118,7 @@ public class ReportController {
         Map<String, Object> response = new HashMap<>();
         HttpStatus status;
 
-        if(solution != null ){
+        if(solution == null ){
             response.put("msg", "success");
             //response.put("comment", comment);
             status = HttpStatus.OK;
