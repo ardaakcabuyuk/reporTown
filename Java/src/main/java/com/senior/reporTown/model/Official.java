@@ -1,10 +1,13 @@
 package com.senior.reporTown.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.senior.reporTown.security.UserRole;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 
 @Getter
 @Setter
@@ -18,6 +21,7 @@ public class Official extends ApplicationUser {
     private String profilePicture;
     private String bio;
     private float score;
+
 
 
     public Official(String firstName,
@@ -38,5 +42,6 @@ public class Official extends ApplicationUser {
         profilePicture = "";
         bio = "";
         score = (float) 0.0;
+
     }
 }

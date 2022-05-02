@@ -14,7 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
@@ -51,10 +53,22 @@ public class UserController {
     public ResponseEntity<ProfileResponse> addOfficial(@AuthenticationPrincipal ApplicationUser authenticatedUser,
                                                        @RequestBody RegistrationRequest request){
 
+
         Institution institution = (Institution) authenticatedUser;
         Official official = userService.addOfficial(institution,request);
         userService.signUpUser(official);
         return getProfile(authenticatedUser.getId());
+    }
+
+    @DeleteMapping("/deleteOfficial/{userId}")
+    public ResponseEntity<Object> deleteOfficial(@AuthenticationPrincipal ApplicationUser authenticatedUser,
+                                                @PathVariable ObjectId userId) {
+
+        authenticatedUser = userService.deleteOfficial(userId,authenticatedUser.getId());
+        Map<String, Object> response = new HashMap<>();
+        response.put("msg", "success");
+        response.put("institution", authenticatedUser);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }

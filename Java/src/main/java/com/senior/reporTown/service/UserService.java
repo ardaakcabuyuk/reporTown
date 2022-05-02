@@ -1,9 +1,6 @@
 package com.senior.reporTown.service;
 
-import com.senior.reporTown.model.ApplicationUser;
-import com.senior.reporTown.model.Citizen;
-import com.senior.reporTown.model.Institution;
-import com.senior.reporTown.model.Official;
+import com.senior.reporTown.model.*;
 import com.senior.reporTown.repository.UserRepository;
 import com.senior.reporTown.request.RegistrationRequest;
 import com.senior.reporTown.security.UserRole;
@@ -98,9 +95,25 @@ public class UserService implements UserDetailsService {
     public Official addOfficial(Institution institution, RegistrationRequest request) {
         Official official = new Official(request.getFirstName(),request.getLastName(),
                                 request.getEmail(),request.getUsername(), request.getPassword(),
-                UserRole.OFFICIAL,request.getPosition(),true,true,true,true);
+                UserRole.OFFICIAL,request.getPosition(),true,true,
+                true,true);
         institution.getEmployees().add(official);
         userRepository.save(institution);
         return official;
+    }
+
+    public Institution deleteOfficial(ObjectId userId, ObjectId institutionId) {
+        Official official = (Official) userRepository.findById(userId).get();
+        Institution institution = (Institution) userRepository.findById(institutionId).get();
+        if (official != null) {
+           userRepository.deleteById(userId);
+           userRepository.save(institution);
+           return institution;
+        }
+        else {
+            return null;
+        }
+
+
     }
 }
