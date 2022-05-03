@@ -135,18 +135,15 @@ public class ReportController {
         return new ResponseEntity<>(response, status);
     }
 
-    /*
-    //parameter allow us to assign profile image to ("profileId")
-    @PostMapping(
-            path = "/upload",
-            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public void uploadReportImage(@AuthenticationPrincipal ApplicationUser authenticatedUser,
-                                       @RequestParam("file") MultipartFile file ){
-
-        reportService.uploadReportImage(authenticatedUser,file);
-
-    }*/
+    @GetMapping("/report/{reportId}/solution/reject")
+    public ResponseEntity<Object> solveReport(@AuthenticationPrincipal ApplicationUser authenticatedUser,
+                                              @PathVariable ObjectId reportId){
+        Report report = reportService.rejectSolution(authenticatedUser.getId(), reportId);
+        Map<String, Object> response = new HashMap<>();
+        HttpStatus status;
+        response.put("msg", "success");
+        status = HttpStatus.OK;
+        return new ResponseEntity<>(response, status);
+    }
 
 }

@@ -165,6 +165,18 @@ public class ReportService {
         }
     }
 
+
+    public Report rejectSolution(ObjectId userId, ObjectId reportId) {
+        Report report = reportRepository.findById(reportId);
+        Citizen citizen = (Citizen) userRepository.findById(userId).get();
+        if (report.isResolvedByInstitution()) {
+            report.setSolution(null);
+            report.setResolvedByInstitution(false);
+        }
+        reportRepository.save(report);
+        return report;
+    }
+
     public void rewardActionTaker(ApplicationUser user, double val) {
         user.setScore(user.getScore() + val);
         userRepository.save(user);
