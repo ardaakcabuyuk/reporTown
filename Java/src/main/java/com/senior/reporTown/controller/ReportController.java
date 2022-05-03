@@ -155,9 +155,8 @@ public class ReportController {
         return reportsOfficial;
     }
 
-
     @GetMapping("/report/{reportId}/solution/reject")
-    public ResponseEntity<Object> solveReport(@AuthenticationPrincipal ApplicationUser authenticatedUser,
+    public ResponseEntity<Object> rejectReport(@AuthenticationPrincipal ApplicationUser authenticatedUser,
                                               @PathVariable ObjectId reportId){
         Report report = reportService.rejectSolution(authenticatedUser.getId(), reportId);
         Map<String, Object> response = new HashMap<>();
