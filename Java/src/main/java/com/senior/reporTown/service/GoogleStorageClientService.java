@@ -94,7 +94,7 @@ public class GoogleStorageClientService {
                 reportRepository.save(r);
                 logger.info("Image URL is refreshed for report " + r.getId().toString());
             } catch (Exception e) {
-                logger.error(String.format("Report with ID: %s does not have an image in the cloud.", r.getId().toString()));
+                e.printStackTrace();
             }
         });
     }
