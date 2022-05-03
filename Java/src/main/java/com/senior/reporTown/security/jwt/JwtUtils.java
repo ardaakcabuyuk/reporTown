@@ -3,8 +3,10 @@ package com.senior.reporTown.security.jwt;
 import java.util.Date;
 
 import com.senior.reporTown.model.ApplicationUser;
+import com.senior.reporTown.repository.TokenBlacklistRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -20,6 +22,9 @@ public class JwtUtils {
 
     @Value("86400000")
     private int jwtExpirationMs;
+
+    @Autowired
+    TokenBlacklistRepository tokenBlacklistRepository;
 
     public String generateJwtToken(Authentication authentication) {
 
@@ -39,6 +44,10 @@ public class JwtUtils {
 
     public boolean validateJwtToken(String authToken) {
         try {
+            if (tokenBlacklistRepository.findByJwt(authToken).isPresent()) {
+                logger.error("You are logged out. Please log in to continue.");
+                return false;
+            }
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
             return true;
         } catch (SignatureException e) {

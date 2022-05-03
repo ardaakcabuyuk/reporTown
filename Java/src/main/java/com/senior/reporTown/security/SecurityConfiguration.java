@@ -2,11 +2,13 @@ package com.senior.reporTown.security;
 
 import com.senior.reporTown.security.jwt.AuthEntryPointJwt;
 import com.senior.reporTown.security.jwt.AuthTokenFilter;
+import com.senior.reporTown.service.LogoutHandlerService;
 import com.senior.reporTown.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,6 +20,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.concurrent.TimeUnit;
@@ -33,6 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
     private final AuthEntryPointJwt unauthorizedHandler;
+    private final LogoutHandlerService logoutHandlerService;
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
@@ -40,10 +44,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    public SecurityConfiguration(PasswordEncoder passwordEncoder, UserService userService, AuthEntryPointJwt unauthorizedHandler) {
+    public SecurityConfiguration(PasswordEncoder passwordEncoder, UserService userService,
+                                 AuthEntryPointJwt unauthorizedHandler, LogoutHandlerService logoutHandlerService) {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
         this.unauthorizedHandler = unauthorizedHandler;
+        this.logoutHandlerService = logoutHandlerService;
     }
 
     @Override
@@ -67,20 +73,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
             .csrf()
             .disable()
-            //.formLogin()
-            //.defaultSuccessUrl("/feed", true)
-            //.and()
             .rememberMe()
                 .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
                 .key("somethingverysecured")
             .and()
             .logout()
-                .logoutUrl("/logout")
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-                .clearAuthentication(true)
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID", "remember-me")
-                .logoutSuccessUrl("/login");
+                .addLogoutHandler(logoutHandlerService)
+                .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK));
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

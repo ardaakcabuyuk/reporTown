@@ -48,7 +48,6 @@ public class UserService implements UserDetailsService {
         return applicationUser;
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username)

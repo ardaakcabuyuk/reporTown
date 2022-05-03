@@ -31,7 +31,6 @@ public class ReportService {
     }
 
     public Report postReport(@AuthenticationPrincipal ApplicationUser authenticatedUser, ReportRequest request) {
-        //String link = uploadReportImage(authenticatedUser, request.getFile());
         Institution institution = (Institution) userRepository.findById(request.getInstitutionId()).get();
         Report newReport = new Report(
                 request.getDescription(),
