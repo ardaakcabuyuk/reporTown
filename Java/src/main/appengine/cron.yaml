@@ -1,0 +1,5 @@
+cron:
+  - description: "refresh signed URLs"
+    url: /refreshSignedURLs
+    schedule: every 20 hours
+    target: default
