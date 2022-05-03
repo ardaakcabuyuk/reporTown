@@ -92,6 +92,7 @@ public class GoogleStorageClientService {
                 URL url = storage.signUrl(blobInfo, 24, TimeUnit.HOURS, com.google.cloud.storage.Storage.SignUrlOption.withV4Signature());
                 r.setImage(url.toString());
                 reportRepository.save(r);
+                logger.info("Image URL is refreshed for report " + r.getId().toString());
             } catch (Exception e) {
                 logger.error(String.format("Report with ID: %s does not have an image in the cloud.", r.getId().toString()));
             }
