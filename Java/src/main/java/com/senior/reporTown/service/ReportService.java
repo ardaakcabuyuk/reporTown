@@ -42,7 +42,8 @@ public class ReportService {
                 authenticatedUser.getUsername(),
                 ((Citizen)authenticatedUser).getFirstName(),
                 ((Citizen)authenticatedUser).getLastName(),
-                institution.getInstitutionName()
+                institution.getInstitutionName(),
+                null
         );
         reportRepository.save(newReport);
         rewardOwner(newReport, 10);
@@ -129,7 +130,13 @@ public class ReportService {
     }
 
     public List<Report> getReportsByUser(ObjectId userId) { return reportRepository.findByUserId(userId); }
-    public List<Report> getReportsByInstitution(ObjectId userId) { return reportRepository.findByInstitutionId(userId); }
+
+    public List<Report> getReportsByInstitution(ObjectId userId) {
+        return reportRepository.findByInstitutionId(userId); }
+
+    public List<Report> getReportsByOfficial(ObjectId userId) {
+        return reportRepository.findByUserId(userId);
+    }
 
     public Solution solveReport(ObjectId userId, ObjectId reportId, String description, MultipartFile solvedImage){
 
@@ -186,5 +193,14 @@ public class ReportService {
         ApplicationUser owner = userRepository.findById(report.getUserId()).get();
         owner.setScore(owner.getScore() + val);
         userRepository.save(owner);
+    }
+
+    public Report assignOfficialToReport(ObjectId officialId, ObjectId reportId) {
+
+        Report report = reportRepository.findById(reportId);
+        Official official = (Official) userRepository.findById(officialId).get();
+        report.setOfficial(official);
+        reportRepository.save(report);
+        return report;
     }
 }

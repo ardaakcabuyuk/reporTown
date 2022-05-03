@@ -61,6 +61,8 @@ public class Report {
     private boolean resolvedByCitizen;
     private boolean resolvedByInstitution;
 
+    private Official official;
+
     public Report(String description,
                   String category,
                   ObjectId userId,
@@ -70,7 +72,8 @@ public class Report {
                   String username,
                   String firstName,
                   String lastName,
-                  String institutionName) {
+                  String institutionName,
+                  Official official) {
         this.description = description;
         this.category = category;
         comments = new ArrayList<>();
@@ -87,6 +90,7 @@ public class Report {
         this.institutionName = institutionName;
         this.resolvedByCitizen = false;
         this.resolvedByInstitution = false;
+        this.official = official;
     }
 }
 

@@ -1,6 +1,7 @@
 package com.senior.reporTown.controller;
 
 import com.senior.reporTown.model.*;
+import com.senior.reporTown.request.AssignOfficialRequest;
 import com.senior.reporTown.request.CommentRequest;
 import com.senior.reporTown.request.ReportRequest;
 import com.senior.reporTown.request.SolutionRequest;
@@ -17,10 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @AllArgsConstructor
@@ -134,6 +132,22 @@ public class ReportController {
         }
         return new ResponseEntity<>(response, status);
     }
+
+    @PostMapping("/assignOfficial/{officialId}/toReport")
+    public Report assignOfficialToReport(@AuthenticationPrincipal ApplicationUser authenticatedUser,
+                                                 @PathVariable ObjectId officialId, @RequestBody AssignOfficialRequest request){
+
+        Report report = reportService.assignOfficialToReport(officialId,request.getReportId());
+        return report;
+
+    }
+
+    @GetMapping("/officialFeed")
+    public List<Report> getReportsOfficial(@AuthenticationPrincipal ApplicationUser authenticatedUser){
+        List<Report> reportsOfficial = reportService.getReportsByOfficial(authenticatedUser.getId());
+        return reportsOfficial;
+    }
+
 
     @GetMapping("/report/{reportId}/solution/reject")
     public ResponseEntity<Object> solveReport(@AuthenticationPrincipal ApplicationUser authenticatedUser,

@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.bson.types.ObjectId;
 
+import java.util.List;
+
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -21,7 +23,7 @@ public class Official extends ApplicationUser {
     private String profilePicture;
     private String bio;
     private String institutionName;
-
+    //private List<Report> reports;
 
     public Official(String firstName,
                    String lastName,
