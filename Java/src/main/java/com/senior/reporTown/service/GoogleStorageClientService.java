@@ -81,8 +81,8 @@ public class GoogleStorageClientService {
     }
 
     public void refreshSignedURLs() throws IOException {
-        Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("/Users/ardaakcabuyuk/IdeaProjects/reporTown/reportown-google-api-key.json"));
-        com.google.cloud.storage.Storage storage = StorageOptions.newBuilder().setCredentials(credentials).setProjectId(PROJECT_ID).build().getService();
+        //Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("/Users/ardaakcabuyuk/IdeaProjects/reporTown/reportown-google-api-key.json"));
+        com.google.cloud.storage.Storage storage = StorageOptions.newBuilder().setProjectId(PROJECT_ID).build().getService();
 
         List<Report> reports = reportRepository.findAll();
         reports.forEach(r -> {
