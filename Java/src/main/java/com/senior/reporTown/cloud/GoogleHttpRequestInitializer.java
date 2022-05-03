@@ -20,6 +20,7 @@ public class GoogleHttpRequestInitializer implements HttpRequestInitializer {
     public void initialize(HttpRequest httpRequest) throws IOException {
         try {
             credentials = GoogleCredentials
+                    //.fromStream(new FileInputStream("/Users/ardaakcabuyuk/IdeaProjects/reporTown/reportown-google-api-key.json"))
                     .getApplicationDefault()
                     .createScoped(Arrays.asList("https://www.googleapis.com/auth/cloud-platform"));
             adapter = new HttpCredentialsAdapter(credentials);

@@ -63,6 +63,8 @@ public class Report {
 
     private Official official;
 
+    private String image;
+
     public Report(String description,
                   String category,
                   ObjectId userId,

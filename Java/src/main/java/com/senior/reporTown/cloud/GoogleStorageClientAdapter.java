@@ -3,6 +3,11 @@ package com.senior.reporTown.cloud;
 import com.google.api.client.http.AbstractInputStreamContent;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.services.storage.Storage;
+import com.google.auth.Credentials;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.StorageOptions;
 import com.google.api.services.storage.model.StorageObject;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.nio.file.Paths;
 
 @Component
 public class GoogleStorageClientAdapter {
@@ -45,9 +51,23 @@ public class GoogleStorageClientAdapter {
         return true;
     }
 
-    public StorageObject download(String fileName) throws IOException {
+    /*public void download(String id) throws IOException {
+        Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("/Users/ardaakcabuyuk/IdeaProjects/reporTown/reportown-google-api-key.json"));
+        com.google.cloud.storage.Storage storage = StorageOptions.newBuilder().setCredentials(credentials).setProjectId("reportown-347509").build().getService();
+        String fileName = "report_images/" + id + "/" + id;
+        Blob blob = storage.get(BlobId.of(bucketName, fileName));
+        blob.downloadTo(Paths.get(id));
+
+        System.out.println(
+                "Downloaded object "
+                        + fileName
+                        + " from bucket name "
+                        + bucketName
+                        + " to "
+                        + fileName);
+
         StorageObject object = storage.objects().get(bucketName, fileName).execute();
-        File file = new File("./" + fileName);
+        File file = new File("a");
         FileOutputStream os = new FileOutputStream(file);
 
         storage.getRequestFactory()
@@ -56,5 +76,5 @@ public class GoogleStorageClientAdapter {
                 .download(os);
         object.set("file", file);
         return object;
-    }
+    }*/
 }

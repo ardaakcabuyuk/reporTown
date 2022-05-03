@@ -46,6 +46,7 @@ public class ReportService {
                 null
         );
         reportRepository.save(newReport);
+        newReport.setImage("report_images/" + newReport.getId().toString() + "/" + newReport.getId().toString());
         rewardOwner(newReport, 10);
         logger.info(String.format("A report has been posted by user %s", authenticatedUser.getUsername()));
         return newReport;

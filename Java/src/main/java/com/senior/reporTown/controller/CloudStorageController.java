@@ -24,36 +24,28 @@ public class CloudStorageController {
     @Autowired
     GoogleStorageClientAdapter googleStorageClientAdapter;
 
-    @PostMapping(path = "report/{reportId}/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public Boolean uploadFile(@RequestPart(value = "file", required = true) MultipartFile files, @PathVariable String reportId)  {
+    @PostMapping(path = "report/{id}/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public Boolean uploadFile(@RequestPart(value = "file", required = true) MultipartFile files, @PathVariable String id)  {
         try {
-            return googleStorageClientAdapter.upload(files, reportId, "prefix");
+            return googleStorageClientAdapter.upload(files, id, "prefix");
         } catch (IOException e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    @RequestMapping(name = "file-download", path = "download",
-            method = RequestMethod.GET)
-    public ResponseEntity<ByteArrayResource> fileDownload(HttpServletRequest request,
-                                                          @RequestParam(value = "file", required = false) String path,
+    /*@GetMapping(path = "/report/{id}/download")
+    public String fileDownload(HttpServletRequest request,
+                                                          @PathVariable ObjectId id,
                                                           HttpServletResponse response
     ) {
         try {
-            StorageObject object = googleStorageClientAdapter.download(path);
+            googleStorageClientAdapter.download(id.toString());
 
-
-            byte[] res = Files.toByteArray((File) object.get("file"));
-            ByteArrayResource resource = new ByteArrayResource(res);
-
-            return ResponseEntity.ok()
-                    .contentLength(res.length)
-                    .header("Content-type", "application/octet-stream")
-                    .header("Content-disposition", "attachment; filename=\"" + path + "\"").body(resource);
+            return "asdfasfas";
         }catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("No such file or directory");
         }
-    }
+    }*/
 }
