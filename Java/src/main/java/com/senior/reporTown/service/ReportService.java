@@ -118,9 +118,10 @@ public class ReportService {
         return reports;
     }
 
+    //bu function yanlış
     public List<Report> getAllSolvedReports(){
         List<Report> reports = reportRepository.findAll();
-        List<Report> solvedReports = new ArrayList<>();
+        List<Report> solvedReports = new ArrayList<Report>();
         for(int i = 0; i < reports.size(); i++){
             if(reports.get(i).getSolution() != null){
                 solvedReports.add(reports.get(i));
@@ -129,6 +130,35 @@ public class ReportService {
         Collections.reverse(solvedReports);
         return solvedReports;
     }
+
+    public List<Report> getAllSolvedReportsOfficial(ObjectId officialId) {
+
+        Official official = (Official) userRepository.findById(officialId).get();
+        List<Report> reports = reportRepository.findByOfficial(official);
+        List<Report> solved = new ArrayList<>();
+        for(int i = 0; i < reports.size() ; i++){
+            if(reports.get(i).isResolvedByCitizen() == true){
+                solved.add(reports.get(i));
+            }
+        }
+        return solved;
+    }
+
+    public List<Report> getAllUnsolvedReportsOfficial(ObjectId officialId) {
+
+        Official official = (Official) userRepository.findById(officialId).get();
+        List<Report> reports = reportRepository.findByOfficial(official);
+        List<Report> unsolved = new ArrayList<>();
+        for(int i = 0; i < reports.size(); i++){
+            if(reports.get(i).isResolvedByCitizen() == false){
+                unsolved.add(reports.get(i));
+            }
+        }
+        return unsolved;
+
+    }
+
+
 
     public List<Report> getReportsByUser(ObjectId userId) { return reportRepository.findByUserId(userId); }
 
@@ -147,7 +177,9 @@ public class ReportService {
             report.setResolvedByCitizen(true);
             rewardActionTaker(user, 10);
             rewardActionTaker(userRepository.findById(report.getInstitutionId()).get(), 20);
-            if(report.isResolvedByInstitution()){
+            Solution solution = new Solution(description,solvedImage,true);
+            return solution;
+            /**if(report.isResolvedByInstitution()){
                 Solution solution = new Solution(description,solvedImage,true);
                 report.setSolution(solution);
                 reportRepository.save(report);
@@ -158,7 +190,7 @@ public class ReportService {
                 report.setSolution(solution);
                 reportRepository.save(report);
                 return solution;
-            }
+            }*/
         }
         else if(user.getRole().toString().equals("OFFICIAL") && report != null && !report.isResolvedByInstitution() && !report.isResolvedByCitizen()){
             report.setResolvedByInstitution(true);
@@ -204,4 +236,5 @@ public class ReportService {
         reportRepository.save(report);
         return report;
     }
+
 }

@@ -107,9 +107,16 @@ public class ReportController {
         return reportService.getAllReports();
     }
 
-    @GetMapping("/feed/solvedReports")
-    public List<Report> getAllSolvedReports(){
-        return reportService.getAllSolvedReports();
+
+    @GetMapping("/officialFeedResolvedReports")
+    public List<Report> getAllSolvedReportsByOfficial(@AuthenticationPrincipal ApplicationUser authenticatedUser){
+        return reportService.getAllSolvedReportsOfficial(authenticatedUser.getId());
+    }
+
+    @GetMapping("/officialFeedUnresolvedReports")
+    public List<Report> getAllUnsolvedReportsByOfficial(@AuthenticationPrincipal ApplicationUser authenticatedUser){
+        System.out.println("in controller");
+        return reportService.getAllUnsolvedReportsOfficial(authenticatedUser.getId());
     }
 
 
