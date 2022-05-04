@@ -156,6 +156,20 @@ public class ReportService {
         return solved;
     }
 
+    public List<Report> officialFeedNotResolvedByCitizen(ObjectId officialId) {
+
+        List<Report> reports = reportRepository.findAll();
+        List<Report> reportsNotSolvedByCitizen = new ArrayList<>();
+        for(int i = 0; i < reports.size() ; i++){
+            if( (reports.get(i).getOfficial() != null) && (reports.get(i).getOfficial().getId().equals(officialId)) ){
+                if(reports.get(i).isResolvedByCitizen() == false && reports.get(i).isResolvedByInstitution()==true){
+                    reportsNotSolvedByCitizen.add(reports.get(i));
+                }
+            }
+        }
+        return reportsNotSolvedByCitizen;
+    }
+
     public List<Report> getAllUnsolvedReportsOfficial(ObjectId officialId) {
 
         Official official = (Official) userRepository.findById(officialId).get();
@@ -258,4 +272,6 @@ public class ReportService {
         notificationService.notify(userRepository.findById(report.getInstitutionId()).get().getUsername(), officialId, reportId, NotificationType.ASSIGNED);
         return report;
     }
+
+
 }

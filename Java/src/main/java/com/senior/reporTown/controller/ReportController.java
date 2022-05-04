@@ -115,9 +115,16 @@ public class ReportController {
 
     @GetMapping("/officialFeedUnresolvedReports")
     public List<Report> getAllUnsolvedReportsByOfficial(@AuthenticationPrincipal ApplicationUser authenticatedUser){
-        System.out.println("in controller");
+        //System.out.println("in controller");
         return reportService.getAllUnsolvedReportsOfficial(authenticatedUser.getId());
     }
+
+    @GetMapping("/officialFeedNotResolvedByCitizen")
+    public List<Report> officialFeedNotResolvedByCitizen(@AuthenticationPrincipal ApplicationUser authenticatedUser){
+        //System.out.println("in controller");
+        return reportService.officialFeedNotResolvedByCitizen(authenticatedUser.getId());
+    }
+
 
 
     @PostMapping("/report/{reportId}/solve")
