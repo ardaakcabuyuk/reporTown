@@ -20,14 +20,18 @@ import java.util.Collections;
 @Service
 public class ReportService {
 
+    private final NotificationService notificationService;
     private final ReportRepository reportRepository;
     private final UserRepository userRepository;
     private final GoogleStorageClientService googleStorageClientService;
     private final Logger logger = LoggerFactory.getLogger(ReportService.class);
 
     @Autowired
-    public ReportService(ReportRepository reportRepository, UserRepository userRepository,
+    public ReportService(NotificationService notificationService,
+                         ReportRepository reportRepository,
+                         UserRepository userRepository,
                          GoogleStorageClientService googleStorageClientService) {
+        this.notificationService = notificationService;
         this.reportRepository = reportRepository;
         this.userRepository = userRepository;
         this.googleStorageClientService = googleStorageClientService;
@@ -75,6 +79,7 @@ public class ReportService {
             // if the user has not upvoted the post, upvote
             else {
                 report.getUpvotes().add(userId);
+                notificationService.notify(userRepository.findById(userId).get().getUsername(), report.getUserId(), reportId, NotificationType.UPVOTE);
             }
             reportRepository.save(report);
             rewardOwner(report, 1);
@@ -91,6 +96,7 @@ public class ReportService {
             Comment comment = new Comment(userId, text, firstName, lastName, username);
             report.getComments().add(comment);
             reportRepository.save(report);
+            notificationService.notify(username, report.getUserId(), reportId, NotificationType.COMMENT);
             rewardOwner(report, 0.5);
             return comment;
         }
@@ -182,6 +188,9 @@ public class ReportService {
             rewardActionTaker(user, 10);
             rewardActionTaker(userRepository.findById(report.getInstitutionId()).get(), 20);
             Solution solution = new Solution(description,true);
+            if (report.isResolvedByInstitution()) {
+                notificationService.notify(user.getUsername(), report.getOfficial().getId(), reportId, NotificationType.SOLUTION_APPROVED);
+            }
             return solution;
             /**if(report.isResolvedByInstitution()){
                 Solution solution = new Solution(description,solvedImage,true);
@@ -202,6 +211,7 @@ public class ReportService {
             Solution solution = new Solution(description,false);
             report.setSolution(solution);
             reportRepository.save(report);
+            notificationService.notify(user.getUsername(), report.getUserId(), reportId, NotificationType.SOLUTION_POSTED);
             return solution;
         }
         else{
@@ -216,6 +226,7 @@ public class ReportService {
         if (report.isResolvedByInstitution()) {
             report.setSolution(null);
             report.setResolvedByInstitution(false);
+            notificationService.notify(citizen.getUsername(), report.getOfficial().getId(), reportId, NotificationType.SOLUTION_REJECTED);
         }
         reportRepository.save(report);
         return report;
@@ -238,6 +249,7 @@ public class ReportService {
         Official official = (Official) userRepository.findById(officialId).get();
         report.setOfficial(official);
         reportRepository.save(report);
+        notificationService.notify(userRepository.findById(report.getInstitutionId()).get().getUsername(), officialId, reportId, NotificationType.ASSIGNED);
         return report;
     }
 
