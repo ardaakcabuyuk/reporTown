@@ -95,6 +95,11 @@ public class GoogleStorageClientService {
                 ApplicationUser user = userRepository.findById(new ObjectId(id)).get();
                 if (user.getRole() == UserRole.CITIZEN) {
                     ((Citizen) user).setProfilePicture(url.toString());
+                    List<Report> userReports = reportRepository.findByUserId(((Citizen) user).getId());
+                    userReports.forEach(r -> {
+                        r.setProfilePicture(url.toString());
+                        reportRepository.save(r);
+                    });
                 } else if (user.getRole() == UserRole.INSTITUTION) {
                     ((Institution) user).setProfilePicture(url.toString());
                 } else if (user.getRole() == UserRole.OFFICIAL) {

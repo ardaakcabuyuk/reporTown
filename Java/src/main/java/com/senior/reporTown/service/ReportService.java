@@ -46,6 +46,7 @@ public class ReportService {
                 authenticatedUser.getUsername(),
                 ((Citizen)authenticatedUser).getFirstName(),
                 ((Citizen)authenticatedUser).getLastName(),
+                ((Citizen)authenticatedUser).getProfilePicture(),
                 institution.getInstitutionName(),
                 null
         );

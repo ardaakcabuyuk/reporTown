@@ -57,6 +57,7 @@ public class Report {
     private String username;
     private String firstName;
     private String lastName;
+    private String profilePicture;
 
     private String institutionName;
     private boolean resolvedByCitizen;
@@ -76,6 +77,7 @@ public class Report {
                   String username,
                   String firstName,
                   String lastName,
+                  String profilePicture,
                   String institutionName,
                   Official official) {
         this.description = description;
@@ -92,6 +94,7 @@ public class Report {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.profilePicture = profilePicture;
         this.institutionName = institutionName;
         this.resolvedByCitizen = false;
         this.resolvedByInstitution = false;
