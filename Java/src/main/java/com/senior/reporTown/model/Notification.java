@@ -19,7 +19,9 @@ public class Notification {
     @Id
     @JsonSerialize(using= ToStringSerializer.class)
     private ObjectId id;
+    @JsonSerialize(using= ToStringSerializer.class)
     private ObjectId reportId;
+    @JsonSerialize(using= ToStringSerializer.class)
     private ObjectId destUserId;
     private String actionTaker;
     private NotificationType type;
