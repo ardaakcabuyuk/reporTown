@@ -11,7 +11,6 @@ import static com.senior.reporTown.security.UserPermission.*;
 
 //todo add more permissions
 public enum UserRole {
-    ADMIN(Sets.newHashSet(CITIZEN_READ, CITIZEN_WRITE, REPORT_READ, REPORT_WRITE)),
     CITIZEN(Sets.newHashSet(CITIZEN_READ, REPORT_READ, REPORT_WRITE)),
     INSTITUTION(Sets.newHashSet(CITIZEN_READ, OFFICIAL_WRITE, REPORT_READ)),
     OFFICIAL(Sets.newHashSet(CITIZEN_READ, REPORT_READ, REPORT_WRITE));

@@ -21,18 +21,7 @@ public class RegistrationService {
         ApplicationUser registeredUser = null;
         String role = request.getRole();
         try {
-            if (role.equals("ADMIN")) {
-                registeredUser = new ApplicationUser(
-                        request.getEmail(),
-                        request.getUsername(),
-                        request.getPassword(),
-                        UserRole.ADMIN,
-                        true,
-                        true,
-                        true,
-                        true
-                );
-            } else if (role.equals("CITIZEN")) {
+            if (role.equals("CITIZEN")) {
                 registeredUser = new Citizen(
                         request.getFirstName(),
                         request.getLastName(),

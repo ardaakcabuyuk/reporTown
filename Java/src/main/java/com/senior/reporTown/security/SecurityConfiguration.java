@@ -57,9 +57,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
             .antMatchers("/register", "/login", "/").permitAll()
-            .antMatchers("/banCitizen/**").hasRole(ADMIN.name())
-            //.antMatchers(HttpMethod.POST, "/postReport").hasAuthority(REPORT_WRITE.getPermission())
-            .antMatchers(HttpMethod.POST, "/registerOfficial").hasAuthority(OFFICIAL_WRITE.getPermission())
             .requestMatchers(new CronMatcher()).permitAll()
             .anyRequest()
             .authenticated()
