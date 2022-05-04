@@ -124,7 +124,7 @@ public class ReportController {
     public ResponseEntity<Object> solveReport(@AuthenticationPrincipal ApplicationUser authenticatedUser,
                                               @RequestBody SolutionRequest request,
                                               @PathVariable ObjectId reportId){
-        Solution solution = reportService.solveReport(authenticatedUser.getId(),reportId, request.getDescription(), request.getFile());
+        Solution solution = reportService.solveReport(authenticatedUser.getId(),reportId, request.getDescription());
         Map<String, Object> response = new HashMap<>();
         HttpStatus status;
 

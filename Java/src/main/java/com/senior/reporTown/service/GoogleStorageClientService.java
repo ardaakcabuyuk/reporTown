@@ -10,8 +10,10 @@ import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.StorageOptions;
 import com.google.api.services.storage.model.StorageObject;
-import com.senior.reporTown.model.Report;
+import com.senior.reporTown.model.*;
 import com.senior.reporTown.repository.ReportRepository;
+import com.senior.reporTown.repository.UserRepository;
+import com.senior.reporTown.security.UserRole;
 import org.apache.commons.io.FilenameUtils;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
@@ -37,17 +39,20 @@ public class GoogleStorageClientService {
     private final Logger logger = LoggerFactory.getLogger(GoogleStorageClientService.class);
     Storage storage;
     ReportRepository reportRepository;
+    UserRepository userRepository;
 
     @Autowired
     public GoogleStorageClientService(Storage storage,
-                                      ReportRepository reportRepository) {
+                                      ReportRepository reportRepository,
+                                      UserRepository userRepository) {
         this.storage = storage;
         this.reportRepository = reportRepository;
+        this.userRepository = userRepository;
     }
 
-    public Boolean upload(MultipartFile file, String reportId, String prefixName) throws IOException {
+    public Boolean upload(MultipartFile file, String dir, String id) throws IOException {
         StorageObject object = new StorageObject();
-        object.setName("report_images/" + reportId + "/" + reportId);
+        object.setName(dir + "/" + id + "/" + id);
         InputStream targetStream = new ByteArrayInputStream(file.getBytes());
         storage.objects().insert(BUCKET_NAME, object, new AbstractInputStreamContent(file.getOriginalFilename()) {
             @Override
@@ -65,42 +70,53 @@ public class GoogleStorageClientService {
                 return targetStream;
             }
         }).execute();
-
+        setSignedURL(dir, id);
         return true;
     }
 
-    public URL setSignedURL(String id) {
-        //Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("/Users/ardaakcabuyuk/IdeaProjects/reporTown/reportown-google-api-key.json"));
+    public void setSignedURL(String dir, String id) {
         try {
-            com.google.cloud.storage.Storage storage = StorageOptions.newBuilder().setCredentials(GoogleCredentials.getApplicationDefault()).setProjectId(PROJECT_ID).build().getService();
-            String fileName = "report_images/" + id + "/" + id;
+            //Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("/Users/ardaakcabuyuk/IdeaProjects/reporTown/reportown-google-api-key.json"));
+            com.google.cloud.storage.Storage storage = StorageOptions.newBuilder().setCredentials(credentials).setProjectId(PROJECT_ID).build().getService();
+            String fileName = dir + "/" + id + "/" + id;
             BlobInfo blobInfo = BlobInfo.newBuilder(BlobId.of(BUCKET_NAME, fileName)).build();
             URL url = storage.signUrl(blobInfo, 24, TimeUnit.HOURS, com.google.cloud.storage.Storage.SignUrlOption.withV4Signature());
-            Report report = reportRepository.findById(new ObjectId(id));
-            report.setImage(url.toString());
-            return url;
+            if (dir.equals("report_images")) {
+                Report report = reportRepository.findById(new ObjectId(id));
+                report.setImage(url.toString());
+                reportRepository.save(report);
+            }
+            else if (dir.equals("solution_images")) {
+                Report report = reportRepository.findById(new ObjectId(id));
+                report.getSolution().setImage(url.toString());
+                reportRepository.save(report);
+            }
+            else if (dir.equals("profile_pictures")) {
+                ApplicationUser user = userRepository.findById(new ObjectId(id)).get();
+                if (user.getRole() == UserRole.CITIZEN) {
+                    ((Citizen) user).setProfilePicture(url.toString());
+                } else if (user.getRole() == UserRole.INSTITUTION) {
+                    ((Institution) user).setProfilePicture(url.toString());
+                } else if (user.getRole() == UserRole.OFFICIAL) {
+                    ((Official) user).setProfilePicture(url.toString());
+                }
+                userRepository.save(user);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
     }
 
     public void refreshSignedURLs() {
-        //Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("/Users/ardaakcabuyuk/IdeaProjects/reporTown/reportown-google-api-key.json"));
-        try {
-            com.google.cloud.storage.Storage storage = StorageOptions.newBuilder().setProjectId(PROJECT_ID).setCredentials(GoogleCredentials.getApplicationDefault()).build().getService();
+        List<Report> reports = reportRepository.findAll();
+        reports.forEach(r -> {
+            setSignedURL("report_images", r.getId().toString());
+            if (r.getSolution() != null) {
+                setSignedURL("solution_images", r.getId().toString());
+            }
+        });
 
-            List<Report> reports = reportRepository.findAll();
-            reports.forEach(r -> {
-                String fileName = "report_images/" + r.getId() + "/" + r.getId();
-                BlobInfo blobInfo = BlobInfo.newBuilder(BlobId.of(BUCKET_NAME, fileName)).build();
-                URL url = storage.signUrl(blobInfo, 24, TimeUnit.HOURS, com.google.cloud.storage.Storage.SignUrlOption.withV4Signature());
-                r.setImage(url.toString());
-                reportRepository.save(r);
-                logger.info("Image URL is refreshed for report " + r.getId().toString());
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        List<ApplicationUser> users = userRepository.findAll();
+        users.forEach(u -> setSignedURL("profile_pictures", u.getId().toString()));
     }
 }

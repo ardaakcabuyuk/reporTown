@@ -12,18 +12,12 @@ import org.springframework.web.multipart.MultipartFile;
 @Setter
 public class Solution {
 
-    @Id
-    @JsonSerialize(using = ToStringSerializer.class)
-    private ObjectId id;
     private String description;
-    private MultipartFile file; //image
+    private String image;
     private boolean resolved;
 
-    public Solution(String description, MultipartFile file, boolean resolved) {
-
+    public Solution(String description, boolean resolved) {
         this.description = description;
-        this.file = file;
         this.resolved = resolved;
-
     }
 }

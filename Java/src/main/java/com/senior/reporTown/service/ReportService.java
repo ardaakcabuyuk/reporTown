@@ -50,7 +50,6 @@ public class ReportService {
                 null
         );
         reportRepository.save(newReport);
-        googleStorageClientService.setSignedURL(newReport.getId().toString());
         rewardOwner(newReport, 10);
         logger.info(String.format("A report has been posted by user %s", authenticatedUser.getUsername()));
         return newReport;
@@ -173,7 +172,7 @@ public class ReportService {
         return reportRepository.findByUserId(userId);
     }
 
-    public Solution solveReport(ObjectId userId, ObjectId reportId, String description, MultipartFile solvedImage){
+    public Solution solveReport(ObjectId userId, ObjectId reportId, String description){
 
         Report report = reportRepository.findById(reportId);
         ApplicationUser user = (ApplicationUser) userRepository.findById(userId).get();
@@ -181,7 +180,7 @@ public class ReportService {
             report.setResolvedByCitizen(true);
             rewardActionTaker(user, 10);
             rewardActionTaker(userRepository.findById(report.getInstitutionId()).get(), 20);
-            Solution solution = new Solution(description,solvedImage,true);
+            Solution solution = new Solution(description,true);
             return solution;
             /**if(report.isResolvedByInstitution()){
                 Solution solution = new Solution(description,solvedImage,true);
@@ -199,7 +198,7 @@ public class ReportService {
         else if(user.getRole().toString().equals("OFFICIAL") && report != null && !report.isResolvedByInstitution() && !report.isResolvedByCitizen()){
             report.setResolvedByInstitution(true);
             rewardActionTaker(user, 10);
-            Solution solution = new Solution(description,solvedImage,false);
+            Solution solution = new Solution(description,false);
             report.setSolution(solution);
             reportRepository.save(report);
             return solution;

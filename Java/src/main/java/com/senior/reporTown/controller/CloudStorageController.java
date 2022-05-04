@@ -22,9 +22,29 @@ public class CloudStorageController {
     GoogleStorageClientService googleStorageClientService;
 
     @PostMapping(path = "report/{id}/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public Boolean uploadFile(@RequestPart(value = "file", required = true) MultipartFile files, @PathVariable String id)  {
+    public Boolean uploadReportImage(@RequestPart(value = "file", required = true) MultipartFile files, @PathVariable String id)  {
         try {
-            return googleStorageClientService.upload(files, id, "prefix");
+            return googleStorageClientService.upload(files, "report_images", id);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @PostMapping(path = "solution/{reportId}/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public Boolean uploadSolutionImage(@RequestPart(value = "file", required = true) MultipartFile files, @PathVariable String reportId)  {
+        try {
+            return googleStorageClientService.upload(files, "solution_images", reportId);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @PostMapping(path = "user/{id}/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public Boolean uploadProfilePicture(@RequestPart(value = "file", required = true) MultipartFile files, @PathVariable String id)  {
+        try {
+            return googleStorageClientService.upload(files, "profile_pictures", id);
         } catch (IOException e) {
             e.printStackTrace();
         }
