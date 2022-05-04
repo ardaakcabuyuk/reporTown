@@ -97,13 +97,14 @@ public class UserController {
         return new ResponseEntity<>(institutions, HttpStatus.OK);
     }
 
-
     @GetMapping("/allUsers")
     public ResponseEntity<List<ApplicationUser>> getAllUsers() {
         List<ApplicationUser> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-
-
+    @GetMapping("/user/exists/{identity}")
+    public ResponseEntity<Boolean> checkUserExists(@PathVariable String identity) {
+        return new ResponseEntity<>(userService.checkUserExists(identity), HttpStatus.OK);
+    }
 }

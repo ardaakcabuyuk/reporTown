@@ -177,4 +177,8 @@ public class UserService implements UserDetailsService {
         }).collect(Collectors.toList());
         return users;
     }
+
+    public boolean checkUserExists(String identity) {
+        return userRepository.findByUsername(identity).isPresent() || userRepository.findByEmail(identity).isPresent();
+    }
 }
