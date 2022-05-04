@@ -52,6 +52,7 @@ public class Report {
 
     private String longitude;
     private String latitude;
+    private String city;
 
     private String username;
     private String firstName;
@@ -71,6 +72,7 @@ public class Report {
                   ObjectId institutionId,
                   String longitude,
                   String latitude,
+                  String city,
                   String username,
                   String firstName,
                   String lastName,
@@ -86,6 +88,7 @@ public class Report {
         this.solution = null;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.city = city;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;

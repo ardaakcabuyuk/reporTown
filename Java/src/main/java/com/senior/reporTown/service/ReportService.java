@@ -42,6 +42,7 @@ public class ReportService {
                 request.getInstitutionId(),
                 request.getLongitude(),
                 request.getLatitude(),
+                request.getCity(),
                 authenticatedUser.getUsername(),
                 ((Citizen)authenticatedUser).getFirstName(),
                 ((Citizen)authenticatedUser).getLastName(),

@@ -82,4 +82,10 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/allInstitutions")
+    public ResponseEntity<List<Institution>> getAllInstitutions() {
+        List<Institution> institutions = userService.getAllInstitutions();
+        return new ResponseEntity<>(institutions, HttpStatus.OK);
+    }
+
 }

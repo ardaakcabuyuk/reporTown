@@ -24,5 +24,6 @@ public class ReportRequest {
     private String category;
     private String longitude;
     private String latitude;
+    private String city;
 
 }
