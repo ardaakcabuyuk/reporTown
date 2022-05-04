@@ -125,6 +125,12 @@ public class ReportController {
         return reportService.officialFeedNotResolvedByCitizen(authenticatedUser.getId());
     }
 
+    @GetMapping("/officialFeedReportsWithNoSolution")
+    public List<Report> officialFeedReportsWithNoSolution(@AuthenticationPrincipal ApplicationUser authenticatedUser){
+        //System.out.println("in controller");
+        return reportService.officialFeedReportsWithNoSolution(authenticatedUser.getId());
+    }
+
 
 
     @PostMapping("/report/{reportId}/solve")
