@@ -93,6 +93,30 @@ public class UserService implements UserDetailsService {
         }
     }
 
+    public void updatePassword(ObjectId userId, String password) {
+        ApplicationUser user = (ApplicationUser) findUserById(userId);
+
+
+        if((user.getRole().toString()).equals("CITIZEN")){
+            Citizen citizen = (Citizen) user;
+            String encodedPassword = passwordEncoder.encode(password);
+            citizen.setPassword(encodedPassword);
+            userRepository.save(citizen);
+        }
+        else if((user.getRole().toString()).equals("OFFICIAL")){
+            Official official = (Official) user;
+            String encodedPassword = passwordEncoder.encode(password);
+            official.setPassword(encodedPassword);
+            userRepository.save(official);
+        }
+        else if((user.getRole().toString()).equals("INSTITUTION")){
+            Institution institution = (Institution) user;
+            String encodedPassword = passwordEncoder.encode(password);
+            institution.setPassword(encodedPassword);
+            userRepository.save(institution);
+        }
+    }
+
     public void addOfficialHelper(Institution institution, Official official) {//ObjectId officialId){
         institution.getEmployeeIds().add(official.getId().toString());
         userRepository.save(institution);
@@ -136,4 +160,6 @@ public class UserService implements UserDetailsService {
     public List<Institution> getAllInstitutions() {
         return (List<Institution>)(List<?>) userRepository.findAllByRole(UserRole.INSTITUTION);
     }
+
+
 }

@@ -44,9 +44,18 @@ public class UserController {
     }
 
     @PostMapping("/profile/{userId}/updateBio")
-    public ResponseEntity<ProfileResponse> updateBio(@AuthenticationPrincipal ApplicationUser authenticatedUser,@RequestBody EditProfileRequest request,
+    public ResponseEntity<ProfileResponse> updateBio(@AuthenticationPrincipal ApplicationUser authenticatedUser
+                                                    ,@RequestBody EditProfileRequest request,
                                                      @PathVariable ObjectId userId){
         userService.updateBio(userId,request.getBio());
+        return getProfile(userId);
+    }
+
+    @PostMapping("/profile/{userId}/updatePassword")
+    public ResponseEntity<ProfileResponse> updatePassword(@AuthenticationPrincipal ApplicationUser authenticatedUser
+                                                     ,@RequestBody EditProfileRequest request,
+                                                     @PathVariable ObjectId userId){
+        userService.updatePassword(userId,request.getPassword());
         return getProfile(userId);
     }
 
@@ -87,5 +96,6 @@ public class UserController {
         List<Institution> institutions = userService.getAllInstitutions();
         return new ResponseEntity<>(institutions, HttpStatus.OK);
     }
+
 
 }

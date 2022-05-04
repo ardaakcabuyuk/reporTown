@@ -12,4 +12,5 @@ import org.springframework.web.multipart.MultipartFile;
 public class EditProfileRequest {
 
     private String bio;
+    private String password;
 }
