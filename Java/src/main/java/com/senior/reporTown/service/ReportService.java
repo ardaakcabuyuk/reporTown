@@ -197,6 +197,7 @@ public class ReportService {
             if (report.isResolvedByInstitution()) {
                 notificationService.notify(user.getUsername(), report.getOfficial().getId(), reportId, NotificationType.SOLUTION_APPROVED);
             }
+            reportRepository.save(report);
             return solution;
             /**if(report.isResolvedByInstitution()){
                 Solution solution = new Solution(description,solvedImage,true);
