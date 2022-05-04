@@ -144,11 +144,13 @@ public class ReportService {
     public List<Report> getAllSolvedReportsOfficial(ObjectId officialId) {
 
         Official official = (Official) userRepository.findById(officialId).get();
-        List<Report> reports = reportRepository.findByOfficial(official);
+        List<Report> reports = reportRepository.findAll();
         List<Report> solved = new ArrayList<>();
         for(int i = 0; i < reports.size() ; i++){
-            if(reports.get(i).isResolvedByCitizen() == true){
-                solved.add(reports.get(i));
+            if( (reports.get(i).getOfficial() != null) && (reports.get(i).getOfficial().getId().equals(officialId)) ){
+                if(reports.get(i).isResolvedByCitizen() == true){
+                    solved.add(reports.get(i));
+                }
             }
         }
         return solved;
@@ -157,11 +159,15 @@ public class ReportService {
     public List<Report> getAllUnsolvedReportsOfficial(ObjectId officialId) {
 
         Official official = (Official) userRepository.findById(officialId).get();
-        List<Report> reports = reportRepository.findByOfficial(official);
+        List<Report> reports = reportRepository.findAll();
         List<Report> unsolved = new ArrayList<>();
         for(int i = 0; i < reports.size(); i++){
-            if(reports.get(i).isResolvedByCitizen() == false){
-                unsolved.add(reports.get(i));
+            if(reports.get(i).getOfficial() != null){
+                if(reports.get(i).getOfficial().getId().equals(officialId)){
+                    if(reports.get(i).isResolvedByCitizen() == false){
+                        unsolved.add(reports.get(i));
+                    }
+                }
             }
         }
         return unsolved;
