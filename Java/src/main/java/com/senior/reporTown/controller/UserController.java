@@ -103,8 +103,8 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @GetMapping("/user/exists/{username}")
-    public ResponseEntity<Boolean> checkUserExists(@PathVariable String username) {
-        return new ResponseEntity<>(userService.checkUserExists(username), HttpStatus.OK);
+    @GetMapping("/user/exists/{identity}")
+    public ResponseEntity<Boolean> checkUserExists(@PathVariable String identity) {
+        return new ResponseEntity<>(userService.checkUserExists(identity), HttpStatus.OK);
     }
 }

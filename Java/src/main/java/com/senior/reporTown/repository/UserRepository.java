@@ -14,6 +14,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface UserRepository extends MongoRepository<ApplicationUser, String> {
     Optional<ApplicationUser> findByUsername(String username);
+    Optional<ApplicationUser> findByEmail(String email);
     Optional<ApplicationUser> findById(ObjectId id);
     Optional<ApplicationUser> deleteById(ObjectId id);
     List<ApplicationUser> findAllByRole(UserRole role);

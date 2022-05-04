@@ -178,7 +178,7 @@ public class UserService implements UserDetailsService {
         return users;
     }
 
-    public boolean checkUserExists(String username) {
-        return userRepository.findByUsername(username).isPresent();
+    public boolean checkUserExists(String identity) {
+        return userRepository.findByUsername(identity).isPresent() || userRepository.findByEmail(identity).isPresent();
     }
 }
