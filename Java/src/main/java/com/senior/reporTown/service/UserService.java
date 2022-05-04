@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -161,5 +162,19 @@ public class UserService implements UserDetailsService {
         return (List<Institution>)(List<?>) userRepository.findAllByRole(UserRole.INSTITUTION);
     }
 
-
+    public List<ApplicationUser> getAllUsers() {
+        List<ApplicationUser> users = userRepository.findAll();
+        users = users.stream().map(u -> {
+            switch (u.getRole()) {
+                case CITIZEN:
+                    return (Citizen) u;
+                case INSTITUTION:
+                    return (Institution) u;
+                case OFFICIAL:
+                    return (Official) u;
+            }
+            return u;
+        }).collect(Collectors.toList());
+        return users;
+    }
 }

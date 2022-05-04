@@ -98,4 +98,12 @@ public class UserController {
     }
 
 
+    @GetMapping("/allUsers")
+    public ResponseEntity<List<ApplicationUser>> getAllUsers() {
+        List<ApplicationUser> users = userService.getAllUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+
+
 }
