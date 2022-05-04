@@ -31,28 +31,24 @@ public class CloudStorageController {
         return false;
     }
 
-    @GetMapping(path = "/report/{id}/download")
+    /*@GetMapping(path = "/report/{id}/download")
     public ResponseEntity<Map<String, URL>> fileDownload(HttpServletRequest request,
                                                           @PathVariable ObjectId id,
                                                           HttpServletResponse response
     ) {
         try {
-            URL url = googleStorageClientService.download(id.toString());
+            URL url = googleStorageClientService.setSignedURL(id.toString());
             return ResponseEntity.ok()
                     .body(Map.of("url", url));
         }catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("No such file or directory");
         }
-    }
+    }*/
 
     @GetMapping(path = "/refreshSignedURLs")
     public Boolean refreshSignedURLs(HttpServletRequest req, HttpServletResponse res) {
-        try {
-            googleStorageClientService.refreshSignedURLs();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        googleStorageClientService.refreshSignedURLs();
+        return true;
     }
 }

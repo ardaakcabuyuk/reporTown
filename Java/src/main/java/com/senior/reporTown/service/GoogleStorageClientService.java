@@ -69,7 +69,7 @@ public class GoogleStorageClientService {
         return true;
     }
 
-    public URL download(String id) throws IOException {
+    public URL setSignedURL(String id) {
         //Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("/Users/ardaakcabuyuk/IdeaProjects/reporTown/reportown-google-api-key.json"));
         com.google.cloud.storage.Storage storage = StorageOptions.newBuilder().setCredentials(GoogleCredentials.getApplicationDefault()).setProjectId(PROJECT_ID).build().getService();
         String fileName = "report_images/" + id + "/" + id;
@@ -80,7 +80,7 @@ public class GoogleStorageClientService {
         return url;
     }
 
-    public void refreshSignedURLs() throws IOException {
+    public void refreshSignedURLs() {
         //Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("/Users/ardaakcabuyuk/IdeaProjects/reporTown/reportown-google-api-key.json"));
         com.google.cloud.storage.Storage storage = StorageOptions.newBuilder().setProjectId(PROJECT_ID).setCredentials(GoogleCredentials.getApplicationDefault()).build().getService();
 

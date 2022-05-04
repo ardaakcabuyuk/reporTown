@@ -22,12 +22,15 @@ public class ReportService {
 
     private final ReportRepository reportRepository;
     private final UserRepository userRepository;
+    private final GoogleStorageClientService googleStorageClientService;
     private final Logger logger = LoggerFactory.getLogger(ReportService.class);
 
     @Autowired
-    public ReportService(ReportRepository reportRepository, UserRepository userRepository) { //,FileStore fileStore) {
+    public ReportService(ReportRepository reportRepository, UserRepository userRepository,
+                         GoogleStorageClientService googleStorageClientService) {
         this.reportRepository = reportRepository;
         this.userRepository = userRepository;
+        this.googleStorageClientService = googleStorageClientService;
     }
 
     public Report postReport(@AuthenticationPrincipal ApplicationUser authenticatedUser, ReportRequest request) {
@@ -46,7 +49,7 @@ public class ReportService {
                 null
         );
         reportRepository.save(newReport);
-        newReport.setImage("report_images/" + newReport.getId().toString() + "/" + newReport.getId().toString());
+        googleStorageClientService.setSignedURL(newReport.getId().toString());
         rewardOwner(newReport, 10);
         logger.info(String.format("A report has been posted by user %s", authenticatedUser.getUsername()));
         return newReport;
