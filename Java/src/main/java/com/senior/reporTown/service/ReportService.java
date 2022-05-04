@@ -250,7 +250,6 @@ public class ReportService {
     }
 
     public Report assignOfficialToReport(ObjectId officialId, ObjectId reportId) {
-
         Report report = reportRepository.findById(reportId);
         Official official = (Official) userRepository.findById(officialId).get();
         report.setOfficial(official);
@@ -258,5 +257,4 @@ public class ReportService {
         notificationService.notify(userRepository.findById(report.getInstitutionId()).get().getUsername(), officialId, reportId, NotificationType.ASSIGNED);
         return report;
     }
-
 }
