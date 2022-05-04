@@ -71,31 +71,36 @@ public class GoogleStorageClientService {
 
     public URL setSignedURL(String id) {
         //Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("/Users/ardaakcabuyuk/IdeaProjects/reporTown/reportown-google-api-key.json"));
-        com.google.cloud.storage.Storage storage = StorageOptions.newBuilder().setCredentials(GoogleCredentials.getApplicationDefault()).setProjectId(PROJECT_ID).build().getService();
-        String fileName = "report_images/" + id + "/" + id;
-        BlobInfo blobInfo = BlobInfo.newBuilder(BlobId.of(BUCKET_NAME, fileName)).build();
-        URL url = storage.signUrl(blobInfo, 24, TimeUnit.HOURS, com.google.cloud.storage.Storage.SignUrlOption.withV4Signature());
-        Report report = reportRepository.findById(new ObjectId(id));
-        report.setImage(url.toString());
-        return url;
+        try {
+            com.google.cloud.storage.Storage storage = StorageOptions.newBuilder().setCredentials(GoogleCredentials.getApplicationDefault()).setProjectId(PROJECT_ID).build().getService();
+            String fileName = "report_images/" + id + "/" + id;
+            BlobInfo blobInfo = BlobInfo.newBuilder(BlobId.of(BUCKET_NAME, fileName)).build();
+            URL url = storage.signUrl(blobInfo, 24, TimeUnit.HOURS, com.google.cloud.storage.Storage.SignUrlOption.withV4Signature());
+            Report report = reportRepository.findById(new ObjectId(id));
+            report.setImage(url.toString());
+            return url;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void refreshSignedURLs() {
         //Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("/Users/ardaakcabuyuk/IdeaProjects/reporTown/reportown-google-api-key.json"));
-        com.google.cloud.storage.Storage storage = StorageOptions.newBuilder().setProjectId(PROJECT_ID).setCredentials(GoogleCredentials.getApplicationDefault()).build().getService();
+        try {
+            com.google.cloud.storage.Storage storage = StorageOptions.newBuilder().setProjectId(PROJECT_ID).setCredentials(GoogleCredentials.getApplicationDefault()).build().getService();
 
-        List<Report> reports = reportRepository.findAll();
-        reports.forEach(r -> {
-            try {
+            List<Report> reports = reportRepository.findAll();
+            reports.forEach(r -> {
                 String fileName = "report_images/" + r.getId() + "/" + r.getId();
                 BlobInfo blobInfo = BlobInfo.newBuilder(BlobId.of(BUCKET_NAME, fileName)).build();
                 URL url = storage.signUrl(blobInfo, 24, TimeUnit.HOURS, com.google.cloud.storage.Storage.SignUrlOption.withV4Signature());
                 r.setImage(url.toString());
                 reportRepository.save(r);
                 logger.info("Image URL is refreshed for report " + r.getId().toString());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
