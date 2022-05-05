@@ -133,23 +133,37 @@ public class ReportController {
 
 
 
-    @PostMapping("/report/{reportId}/solve")
-    public ResponseEntity<Object> solveReport(@AuthenticationPrincipal ApplicationUser authenticatedUser,
+    @PostMapping("/report/{reportId}/solution/post")
+    public ResponseEntity<Object> postSolution(@AuthenticationPrincipal ApplicationUser authenticatedUser,
                                               @RequestBody SolutionRequest request,
                                               @PathVariable ObjectId reportId){
-        Solution solution = reportService.solveReport(authenticatedUser.getId(),reportId, request.getDescription());
+        Solution solution = reportService.postSolution(authenticatedUser.getId(),reportId, request.getDescription());
         Map<String, Object> response = new HashMap<>();
         HttpStatus status;
+        response.put("msg", "success");
+        status = HttpStatus.OK;
+        return new ResponseEntity<>(response, status);
+    }
 
-        if(solution != null){
-            response.put("msg", "success");
-            //response.put("comment", comment);
-            status = HttpStatus.OK;
-        }
-        else{
-            response.put("msg", "This report is already solved or not exists");
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
+    @GetMapping("/report/{reportId}/solution/approve")
+    public ResponseEntity<Object> approveSolution(@AuthenticationPrincipal ApplicationUser authenticatedUser,
+                                               @PathVariable ObjectId reportId){
+        reportService.approveSolution(authenticatedUser.getId(), reportId);
+        Map<String, Object> response = new HashMap<>();
+        HttpStatus status;
+        response.put("msg", "success");
+        status = HttpStatus.OK;
+        return new ResponseEntity<>(response, status);
+    }
+
+    @GetMapping("/report/{reportId}/solution/mark")
+    public ResponseEntity<Object> markSolutionAsSolved(@AuthenticationPrincipal ApplicationUser authenticatedUser,
+                                                  @PathVariable ObjectId reportId){
+        reportService.markAsSolved(authenticatedUser.getId(), reportId);
+        Map<String, Object> response = new HashMap<>();
+        HttpStatus status;
+        response.put("msg", "success");
+        status = HttpStatus.OK;
         return new ResponseEntity<>(response, status);
     }
 
@@ -177,6 +191,11 @@ public class ReportController {
         response.put("msg", "success");
         status = HttpStatus.OK;
         return new ResponseEntity<>(response, status);
+    }
+
+    @GetMapping("/report/trending")
+    public ResponseEntity<List<Report>> getTrendingReports() {
+        return new ResponseEntity<>(reportService.getTrendingReports(), HttpStatus.OK);
     }
 
 }

@@ -12,6 +12,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import java.util.List;
@@ -215,45 +216,39 @@ public class ReportService {
         return reportRepository.findByUserId(userId);
     }
 
-    public Solution solveReport(ObjectId userId, ObjectId reportId, String description){
-
+    public void approveSolution(ObjectId userId, ObjectId reportId) {
         Report report = reportRepository.findById(reportId);
-        ApplicationUser user = (ApplicationUser) userRepository.findById(userId).get();
-        if(user.getRole().toString().equals("CITIZEN") && report != null && !report.isResolvedByCitizen()){
-            report.setResolvedByCitizen(true);
-            rewardActionTaker(user, 10);
-            rewardActionTaker(userRepository.findById(report.getInstitutionId()).get(), 20);
-            Solution solution = new Solution(description,true);
-            if (report.isResolvedByInstitution()) {
-                notificationService.notify(user.getUsername(), report.getOfficial().getId(), reportId, NotificationType.SOLUTION_APPROVED);
-            }
-            reportRepository.save(report);
-            return solution;
-            /**if(report.isResolvedByInstitution()){
-                Solution solution = new Solution(description,solvedImage,true);
-                report.setSolution(solution);
-                reportRepository.save(report);
-                return solution;
-            }
-            else{
-                Solution solution = new Solution(description,solvedImage,false);
-                report.setSolution(solution);
-                reportRepository.save(report);
-                return solution;
-            }*/
+        Citizen user = (Citizen) userRepository.findById(userId).get();
+        report.setResolvedByCitizen(true);
+        rewardActionTaker(user, 10);
+        rewardActionTaker(userRepository.findById(report.getInstitutionId()).get(), 20);
+        report.getSolution().setResolved(true);
+        reportRepository.save(report);
+        notificationService.notify(user.getUsername(), report.getOfficial().getId(), reportId, NotificationType.SOLUTION_APPROVED);
+    }
+
+    public void markAsSolved(ObjectId userId, ObjectId reportId) {
+        Report report = reportRepository.findById(reportId);
+        Citizen user = (Citizen) userRepository.findById(userId).get();
+        report.setResolvedByCitizen(true);
+        rewardActionTaker(user, 10);
+        rewardActionTaker(userRepository.findById(report.getInstitutionId()).get(), 20);
+        reportRepository.save(report);
+        if (report.getOfficial() != null) {
+            notificationService.notify(user.getUsername(), report.getOfficial().getId(), reportId, NotificationType.MARK_SOLVED);
         }
-        else if(user.getRole().toString().equals("OFFICIAL") && report != null && !report.isResolvedByInstitution() && !report.isResolvedByCitizen()){
-            report.setResolvedByInstitution(true);
-            rewardActionTaker(user, 10);
-            Solution solution = new Solution(description,false);
-            report.setSolution(solution);
-            reportRepository.save(report);
-            notificationService.notify(user.getUsername(), report.getUserId(), reportId, NotificationType.SOLUTION_POSTED);
-            return solution;
-        }
-        else{
-            return null;
-        }
+    }
+
+    public Solution postSolution(ObjectId userId, ObjectId reportId, String description){
+        Report report = reportRepository.findById(reportId);
+        Official official = (Official) userRepository.findById(userId).get();
+        report.setResolvedByInstitution(true);
+        rewardActionTaker(official, 10);
+        Solution solution = new Solution(description,false);
+        report.setSolution(solution);
+        reportRepository.save(report);
+        notificationService.notify(official.getUsername(), report.getUserId(), reportId, NotificationType.SOLUTION_POSTED);
+        return solution;
     }
 
 
@@ -289,6 +284,10 @@ public class ReportService {
         return report;
     }
 
-
-
+    public List<Report> getTrendingReports() {
+        LocalDateTime oneDayAgo = LocalDateTime.now().minusDays(10);
+        List<Report> recentReports = reportRepository.findRecent(oneDayAgo);
+        Collections.sort(recentReports, Comparator.comparingInt(r -> (r.getUpvotes().size() * 3 + r.getComments().size() * 2)));
+        return recentReports;
+    }
 }

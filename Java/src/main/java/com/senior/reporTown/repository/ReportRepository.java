@@ -10,6 +10,8 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,4 +20,7 @@ public interface ReportRepository extends MongoRepository<Report, String>{
     Report findById(ObjectId id);
     List<Report> findByUserId(ObjectId userId);
     List<Report> findByInstitutionId(ObjectId institutionId);
+    List<Report> findByOfficial(Official official);
+    @Query("{'date': {$gte: ?0}}")
+    List<Report> findRecent(LocalDateTime date);
 }

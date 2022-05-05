@@ -40,6 +40,9 @@ public class NotificationService {
         else if (type == NotificationType.SOLUTION_REJECTED) {
             description = actionTaker + " has rejected your solution.";
         }
+        else if (type == NotificationType.MARK_SOLVED) {
+            description = actionTaker + " has marked a report that you are assigned to as solved.";
+        }
         else if (type == NotificationType.TAGGED) {
             description = actionTaker + " has tagged your institution to a report.";
         }
