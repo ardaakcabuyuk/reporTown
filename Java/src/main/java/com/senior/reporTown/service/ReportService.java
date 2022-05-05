@@ -288,6 +288,12 @@ public class ReportService {
         LocalDateTime oneDayAgo = LocalDateTime.now().minusDays(10);
         List<Report> recentReports = reportRepository.findRecent(oneDayAgo);
         Collections.sort(recentReports, Comparator.comparingInt(r -> (r.getUpvotes().size() * 3 + r.getComments().size() * 2)));
+        recentReports.removeIf(report -> report.getUpvotes().size() + report.getComments().size() == 0);
+        if (recentReports.size() >= 3) {
+            List<Report> trends = recentReports.subList(recentReports.size() - 3, recentReports.size());
+            Collections.reverse(trends);
+            return trends;
+        }
         return recentReports;
     }
 }
