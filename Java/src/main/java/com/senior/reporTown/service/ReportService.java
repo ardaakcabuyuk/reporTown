@@ -285,7 +285,7 @@ public class ReportService {
     }
 
     public List<Report> getTrendingReports() {
-        LocalDateTime oneDayAgo = LocalDateTime.now().minusDays(10);
+        LocalDateTime oneDayAgo = LocalDateTime.now().minusDays(2);
         List<Report> recentReports = reportRepository.findRecent(oneDayAgo);
         Collections.sort(recentReports, Comparator.comparingInt(r -> (r.getUpvotes().size() * 3 + r.getComments().size() * 2)));
         recentReports.removeIf(report -> report.getUpvotes().size() + report.getComments().size() == 0);
@@ -294,6 +294,7 @@ public class ReportService {
             Collections.reverse(trends);
             return trends;
         }
+        Collections.reverse(recentReports);
         return recentReports;
     }
 }
