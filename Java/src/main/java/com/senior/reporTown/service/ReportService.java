@@ -56,6 +56,7 @@ public class ReportService {
                 null
         );
         reportRepository.save(newReport);
+        notificationService.notify(authenticatedUser.getUsername(), institution.getId(), newReport.getId(), NotificationType.TAGGED);
         rewardOwner(newReport, 10);
         logger.info(String.format("A report has been posted by user %s", authenticatedUser.getUsername()));
         return newReport;
@@ -81,9 +82,9 @@ public class ReportService {
             else {
                 report.getUpvotes().add(userId);
                 notificationService.notify(userRepository.findById(userId).get().getUsername(), report.getUserId(), reportId, NotificationType.UPVOTE);
+                rewardOwner(report, 1);
             }
             reportRepository.save(report);
-            rewardOwner(report, 1);
             return report.getUpvotes().size();
         }
         else {
@@ -225,6 +226,7 @@ public class ReportService {
         report.getSolution().setResolved(true);
         reportRepository.save(report);
         notificationService.notify(user.getUsername(), report.getOfficial().getId(), reportId, NotificationType.SOLUTION_APPROVED);
+        notificationService.notify(user.getUsername(), report.getInstitutionId(), reportId, NotificationType.SOLUTION_APPROVED);
     }
 
     public void markAsSolved(ObjectId userId, ObjectId reportId) {
@@ -237,6 +239,7 @@ public class ReportService {
         if (report.getOfficial() != null) {
             notificationService.notify(user.getUsername(), report.getOfficial().getId(), reportId, NotificationType.MARK_SOLVED);
         }
+        notificationService.notify(user.getUsername(), report.getInstitutionId(), reportId, NotificationType.MARK_SOLVED);
     }
 
     public Solution postSolution(ObjectId userId, ObjectId reportId, String description){
@@ -248,6 +251,7 @@ public class ReportService {
         report.setSolution(solution);
         reportRepository.save(report);
         notificationService.notify(official.getUsername(), report.getUserId(), reportId, NotificationType.SOLUTION_POSTED);
+        notificationService.notify(official.getUsername(), report.getInstitutionId(), reportId, NotificationType.SOLUTION_POSTED);
         return solution;
     }
 
@@ -259,20 +263,35 @@ public class ReportService {
             report.setSolution(null);
             report.setResolvedByInstitution(false);
             notificationService.notify(citizen.getUsername(), report.getOfficial().getId(), reportId, NotificationType.SOLUTION_REJECTED);
+            notificationService.notify(citizen.getUsername(), report.getInstitutionId(), reportId, NotificationType.SOLUTION_REJECTED);
         }
         reportRepository.save(report);
         return report;
     }
 
     public void rewardActionTaker(ApplicationUser user, double val) {
+        double prev = user.getScore();
         user.setScore(user.getScore() + val);
         userRepository.save(user);
+        sendRewardNotification(user.getId(), prev, user.getScore());
     }
 
     public void rewardOwner(Report report, double val) {
         ApplicationUser owner = userRepository.findById(report.getUserId()).get();
+        double prev = owner.getScore();
         owner.setScore(owner.getScore() + val);
         userRepository.save(owner);
+        sendRewardNotification(owner.getId(), prev, owner.getScore());
+    }
+
+    public void sendRewardNotification(ObjectId userId, double prev, double after) {
+        final int[] CHECKPOINTS = {100, 500, 1000, 5000, 10000, 50000, 100000};
+        System.out.println(prev + " " + after);
+        for (int i = 0; i < CHECKPOINTS.length; i++) {
+            if (prev < CHECKPOINTS[i] && CHECKPOINTS[i] < after) {
+                notificationService.notifyReward(CHECKPOINTS[i], userId);
+            }
+        }
     }
 
     public Report assignOfficialToReport(ObjectId officialId, ObjectId reportId) {

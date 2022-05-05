@@ -8,5 +8,6 @@ public enum NotificationType {
     SOLUTION_REJECTED,
     MARK_SOLVED,
     ASSIGNED,
-    TAGGED
+    TAGGED,
+    REWARD
 }
