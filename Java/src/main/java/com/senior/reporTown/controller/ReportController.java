@@ -102,6 +102,15 @@ public class ReportController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+
+    @GetMapping("/report/{id}/delete")
+    public ResponseEntity<Object> deleteReport(@PathVariable ObjectId id) {
+        reportService.deleteReport(id);
+        Map<String, Object> response = new HashMap<>();
+        response.put("msg", "success");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @GetMapping("/feed")
     public List<Report> getAllReports(){
         return reportService.getAllReports();

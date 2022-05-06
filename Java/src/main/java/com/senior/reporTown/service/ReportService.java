@@ -126,6 +126,10 @@ public class ReportService {
         return report;
     }
 
+    public void deleteReport(ObjectId reportId) {
+        reportRepository.deleteById(reportId.toString());
+    }
+
     public List<Report> getAllReports(){
         List<Report> reports = reportRepository.findAll();
         Collections.reverse(reports);
