@@ -27,6 +27,6 @@ High-Level Design Report: [[Github]](https://github.com/OguzKaanImamoglu/reporTo
 
 Low Level Design Report: [[Github]](https://github.com/OguzKaanImamoglu/reporTown/blob/main/Reports/CS492-reporTown-Low_Level_Design_Report.pdf) [[Google Drive]](https://drive.google.com/file/d/1VgH0cI8foiUymX_JaykBhLeOF8FS-Qpi/view?usp=sharing)
 
-Final Report:
+Final Report: [[Github]](https://github.com/ardaakcabuyuk/reporTown/blob/backend_dev/Reports/reporTown_Final_Report.pdf) [[Google Drive]](https://docs.google.com/document/d/15C63yGtycDqWDKei9yQfLyUUZZ6lTKQTXaKap0DGds4/edit#)
 
 
