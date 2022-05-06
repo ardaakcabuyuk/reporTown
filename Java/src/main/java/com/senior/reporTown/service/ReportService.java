@@ -81,7 +81,7 @@ public class ReportService {
             // if the user has not upvoted the post, upvote
             else {
                 report.getUpvotes().add(userId);
-                if (!report.getUserId().toString().equals(userId))
+                if (!report.getUserId().toString().equals(userId.toString()))
                     notificationService.notify(userRepository.findById(userId).get().getUsername(), report.getUserId(), reportId, NotificationType.UPVOTE);
                 rewardOwner(report, 1);
             }
@@ -99,7 +99,7 @@ public class ReportService {
             Comment comment = new Comment(userId, text, firstName, lastName, username);
             report.getComments().add(comment);
             reportRepository.save(report);
-            if (!report.getUserId().toString().equals(userId))
+            if (!report.getUserId().toString().equals(userId.toString()))
                 notificationService.notify(username, report.getUserId(), reportId, NotificationType.COMMENT);
             rewardOwner(report, 0.5);
             return comment;
